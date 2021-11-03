@@ -17,10 +17,10 @@ const App = () => {
 				setIsLoading(false);
 			})
 			.catch((err) => console.log(err));
-	}, [term]);
+	}, [term, url]);
 	return (
 		<div className="container mx-auto">
-			<SearchImage />
+			<SearchImage searchTerm={(text) => setTerm(text)} />
 			{isLoading ? (
 				<div className="flex justify-center items-center mt-96">
 					<div className="animate-spin rounded-full h-32 w-32  border-b-8 border-gray-600"></div>
