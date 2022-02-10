@@ -11,6 +11,7 @@ const Navbar = () => {
 					<nav
 						className="relative flex items-center justify-between sm:h-10 lg:justify-start"
 						aria-label="Global">
+						hello
 						<div className="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0">
 							<div className="flex items-center justify-between w-full md:w-auto">
 								<div className="flex flex-shrink-0 text-indigo-500 mt-2">
@@ -52,7 +53,7 @@ const Navbar = () => {
 							<a
 								href="#home"
 								className="font-medium text-gray-500 text-2xl hover:text-gray-900">
-								Home
+								Home1
 							</a>
 							<a
 								href="#home"
@@ -70,30 +71,6 @@ const Navbar = () => {
 								className="p-6 border border-transparent text-base font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-700 md:py-2 md:text-lg">
 								Add
 							</a>
-
-							{/* <a
-								href="#home"
-								className="font-medium text-gray-500 text-2xl hover:text-gray-900">
-								Add
-							</a> */}
-							{/* 
-							<a
-								href="#responsive-header"
-								className="block lg:inline-block text-2xl lg:mt-0 text-indigo-600 hover:text-white">
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									className="h-9 w-9"
-									fill="none"
-									viewBox="0 0 24 24"
-									stroke="currentColor">
-									<path
-										stroke-linecap="round"
-										stroke-linejoin="round"
-										stroke-width="2"
-										d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-									/>
-								</svg>
-							</a> */}
 						</div>
 					</nav>
 				</div>
@@ -136,7 +113,7 @@ const Navbar = () => {
 								<a
 									href="#hoime"
 									className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50">
-									Home
+									Home2
 								</a>
 								<a
 									href="#hoime"
