@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import GoogleButton from "react-google-button";
 
 const Login = () => {
 	return (
@@ -32,9 +34,12 @@ const Login = () => {
 							type="password"
 							placeholder="******************"
 						/>
-						<p className="text-gray-600 text-xs italic">
-							Make it as long and as crazy as you'd like
-						</p>
+					</div>
+					<div class="text-center">
+						Don't have an account?
+						<Link to="/register" className="p-2 bg-yellow-200 mx-3">
+							Register
+						</Link>
 					</div>
 				</div>
 				<div className="flex items-center">
@@ -43,21 +48,12 @@ const Login = () => {
 						type="button">
 						Login
 					</button>
-					<div class="text-center">
-						<a
-							class="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
-							href="#hh">
-							Forgot Password?
-						</a>
-					</div>
-					<div class="text-center">
-						<a
-							class="inline-block text-sm text-blue-500 align-baseline hover:text-blue-800"
-							href="./index.html">
-							Already have an account? Login!
-						</a>
-					</div>
 				</div>
+				<GoogleButton
+					className="g-btn"
+					type="dark"
+					onClick={(e) => console.log(e.target.value)}
+				/>
 			</form>
 		</div>
 	);

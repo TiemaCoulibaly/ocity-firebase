@@ -2,7 +2,7 @@ import React from "react";
 
 const Register = () => {
 	return (
-		<div classNameName="flex justify-center my-40">
+		<div className="flex justify-center my-40">
 			<form className="w-full max-w-lg rounded-lg  p-10 shadow-lg">
 				<div className="flex flex-wrap -mx-3 mb-6">
 					<div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -45,9 +45,13 @@ const Register = () => {
 							type="password"
 							placeholder="******************"
 						/>
-						<p className="text-gray-600 text-xs italic">
-							Make it as long and as crazy as you'd like
-						</p>
+						<div className="flex items-center">
+							<button
+								className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+								type="button">
+								Register
+							</button>
+						</div>
 					</div>
 				</div>
 			</form>
