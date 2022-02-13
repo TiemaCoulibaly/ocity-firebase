@@ -18,9 +18,7 @@ const AddCity = () => {
 						<form class="px-8 pt-6 pb-8 mb-4 bg-white rounded">
 							<div class="mb-4 md:flex md:justify-between">
 								<div class="mb-4 md:mr-2 md:mb-0">
-									<label
-										class="block mb-2 text-sm font-bold text-gray-700"
-										for="firstName">
+									<label class="block mb-2 text-sm font-bold text-gray-700">
 										Nom du city-stade
 									</label>
 									<input
@@ -31,9 +29,7 @@ const AddCity = () => {
 									/>
 								</div>
 								<div class="md:ml-2">
-									<label
-										class="block mb-2 text-sm font-bold text-gray-700"
-										for="lastName">
+									<label class="block mb-2 text-sm font-bold text-gray-700">
 										Adresse du city-stade
 									</label>
 									<input
@@ -47,9 +43,7 @@ const AddCity = () => {
 
 							<div class="mb-4 md:flex md:justify-between">
 								<div class="mb-4 md:mr-2 md:mb-0">
-									<label
-										class="block mb-2 text-sm font-bold text-gray-700"
-										for="password">
+									<label class="block mb-2 text-sm font-bold text-gray-700">
 										Ville
 									</label>
 									<input
@@ -60,9 +54,7 @@ const AddCity = () => {
 									/>
 								</div>
 								<div class="md:ml-2">
-									<label
-										class="block mb-2 text-sm font-bold text-gray-700"
-										for="c_password">
+									<label class="block mb-2 text-sm font-bold text-gray-700">
 										Code Postal
 									</label>
 
@@ -75,9 +67,7 @@ const AddCity = () => {
 								</div>
 							</div>
 							<div class="mb-4">
-								<label
-									class="block mb-2 text-sm font-bold text-gray-700"
-									for="email">
+								<label class="block mb-2 text-sm font-bold text-gray-700">
 									Decris le city
 								</label>
 								<textarea
