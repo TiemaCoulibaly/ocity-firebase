@@ -2,21 +2,22 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import GoogleButton from "react-google-button";
 import { useUserAuth } from "../context/UserAuthContext";
-
+import Alert from "../components/Alert";
 const Login = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState("");
-	const { logIn, googleSignIn } = useUserAuth();
+	const { logIn, googleSignIn, resetPassword } = useUserAuth();
 	let navigate = useNavigate();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		setError("");
 		try {
 			await logIn(email, password);
 			navigate("/");
 		} catch (err) {
-			setError(err.message);
+			setError("Enter a valid email/password");
 		}
 	};
 
@@ -24,7 +25,23 @@ const Login = () => {
 		e.preventDefault();
 		try {
 			await googleSignIn();
+			// localStorage.setItem("isAuth", true);
 			navigate("/");
+		} catch (err) {
+			setError(err.message);
+		}
+	};
+
+	const handleResetPassword = async (e) => {
+		e.preventDefault();
+
+		if (!email) {
+			return setError("Write an email to reset your password");
+		}
+
+		try {
+			await resetPassword(email);
+			setError("We sent you an email. Check your inbox");
 		} catch (err) {
 			setError(err.message);
 		}
@@ -35,7 +52,7 @@ const Login = () => {
 			<form
 				className="w-3/12 rounded-lg shadow-lg border  px-8 pt-6 pb-8 mb-4"
 				onSubmit={handleSubmit}>
-				{error && <span className="p-1 bg-red-300 mb-4">{error}</span>}
+				{error && <Alert message={error} />}
 				<div className="flex flex-wrap -mx-3 mb-6">
 					<div className="w-full md:w-2/2 px-3 mb-6 md:mb-0">
 						<label className="block text-gray-700 text-sm font-bold mb-2">
@@ -67,6 +84,12 @@ const Login = () => {
 							Register
 						</Link>
 					</div>
+					<a
+						className="inline-block align-baseline font-bold text-sm text-blue-500 p-2 hover:bg-blue-200"
+						href="#!"
+						onClick={handleResetPassword}>
+						Forgot Password?
+					</a>
 				</div>
 				<div className="flex items-center">
 					<button
