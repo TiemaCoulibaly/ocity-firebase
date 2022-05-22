@@ -1,17 +1,20 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-	apiKey: "AIzaSyBolipn-D_C9V9rtF7n2FSPgGH2Y0aUHwA",
-	authDomain: "ocity-stade.firebaseapp.com",
-	projectId: "ocity-stade",
-	storageBucket: "ocity-stade.appspot.com",
-	messagingSenderId: "964826299775",
-	appId: "1:964826299775:web:ea246aa33db34d051fee4a",
-	measurementId: "G-0TQTLS3MQE",
+  apiKey: process.env.REACT_APP_FIREBASE_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_BUCKET,
+  messagingSenderId: process.env.REACT_APP_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
+export const db = getFirestore();
+export const storage = getStorage(app);
 export default app;

@@ -1,78 +1,85 @@
-import React, { useState } from "react";
-import { useUserAuth } from "../context/UserAuthContext";
+import React, { useContext, useState } from "react";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth, db } from "../firebase";
+import {
+  addDoc,
+  setDoc,
+  collection,
+  serverTimestamp,
+  doc,
+} from "firebase/firestore";
+
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-	const [username, setUsername] = useState("");
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	const [error, setError] = useState("");
-	const { signUp } = useUserAuth();
-	let navigate = useNavigate();
+  const [data, setData] = useState({});
+  const [error, setError] = useState();
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		try {
-			await signUp(email, password, username);
-			navigate("/login");
-		} catch (err) {
-			setError(err.message);
-		}
-	};
-	return (
-		<div className="flex justify-center my-40">
-			<form
-				className="w-full max-w-lg rounded-lg  p-10 shadow-lg"
-				onSubmit={handleSubmit}>
-				{error && <span className="p-1 bg-red-300 mb-4">{error}</span>}
-				<div className="flex flex-wrap -mx-3 mb-6">
-					<div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-						<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-							Username
-						</label>
-						<input
-							className="appearance-none block w-full bg-gray-200 text-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-							id="grid-first-name"
-							type="text"
-							placeholder="Enter username"
-							onChange={(e) => setUsername(e.target.value)}
-						/>
-					</div>
-					<div className="w-full md:w-1/2 px-3">
-						<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-							Email
-						</label>
-						<input
-							className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-							type="text"
-							placeholder="Enter your email"
-							onChange={(e) => setEmail(e.target.value)}
-						/>
-					</div>
-				</div>
-				<div className="flex flex-wrap -mx-3 mb-6">
-					<div className="w-full px-3">
-						<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-							Password
-						</label>
-						<input
-							className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-							type="password"
-							placeholder="Enter password"
-							onChange={(e) => setPassword(e.target.value)}
-						/>
-						<div className="flex items-center">
-							<button
-								className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-								type="submit">
-								Register
-							</button>
-						</div>
-					</div>
-				</div>
-			</form>
-		</div>
-	);
+  const navigate = useNavigate();
+
+  const handleInput = (e) => {
+    const { name, value } = e.target;
+
+    setData({ ...data, [name]: value });
+  };
+
+  const handleAdd = async (e) => {
+    e.preventDefault();
+    try {
+      await createUserWithEmailAndPassword(auth, data.email, data.password);
+
+      await updateProfile(auth.currentUser, {
+        displayName: data.username,
+      });
+
+      await addDoc(collection(db, "users"), {
+        ...data,
+        timeStamp: serverTimestamp(),
+      });
+
+      navigate("/login");
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  return (
+    <div className="flex justify-center my-40">
+      <form className="" onSubmit={handleAdd}>
+        <input
+          className="appearance-none rounded-none relative block w-full mb-5 p-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10"
+          type="text"
+          name="username"
+          id="username"
+          placeholder="username"
+          onChange={handleInput}
+        />
+        <input
+          className="appearance-none rounded-none relative block w-full mb-5 p-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10"
+          type="email"
+          name="email"
+          id="name"
+          placeholder="email"
+          onChange={handleInput}
+        />
+
+        <input
+          className="appearance-none rounded-none relative block w-full mb-5 p-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10"
+          type="password"
+          name="password"
+          id="password"
+          placeholder="password"
+          onChange={handleInput}
+        />
+        <button
+          className="group relative w-full flex justify-center p-3 mb-5 text-xl font-medium rounded-md text-white bg-gradient-to-r from-green-500 to-green-800 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50"
+          type="submit">
+          submit
+        </button>
+        <p className="bg-red-500 p-2 text-white">{error}</p>
+      </form>
+    </div>
+  );
 };
 
 export default Register;
