@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 
@@ -31,8 +31,9 @@ const Login = () => {
         navigate("/");
         setIsFetching(false);
       })
-      .catch((error) => {
-        setErrorMessage(true);
+      .catch((err) => {
+        setErrorMessage(err.message);
+        setIsFetching(false);
       });
   };
 
@@ -55,8 +56,10 @@ const Login = () => {
           <input
             className="appearance-none rounded-none relative py-3 px-3 mb-5 block w-full border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10"
             type="email"
+            name="email"
             placeholder="Entrez votre email"
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
 
           <label
@@ -110,10 +113,12 @@ const Login = () => {
             <input
               className="appearance-none border border-gray-300 w-full p-3 rounded-b-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10  placeholder-gray-500"
               id="password"
+              name="password"
               type={showPassword ? "text" : "password"}
               autoComplete="off"
               placeholder="Entrez votre mot de passe"
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
           </div>
 
@@ -125,7 +130,7 @@ const Login = () => {
           </button>
           {/* bg-gradient-to-r from-green-500 to-green-800  hover:bg-green-600  */}
         </form>
-        {errorMessage && <Alert message={"Mot de passe/email incorrect"} />}
+        {errorMessage && <Alert message={errorMessage} />}
       </div>
     </div>
   );
