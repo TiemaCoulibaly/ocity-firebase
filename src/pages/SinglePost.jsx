@@ -10,6 +10,7 @@ import {
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import React, { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import Map from "../components/Map";
 import { AuthContext } from "../context/AuthContext";
 import { db, storage } from "../firebase";
 
@@ -70,7 +71,6 @@ const SinglePost = () => {
         const docRef = doc(db, "city-stade", path);
         const docSnap = await getDoc(docRef);
         setPost(docSnap.data());
-        console.log("post fectadat", post);
       } catch (err) {
         console.log(err);
       }
@@ -114,7 +114,6 @@ const SinglePost = () => {
       console.log(err.message);
     }
   };
-  console.log("my data", data);
 
   return (
     <>
@@ -127,11 +126,13 @@ const SinglePost = () => {
           />
           {/* Only same user could edit or delete is own post */}
           {currentUser?.displayName === post?.username && (
-            <div className="flex justify-center">
-              <button onClick={handleClick}>
+            <div className="flex justify-center py-2">
+              <button
+                className="bg-blue-300 mx-5 p-2 hover:bg-blue-400 rounded"
+                onClick={handleClick}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6 mx-5 bg-blue-300 hover:bg-blue-400  rounded"
+                  className="h-7 w-7"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -146,10 +147,11 @@ const SinglePost = () => {
               <button
                 type="button"
                 data-modal-toggle="popup-modal"
-                onClick={() => setShowModal(true)}>
+                onClick={() => setShowModal(true)}
+                className="mx-5 bg-red-300 hover:bg-red-400 p-2 rounded">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6  mx-5 bg-red-300 hover:bg-red-400 rounded"
+                  className="h-7 w-7"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -219,39 +221,41 @@ const SinglePost = () => {
                 <h1 className="font-bold  text-2xl lg:text-4xl md:text-3xl  text-gray-800 text-center">
                   City stade du {post.title}
                 </h1>
+                <section className="flex justify-between">
+                  <div className="mt-4">
+                    <p className="bg-gray-50  text-gray-900  text-base md:text-2xl sm:text-sm rounded-lg focus:ring-green-500 focus:border-green-500 p-2.5 ">
+                      <span className="text-gray-400"> Addresse:</span>{" "}
+                      {post.address}
+                    </p>
 
-                <div className="items-center mt-4">
-                  <p className="bg-gray-50  text-gray-900  text-base md:text-2xl sm:text-sm rounded-lg focus:ring-green-500 focus:border-green-500 p-2.5 ">
-                    <span className="text-gray-400"> Addresse:</span>{" "}
-                    {post.address}
-                  </p>
+                    <p className="bg-gray-50  text-gray-900  text-base md:text-2xl sm:text-sm rounded-lg focus:ring-green-500 focus:border-green-500 p-2.5 ">
+                      <span className="text-gray-400"> Description:</span>{" "}
+                      {post.description}
+                    </p>
 
-                  <p className="bg-gray-50  text-gray-900  text-base md:text-2xl sm:text-sm rounded-lg focus:ring-green-500 focus:border-green-500 p-2.5 ">
-                    <span className="text-gray-400"> Description:</span>{" "}
-                    {post.description}
-                  </p>
+                    <p className="bg-gray-50  text-gray-900  text-base md:text-2xl sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 ">
+                      <span className="text-gray-400"> Type de Terrain:</span>{" "}
+                      {post.pitch}
+                    </p>
 
-                  <p className="bg-gray-50  text-gray-900  text-base md:text-2xl sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 ">
-                    <span className="text-gray-400"> Type de Terrain:</span>{" "}
-                    {post.pitch}
-                  </p>
+                    <p className="bg-gray-50  text-gray-900  text-base md:text-2xl sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5">
+                      <span className="text-gray-400">
+                        {" "}
+                        Type d'éclairage (nuit):
+                      </span>{" "}
+                      {post.light}
+                    </p>
 
-                  <p className="bg-gray-50  text-gray-900  text-base md:text-2xl sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5">
-                    <span className="text-gray-400">
-                      {" "}
-                      Type d'éclairage (nuit):
-                    </span>{" "}
-                    {post.light}
-                  </p>
-
-                  <p className="bg-gray-50  text-gray-900  text-base md:text-2xl sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 ">
-                    <span className="text-gray-400">
-                      {" "}
-                      Type de chaussure (recommendé):
-                    </span>{" "}
-                    {post.shoes}
-                  </p>
-                </div>
+                    <p className="bg-gray-50  text-gray-900  text-base md:text-2xl sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 ">
+                      <span className="text-gray-400">
+                        {" "}
+                        Type de chaussure (recommendé):
+                      </span>{" "}
+                      {post.shoes}
+                    </p>
+                  </div>
+                  {/* <Map /> */}
+                </section>
               </>
             ) : (
               <>
