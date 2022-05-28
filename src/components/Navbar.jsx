@@ -12,8 +12,6 @@ import logo from "../images/ocity-rmv.png";
 const Navbar = () => {
   const { currentUser, dispatch } = useContext(AuthContext);
 
-  console.log("curent", currentUser);
-  // console.log("curentALL", currentUser);
   let navigate = useNavigate();
 
   const handleLogout = async (e) => {

@@ -3,10 +3,16 @@ import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db, storage } from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { AuthContext } from "../context/AuthContext";
+import axios from "axios";
+
 const AddCity = () => {
   const [data, setData] = useState({});
   const [file, setFile] = useState("");
   const [progress, setProgress] = useState(null);
+  const [fullAddress, setFullAddress] = useState([]);
+  const [query, setQuery] = useState("");
+  const [address, setAddress] = useState("");
+
   const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
@@ -55,6 +61,7 @@ const AddCity = () => {
     setData({
       ...data,
       username: currentUser.displayName,
+
       [name]: value,
     });
   };
@@ -64,6 +71,7 @@ const AddCity = () => {
     try {
       const docRef = await addDoc(collection(db, "city-stade"), {
         ...data,
+        address: address,
         timeStamp: serverTimestamp(),
       });
 
@@ -72,6 +80,26 @@ const AddCity = () => {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    axios
+      .get(`https://api-adresse.data.gouv.fr/search/?q=${query}&autocomplete=0`)
+      .then((response) => {
+        setFullAddress(response.data.features);
+        // get the coordinates of addresses
+        // console.log("geometry", response.data.features[0].geometry.coordinates);
+      });
+  }, [query]);
+  const handleChangeAddress = (e) => {
+    setQuery(e.target.value);
+    setAddress(e.target.value);
+  };
+  const handleClick = (text) => {
+    setQuery(text);
+    setAddress(text);
+    setFullAddress([]);
+  };
+
   return (
     <div className="min-h-full flex items-center justify-center py-2 px-4 sm:px-6 lg:px-8">
       <div className="max-w-2xl w-full space-y-3">
@@ -132,16 +160,25 @@ const AddCity = () => {
 
           <input
             type="text"
-            className="appearance-none rounded-none relative block w-full mb-5 p-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10"
-            placeholder="Adresse du city stade ?"
             id="address"
             name="address"
-            onChange={handleChange}
+            value={address}
+            className="appearance-none rounded-none relative block w-full mb-5 p-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10"
+            placeholder="Adresse du city stade ?"
+            onChange={handleChangeAddress}
           />
+          {fullAddress.map((add, key) => (
+            <div
+              className="p-3 bg-white hover:bg-green-200 border-r-2 border-l-2 border-gray-300"
+              key={key}
+              onClick={() => handleClick(add.properties.label)}>
+              {add.properties.label}
+            </div>
+          ))}
 
-          <p className="flex justify-center p-2 mb-2 bg-red-100 font-semibold rounded-md">
+          {/* <p className="flex justify-center p-2 mb-2 bg-red-100 font-semibold rounded-md">
             Entrez l'adresse du city stade
-          </p>
+          </p> */}
 
           <textarea
             placeholder="decris le city stade et comment y accéder.."
@@ -156,6 +193,7 @@ const AddCity = () => {
               <select
                 onChange={handleChange}
                 name="pitch"
+                id="pitch"
                 defaultValue=""
                 className="active:bg-green-600 bg-white p-3 shadow-lg rounded-md w-2/3  border-none focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10">
                 <option value="" disabled hidden className="">
@@ -171,6 +209,7 @@ const AddCity = () => {
             <div className="flex flex-col justify-center items-center py-4">
               <select
                 name="light"
+                id="light"
                 onChange={handleChange}
                 defaultValue=""
                 className="active:bg-green-600 bg-white p-3 shadow-lg rounded-md w-2/3  border-none focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10">
@@ -186,6 +225,7 @@ const AddCity = () => {
             <div className="flex flex-col justify-center items-center py-4">
               <select
                 name="shoes"
+                id="shoes"
                 onChange={handleChange}
                 defaultValue=""
                 className="active:bg-green-600 bg-white p-3 shadow-lg rounded-md w-2/3  border-none focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10">
@@ -206,7 +246,7 @@ const AddCity = () => {
             disabled={progress !== null && progress < 100}
             className="group relative w-full flex justify-center p-3 mb-5 text-xl font-medium rounded-md text-white bg-gradient-to-r from-green-500 to-green-800 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50 disabled:cursor-not-allowed"
             type="submit">
-            submit
+            Ajouter
           </button>
         </form>
       </div>
