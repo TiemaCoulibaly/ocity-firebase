@@ -4,10 +4,12 @@ import { db, storage } from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { AuthContext } from "../context/AuthContext";
 import axios from "axios";
+import ProgressBar from "../components/ProgressBar";
 
 const AddCity = () => {
   const [data, setData] = useState({});
   const [file, setFile] = useState("");
+  const [upload, setUpload] = useState("");
   const [progress, setProgress] = useState(null);
   const [fullAddress, setFullAddress] = useState([]);
   const [query, setQuery] = useState("");
@@ -27,14 +29,17 @@ const AddCity = () => {
         (snapshot) => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log("Upload is " + progress + "% done");
+          // console.log("Upload is " + progress + "% done");
+
           setProgress(progress);
           switch (snapshot.state) {
             case "paused":
-              console.log("Upload is paused");
+              setUpload("is paused");
+
               break;
             case "running":
-              console.log("Upload is running");
+              setUpload("is done");
+
               break;
             default:
               break;
@@ -107,6 +112,10 @@ const AddCity = () => {
           <h2 className="text-center text-3xl font-extrabold text-gray-900 mt-2">
             Ajouter un city stade
           </h2>
+
+          {progress && (
+            <ProgressBar progressPercentage={progress} upload={upload} />
+          )}
         </div>
 
         {file && (
@@ -142,6 +151,7 @@ const AddCity = () => {
                     id="fileInput"
                     className="hidden"
                     onChange={(e) => setFile(e.target.files[0])}
+                    multiple
                   />
                 </label>
               </div>
