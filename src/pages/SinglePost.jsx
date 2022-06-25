@@ -10,7 +10,7 @@ import {
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import React, { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import Map from "../components/Map";
+
 import { AuthContext } from "../context/AuthContext";
 import { db, storage } from "../firebase";
 
@@ -92,7 +92,6 @@ const SinglePost = () => {
     e.preventDefault();
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
-    console.log("dataaak", data);
   };
 
   const handleClick = (e) => {
@@ -114,16 +113,21 @@ const SinglePost = () => {
       console.log(err.message);
     }
   };
-
+  console.log("image", post.image);
   return (
     <>
       <div className="bg-white shadow-2xl px-4 py-10">
         <div className="">
-          <img
-            className="w-full h-96 rounded-lg rounded-b-none object-center object-cover"
-            src={post.image}
-            alt="city stade"
-          />
+          {post.pictures?.map((image, i) => (
+            <div key={i}>
+              <img
+                className="w-full h-96 rounded-lg rounded-b-none object-center object-cover"
+                src={image}
+                alt="city stade"
+              />
+            </div>
+          ))}
+
           {/* Only same user could edit or delete is own post */}
           {currentUser?.displayName === post?.username && (
             <div className="flex justify-center py-2">

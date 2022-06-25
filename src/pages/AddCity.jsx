@@ -8,58 +8,70 @@ import ProgressBar from "../components/ProgressBar";
 
 const AddCity = () => {
   const [data, setData] = useState({});
-  const [file, setFile] = useState("");
+
   const [upload, setUpload] = useState("");
   const [progress, setProgress] = useState(null);
   const [fullAddress, setFullAddress] = useState([]);
   const [query, setQuery] = useState("");
   const [address, setAddress] = useState("");
+  const [images, setImages] = useState([]);
+  const [urls, setUrls] = useState([]);
 
   const { currentUser } = useContext(AuthContext);
 
-  useEffect(() => {
-    const uploadFile = () => {
-      const uniqueName = new Date().getTime() + file.name;
+  const handleFile = (e) => {
+    const { files } = e.target;
+    for (let i = 0; i < files.length; i++) {
+      const newImage = files[i];
+      console.log("newimage", newImage);
+      setImages((prevState) => [...prevState, newImage]);
+    }
+  };
+
+  const handleUpload = (e) => {
+    e.preventDefault();
+    const promises = [];
+    images.forEach((image) => {
+      const uniqueName = new Date().getTime() + image.name;
       const storageRef = ref(storage, uniqueName);
-
-      const uploadTask = uploadBytesResumable(storageRef, file);
-
+      const uploadTask = uploadBytesResumable(storageRef, image);
+      promises.push(uploadTask);
       uploadTask.on(
         "state_changed",
         (snapshot) => {
-          const progress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          // console.log("Upload is " + progress + "% done");
-
+          const progress = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          );
           setProgress(progress);
           switch (snapshot.state) {
             case "paused":
-              setUpload("is paused");
+              setUpload("upload is paused");
 
               break;
             case "running":
-              setUpload("is done");
+              setUpload("upload is done");
 
               break;
             default:
               break;
           }
         },
+
         (error) => {
           console.log(error);
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            setData((prevData) => ({
-              ...prevData,
-              image: downloadURL,
-            }));
+            setUrls((prevState) => [...prevState, downloadURL]);
           });
         }
       );
-    };
-    file && uploadFile();
-  }, [file]);
+    });
+
+    Promise.all(promises)
+      .then(() => setUpload("All images uploaded"))
+      .catch((err) => console.log(err));
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -77,6 +89,7 @@ const AddCity = () => {
       const docRef = await addDoc(collection(db, "city-stade"), {
         ...data,
         address: address,
+        pictures: urls,
         timeStamp: serverTimestamp(),
       });
 
@@ -117,18 +130,23 @@ const AddCity = () => {
             <ProgressBar progressPercentage={progress} upload={upload} />
           )}
         </div>
-
+        {/* 
         {file && (
           <div className=" flex justify-center rounded-lg rounded-b-none object-center object-cover">
             {" "}
             <img
               className="w-full object-cover object-center rounded-xl "
-              src={URL.createObjectURL(file)}
+              // src={URL.createObjectURL(file)}
               alt="city"
               required
             />
           </div>
-        )}
+        )} */}
+        {urls?.map((url, i) => (
+          <div key={i}>
+            <img src={url} alt="flf" />
+          </div>
+        ))}
 
         <form onSubmit={handleSubmit}>
           <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 mb-5 border-gray-300 border-dashed rounded-md">
@@ -144,18 +162,27 @@ const AddCity = () => {
               <div className="flex justify-center text-sm text-gray-600">
                 <label
                   htmlFor="fileInput"
-                  className="relative cursor-pointer bg-white rounded-md font-medium text-green-600 hover:text-green-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-green-500">
-                  <span>Upload a file</span>
+                  className="cursor-pointer bg-white rounded-md font-medium text-green-600 ">
+                  <span></span>
                   <input
                     type="file"
                     id="fileInput"
-                    className="hidden"
-                    onChange={(e) => setFile(e.target.files[0])}
+                    className=""
+                    onChange={handleFile}
                     multiple
+                    disabled={images.length > 3}
                   />
+                  {images.length >= 1 && (
+                    <button
+                      disabled={images.length > 3}
+                      className="text-xs font-semibold border-2 border-green-300 p-2 px-4 uppercase rounded-sm text-green-900 hover:text-white  bg-green-100 hover:bg-green-500  disabled:opacity-50"
+                      onClick={handleUpload}>
+                      Upload
+                    </button>
+                  )}
                 </label>
               </div>
-              <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+              <p className="text-xs text-gray-500">PNG, JPG, GIF 3 files max</p>
             </div>
           </div>
 
@@ -254,7 +281,7 @@ const AddCity = () => {
 
           <button
             disabled={progress !== null && progress < 100}
-            className="group relative w-full flex justify-center p-3 mb-5 text-xl font-medium rounded-md text-white bg-gradient-to-r from-green-500 to-green-800 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="group relative w-full flex justify-center p-3 mb-5 text-xl font-medium rounded-md text-white bg-gradient-to-r from-green-500 to-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-green-400"
             type="submit">
             Ajouter
           </button>
