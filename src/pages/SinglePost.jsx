@@ -1,15 +1,8 @@
-import {
-  collection,
-  doc,
-  getDoc,
-  deleteDoc,
-  setDoc,
-  updateDoc,
-  serverTimestamp,
-} from "firebase/firestore";
+import { doc, getDoc, deleteDoc, updateDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import React, { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import CarouselImages from "../components/CarouselImages";
 
 import { AuthContext } from "../context/AuthContext";
 import { db, storage } from "../firebase";
@@ -113,63 +106,17 @@ const SinglePost = () => {
       console.log(err.message);
     }
   };
-  console.log("image", post.image);
+
+  // const google = `https://www.google.com/maps/place/13+rue+gustave+eiffel,92110+clichy/@${48.9034266},${2.2902923},${18}z`;
+  // const google = `https://www.google.com/maps?daddr=${48.9034266},${2.2902923}`;
+
   return (
     <>
+      {/* <a href={google} target="_blank" rel="noreferrer" alt="googleadress">
+        google
+      </a> */}
       <div className="bg-white shadow-2xl px-4 py-10">
         <div className="">
-          {post.pictures?.map((image, i) => (
-            <div key={i}>
-              <img
-                className="w-full h-96 rounded-lg rounded-b-none object-center object-cover"
-                src={image}
-                alt="city stade"
-              />
-            </div>
-          ))}
-
-          {/* Only same user could edit or delete is own post */}
-          {currentUser?.displayName === post?.username && (
-            <div className="flex justify-center py-2">
-              <button
-                className="bg-blue-300 mx-5 p-2 hover:bg-blue-400 rounded"
-                onClick={handleClick}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-7 w-7"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}>
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-                  />
-                </svg>
-              </button>
-              <button
-                type="button"
-                data-modal-toggle="popup-modal"
-                onClick={() => setShowModal(true)}
-                className="mx-5 bg-red-300 hover:bg-red-400 p-2 rounded">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-7 w-7"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}>
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                  />
-                </svg>
-              </button>
-            </div>
-          )}
-
           <div className="px-4 py-2 mt-2 ">
             {/* HANDLE DELETE */}
             {showModal ? (
@@ -225,6 +172,49 @@ const SinglePost = () => {
                 <h1 className="font-bold  text-2xl lg:text-4xl md:text-3xl  text-gray-800 text-center">
                   City stade du {post.title}
                 </h1>
+                <CarouselImages pictures={post.pictures} />
+                {/* Only same user could edit or delete is own post */}
+                {currentUser?.displayName === post?.username && (
+                  <div className="flex justify-center py-2">
+                    <button
+                      className="bg-blue-300 mx-5 p-2 hover:bg-blue-400 rounded"
+                      onClick={handleClick}>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-7 w-7"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}>
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                        />
+                      </svg>
+                    </button>
+                    <button
+                      type="button"
+                      data-modal-toggle="popup-modal"
+                      onClick={() => setShowModal(true)}
+                      className="mx-5 bg-red-300 hover:bg-red-400 p-2 rounded">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-7 w-7"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}>
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                )}
+
                 <section className="flex justify-between">
                   <div className="mt-4">
                     <p className="bg-gray-50  text-gray-900  text-base md:text-2xl sm:text-sm rounded-lg focus:ring-green-500 focus:border-green-500 p-2.5 ">

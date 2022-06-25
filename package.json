@@ -12,6 +12,7 @@
 		"axios": "^0.21.4",
 		"file-saver": "^2.0.5",
 		"firebase": "^9.6.6",
+		"pure-react-carousel": "^1.28.1",
 		"react": "^17.0.1",
 		"react-dom": "^17.0.1",
 		"react-google-button": "^0.7.2",
