@@ -7,6 +7,7 @@ const Post = ({ post }) => {
     month: "long",
     day: "numeric",
   };
+  console.log("hello", post.pictures);
 
   return (
     <>
@@ -15,7 +16,7 @@ const Post = ({ post }) => {
           <div className="w-full lg:w-2/4 md:w-2/4 h-80">
             <img
               className="object-center object-cover w-full h-full"
-              src={post.image}
+              src={post?.pictures}
               alt="city-stade"
               loading="lazy"
             />
@@ -50,7 +51,7 @@ const Post = ({ post }) => {
         </div>
         <div className="flex flex-wrap my-3 justify-start lg:justify-around md:justify-around">
           <p className="mx-2 p-2 mt-2 rounded-full bg-green-100 text-green-700">
-            # {post.picth}
+            # {post.pitch}
           </p>
           <p className="mx-2 p-2 mt-2 rounded-full bg-green-100 text-green-700">
             # {post.light}
