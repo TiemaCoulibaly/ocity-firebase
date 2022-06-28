@@ -130,23 +130,17 @@ const AddCity = () => {
             <ProgressBar progressPercentage={progress} upload={upload} />
           )}
         </div>
-        {/* 
-        {file && (
-          <div className=" flex justify-center rounded-lg rounded-b-none object-center object-cover">
-            {" "}
+
+        <div className="flex justify-around flex-wrap rounded-lg rounded-b-none w-full">
+          {urls?.map((url, i) => (
             <img
-              className="w-full object-cover object-center rounded-xl "
-              // src={URL.createObjectURL(file)}
-              alt="city"
-              required
+              key={i}
+              className="w-60 mx-2 my-2 object-cover object-center rounded-xl"
+              src={url}
+              alt="city-stade"
             />
-          </div>
-        )} */}
-        {urls?.map((url, i) => (
-          <div key={i}>
-            <img src={url} alt="flf" />
-          </div>
-        ))}
+          ))}
+        </div>
 
         <form onSubmit={handleSubmit}>
           <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 mb-5 border-gray-300 border-dashed rounded-md">
@@ -163,7 +157,9 @@ const AddCity = () => {
                 <label
                   htmlFor="fileInput"
                   className="cursor-pointer bg-white rounded-md font-medium text-green-600 ">
-                  <span></span>
+                  {images.length > 0 && (
+                    <span>{images.length} images uploaded</span>
+                  )}
                   <input
                     type="file"
                     id="fileInput"
@@ -171,18 +167,30 @@ const AddCity = () => {
                     onChange={handleFile}
                     multiple
                     disabled={images.length > 3}
+                    required
                   />
+
                   {images.length >= 1 && (
                     <button
                       disabled={images.length > 3}
-                      className="text-xs font-semibold border-2 border-green-300 p-2 px-4 uppercase rounded-sm text-green-900 hover:text-white  bg-green-100 hover:bg-green-500  disabled:opacity-50"
+                      className={`${
+                        images.length > 3 && "hidden"
+                      } text - xs font-semibold border-2 border-green-300 p-2 px-4 uppercase rounded-sm text-green-900 hover:text-white bg-green-100 hover:bg-green-500 disabled:opacity-50`}
                       onClick={handleUpload}>
                       Upload
                     </button>
                   )}
                 </label>
               </div>
-              <p className="text-xs text-gray-500">PNG, JPG, GIF 3 files max</p>
+              {images.length > 3 || images.length === 3 ? (
+                <p className="bg-red-100 p-1 text-xs text-gray-500">
+                  Limit de 3 images atteint upload
+                </p>
+              ) : (
+                <p className="text-xs text-gray-500">
+                  PNG, JPG, GIF 3 files max
+                </p>
+              )}
             </div>
           </div>
 
@@ -193,6 +201,7 @@ const AddCity = () => {
             id="title"
             name="title"
             onChange={handleChange}
+            required
           />
 
           <input
@@ -203,6 +212,7 @@ const AddCity = () => {
             className="appearance-none rounded-none relative block w-full mb-5 p-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10"
             placeholder="Adresse du city stade ?"
             onChange={handleChangeAddress}
+            required
           />
           {fullAddress.map((add, key) => (
             <div
@@ -223,7 +233,8 @@ const AddCity = () => {
             className="appearance-none rounded-none relative block w-full mb-5 p-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10"
             id="description"
             name="description"
-            onChange={handleChange}></textarea>
+            onChange={handleChange}
+            required></textarea>
 
           <div className="flex flex-col my-4">
             <div className="flex flex-col justify-center items-center py-4">
@@ -232,7 +243,8 @@ const AddCity = () => {
                 name="pitch"
                 id="pitch"
                 defaultValue=""
-                className="active:bg-green-600 bg-white p-3 shadow-lg rounded-md w-2/3  border-none focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10">
+                className="active:bg-green-600 bg-white p-3 shadow-lg rounded-md w-2/3  border-none focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10"
+                required>
                 <option value="" disabled hidden className="">
                   Type de Terrain
                 </option>
@@ -249,7 +261,8 @@ const AddCity = () => {
                 id="light"
                 onChange={handleChange}
                 defaultValue=""
-                className="active:bg-green-600 bg-white p-3 shadow-lg rounded-md w-2/3  border-none focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10">
+                className="active:bg-green-600 bg-white p-3 shadow-lg rounded-md w-2/3  border-none focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10"
+                required>
                 <option value="" disabled hidden>
                   Type d'éclairage (nuit)
                 </option>
@@ -265,7 +278,8 @@ const AddCity = () => {
                 id="shoes"
                 onChange={handleChange}
                 defaultValue=""
-                className="active:bg-green-600 bg-white p-3 shadow-lg rounded-md w-2/3  border-none focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10">
+                className="active:bg-green-600 bg-white p-3 shadow-lg rounded-md w-2/3  border-none focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10"
+                required>
                 <option value="" disabled hidden>
                   Type de chaussure (recommendé)
                 </option>

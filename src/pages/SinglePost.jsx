@@ -109,6 +109,7 @@ const SinglePost = () => {
 
   // const google = `https://www.google.com/maps/place/13+rue+gustave+eiffel,92110+clichy/@${48.9034266},${2.2902923},${18}z`;
   // const google = `https://www.google.com/maps?daddr=${48.9034266},${2.2902923}`;
+  //https://www.google.com/maps/search/?api=1&query=92230%20Gennevilliers%2021%20Rue%20Louis%20Calmel%20"
 
   return (
     <>
@@ -253,17 +254,6 @@ const SinglePost = () => {
               </>
             ) : (
               <>
-                {file && (
-                  <div className=" flex justify-center rounded-lg rounded-b-none object-center object-cover">
-                    {" "}
-                    <img
-                      className="w-full object-cover object-center rounded-xl "
-                      src={URL.createObjectURL(file)}
-                      alt="city"
-                      required
-                    />
-                  </div>
-                )}
                 <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 mb-5 border-gray-300 border-dashed rounded-md">
                   <div className="space-y-1 text-center">
                     <svg
