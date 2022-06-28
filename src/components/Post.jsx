@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import CarouselImages from "./CarouselImages";
 
 const Post = ({ post }) => {
   const options = {
@@ -7,19 +8,21 @@ const Post = ({ post }) => {
     month: "long",
     day: "numeric",
   };
-  console.log("hello", post.pictures);
 
   return (
     <>
       <div className="bg-white rounded-lg shadow-lg overflow-hidden">
         <div className="w-full flex flex-col md:flex-row">
           <div className="w-full lg:w-2/4 md:w-2/4 h-80">
-            <img
-              className="object-center object-cover w-full h-full"
-              src={post?.pictures}
-              alt="city-stade"
-              loading="lazy"
-            />
+            <div className="relative w-full mx-auto">
+              <CarouselImages
+                heightImage={100}
+                widthImage={100}
+                arrow={7}
+                top={32}
+                pictures={post.pictures}
+              />
+            </div>
           </div>
 
           <div className="p-4  w-full md:w-2/5 text-left">

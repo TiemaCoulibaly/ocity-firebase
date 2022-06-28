@@ -1,10 +1,7 @@
 import React from "react";
 import {
   ButtonBack,
-  ButtonFirst,
-  ButtonLast,
   ButtonNext,
-  ButtonPlay,
   CarouselProvider,
   DotGroup,
   ImageWithZoom,
@@ -13,13 +10,13 @@ import {
 } from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
 
-const CarouselImages = ({ pictures }) => {
+const CarouselImages = ({ pictures, widthImage, heightImage, arrow, top }) => {
   return (
-    <div className="relative w-1/2 mx-auto">
+    <>
       <CarouselProvider
         visibleSlides={1}
-        naturalSlideWidth={70}
-        naturalSlideHeight={30}
+        naturalSlideWidth={widthImage}
+        naturalSlideHeight={heightImage}
         totalSlides={pictures && pictures.length}
         step={1}
         hasMasterSpinner>
@@ -29,15 +26,16 @@ const CarouselImages = ({ pictures }) => {
               <ImageWithZoom
                 src={picture}
                 alt={picture.name}
-                className="object-contain"
+                className="object-center object-cover w-full h-full rounded-sm"
               />
             </Slide>
           ))}
         </Slider>
-        <ButtonBack className="absolute top-1/2 left-5 p-2  bg-green-300 text-white  hover:bg-green-500">
+        <ButtonBack
+          className={`absolute top-${top} left-5 p-2 text-white transition duration-500 ease-in-out transform hover:scale-125 hover:-translate-y-1`}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-7 w-7"
+            className={`h-${arrow} w-${arrow}`}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -49,10 +47,11 @@ const CarouselImages = ({ pictures }) => {
             />
           </svg>
         </ButtonBack>
-        <ButtonNext className="absolute top-1/2 right-5 p-2  bg-green-300 text-white  hover:bg-green-500">
+        <ButtonNext
+          className={`absolute top-${top} right-5 p-2 text-white transition duration-500 ease-in-out transform hover:scale-125 hover:-translate-y-1`}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-7 w-7"
+            className={`h-${arrow} w-${arrow}`}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -67,7 +66,7 @@ const CarouselImages = ({ pictures }) => {
 
         <DotGroup className="text-red-400"></DotGroup>
       </CarouselProvider>
-    </div>
+    </>
   );
 };
 
