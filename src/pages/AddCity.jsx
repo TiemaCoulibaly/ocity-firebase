@@ -16,6 +16,7 @@ const AddCity = () => {
   const [address, setAddress] = useState("");
   const [images, setImages] = useState([]);
   const [urls, setUrls] = useState([]);
+  const [coordinates, setCoordinates] = useState("");
 
   const { currentUser } = useContext(AuthContext);
 
@@ -78,6 +79,7 @@ const AddCity = () => {
     setData({
       ...data,
       username: currentUser.displayName,
+      coordinates: coordinates,
 
       [name]: value,
     });
@@ -105,7 +107,7 @@ const AddCity = () => {
       .then((response) => {
         setFullAddress(response.data.features);
         // get the coordinates of addresses
-        // console.log("geometry", response.data.features[0].geometry.coordinates);
+        setCoordinates(response.data.features[0]?.geometry.coordinates);
       });
   }, [query]);
   const handleChangeAddress = (e) => {
@@ -117,6 +119,7 @@ const AddCity = () => {
     setAddress(text);
     setFullAddress([]);
   };
+  console.log("fulladdress", coordinates);
 
   return (
     <div className="min-h-full flex items-center justify-center py-2 px-4 sm:px-6 lg:px-8">
