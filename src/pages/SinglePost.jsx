@@ -113,18 +113,18 @@ const SinglePost = () => {
     }
   };
 
-  // const google = `https://www.google.com/maps/place/13+rue+gustave+eiffel,92110+clichy/@${48.9034266},${2.2902923},${18}z`;
-  // const google = `https://www.google.com/maps?daddr=${48.9034266},${2.2902923}`;
-  //https://www.google.com/maps/search/?api=1&query=92230%20Gennevilliers%2021%20Rue%20Louis%20Calmel%20"
+  const longitude = post.coordinates && post?.coordinates[0];
+  const latitude = post.coordinates && post?.coordinates[1];
+
+  const google = `https://www.google.com/maps/place/${
+    post.address
+  }/@${latitude},${longitude},${18}z`;
 
   return (
     <>
-      {/* <a href={google} target="_blank" rel="noreferrer" alt="googleadress">
-        google
-      </a> */}
-      <div className="bg-white shadow-2xl px-4 py-10">
+      <div className="bg-white shadow-2xl px-4 py-8">
         <div className="">
-          <div className="px-4 py-2 mt-2 ">
+          <div className="px-4 py-2 mt-2">
             {/* HANDLE DELETE */}
             {showModal ? (
               <>
@@ -176,7 +176,7 @@ const SinglePost = () => {
 
             {!updateMode ? (
               <>
-                <h1 className="mb-2 font-bold  text-2xl lg:text-4xl md:text-3xl  text-gray-800 text-center">
+                <h1 className="mb-4 font-bold  text-2xl lg:text-4xl md:text-3xl  text-gray-800 text-center">
                   ⚽ City stade du {post.title}
                 </h1>
                 <div className="relative w-1/2 mx-auto">
@@ -192,11 +192,11 @@ const SinglePost = () => {
                 {currentUser?.displayName === post?.username && (
                   <div className="flex justify-center py-2">
                     <button
-                      className="bg-blue-300 mx-5 p-2 hover:bg-blue-400 rounded"
+                      className="bg-blue-300 mx-5 p-1 hover:bg-blue-400 rounded"
                       onClick={handleClick}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-7 w-7"
+                        className="h-6 w-6"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -212,10 +212,10 @@ const SinglePost = () => {
                       type="button"
                       data-modal-toggle="popup-modal"
                       onClick={() => setShowModal(true)}
-                      className="mx-5 bg-red-300 hover:bg-red-400 p-2 rounded">
+                      className="mx-5 bg-red-300 hover:bg-red-400 p-1 rounded">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-7 w-7"
+                        className="h-6 w-6"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -230,37 +230,65 @@ const SinglePost = () => {
                   </div>
                 )}
 
-                <section className="flex justify-around mt-4">
+                <section className="flex justify-between mt-4 w-1/2 mx-auto">
                   <div className="">
-                    <p className="text-gray-900  text-base md:text-2xl sm:text-sm rounded-lg focus:ring-green-500 focus:border-green-500 p-2.5 ">
-                      <span className="text-gray-400"> Addresse:</span>{" "}
-                      {post.address}
-                    </p>
+                    <div className="text-gray-900  text-base md:text-lg sm:text-sm rounded-lg focus:ring-green-500 focus:border-green-500 p-2.5">
+                      <div className="flex items-center justify-center">
+                        <span className="text-green-600"> Addresse</span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-4 w-4 ml-2"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          strokeWidth={2}>
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                          />
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                          />
+                        </svg>
+                        <a
+                          className="underline hover:no-underline"
+                          href={google}
+                          alt="address-city-stade"
+                          target="_blank"
+                          rel="noreferrer">
+                          {post.address}
+                        </a>
+                      </div>
+                    </div>
 
-                    <p className="text-gray-900  text-base md:text-2xl sm:text-sm rounded-lg focus:ring-green-500 focus:border-green-500 p-2.5 ">
-                      <span className="text-gray-400"> Description:</span>{" "}
+                    <p className="text-gray-900  text-base md:text-lg sm:text-sm rounded-lg focus:ring-green-500 focus:border-green-500 p-2.5 ">
+                      <span className="text-green-600 mr-2"> Description </span>{" "}
                       {post.description}
                     </p>
                   </div>
-                  <div>
-                    <p className="text-gray-900  text-base md:text-2xl sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 ">
-                      <span className="text-gray-400"> Type de Terrain:</span>{" "}
+
+                  <div className="">
+                    <p className="text-gray-900  text-base md:text-lg sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 ">
+                      <span className="text-green-600 mr-2">
+                        Type de Terrain
+                      </span>
                       {post.pitch}
                     </p>
 
-                    <p className="text-gray-900  text-base md:text-2xl sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5">
-                      <span className="text-gray-400">
-                        {" "}
-                        Type d'éclairage (nuit):
-                      </span>{" "}
+                    <p className="text-gray-900  text-base md:text-lg sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5">
+                      <span className="text-green-600 mr-2">
+                        Type d'éclairage (nuit)
+                      </span>
                       {post.light}
                     </p>
 
-                    <p className="text-gray-900  text-base md:text-2xl sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 ">
-                      <span className="text-gray-400">
-                        {" "}
-                        Type de chaussure (recommendé):
-                      </span>{" "}
+                    <p className="text-gray-900  text-base md:text-lg sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 ">
+                      <span className="text-green-600 mr-2">
+                        Type de chaussure (recommendé)
+                      </span>
                       {post.shoes}
                     </p>
                   </div>
@@ -391,14 +419,20 @@ const SinglePost = () => {
                       </select>
                     </div>
                   </div>
-
-                  <button
-                    disabled={progress !== null && progress < 100}
-                    onClick={handleUpdate}
-                    className="group relative w-full flex justify-center p-3 mb-5 text-xl font-medium rounded-md text-white bg-gradient-to-r from-green-500 to-green-800 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50 disabled:cursor-not-allowed"
-                    type="submit">
-                    Update
-                  </button>
+                  <div className="flex justify-around items-center">
+                    <button
+                      disabled={progress !== null && progress < 100}
+                      onClick={handleUpdate}
+                      className="group relative flex justify-center p-3 text-xl font-medium rounded-md text-white bg-gradient-to-r from-green-500 to-green-800 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                      type="submit">
+                      Update
+                    </button>
+                    <button
+                      className="bg-red-200 p-3 rounded-md text-xl"
+                      onClick={handleClick}>
+                      Cancel
+                    </button>
+                  </div>
                 </div>
               </div>
             )}

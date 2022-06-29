@@ -26,7 +26,7 @@ const CarouselImages = ({ pictures, widthImage, heightImage, arrow, top }) => {
               <ImageWithZoom
                 src={picture}
                 alt={picture.name}
-                className="object-center object-cover w-full h-full rounded-sm"
+                className="object-center object-cover w-full h-full rounded-md"
               />
             </Slide>
           ))}
