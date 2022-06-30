@@ -13,7 +13,7 @@ const Post = ({ post }) => {
     <>
       <div className="bg-white rounded-lg shadow-lg overflow-hidden">
         <div className="w-full flex flex-col md:flex-row">
-          <div className="w-full lg:w-2/4 md:w-2/4 h-60">
+          <div className="w-full lg:w-2/4 md:w-2/4 h-64">
             <div className="relative w-full mx-auto">
               <CarouselImages
                 heightImage={100}
