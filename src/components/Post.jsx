@@ -13,13 +13,13 @@ const Post = ({ post }) => {
     <>
       <div className="bg-white rounded-lg shadow-lg overflow-hidden">
         <div className="w-full flex flex-col md:flex-row">
-          <div className="w-full lg:w-2/4 md:w-2/4 h-80">
+          <div className="w-full lg:w-2/4 md:w-2/4 h-60">
             <div className="relative w-full mx-auto">
               <CarouselImages
                 heightImage={100}
                 widthImage={100}
                 arrow={7}
-                top={32}
+                top={24}
                 pictures={post.pictures}
               />
             </div>
@@ -52,7 +52,7 @@ const Post = ({ post }) => {
             </Link>
           </div>
         </div>
-        <div className="flex flex-wrap my-3 justify-start lg:justify-around md:justify-around">
+        <div className="flex flex-wrap my-3 justify-start lg:justify-around md:justify-end">
           <p className="mx-2 p-2 mt-2 rounded-full bg-green-100 text-green-700">
             # {post.pitch}
           </p>

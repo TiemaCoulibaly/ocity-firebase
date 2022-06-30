@@ -3,6 +3,7 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import React, { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import CarouselImages from "../components/CarouselImages";
+// import Graph from "../components/Graph";
 import ProgressBar from "../components/ProgressBar";
 
 import { AuthContext } from "../context/AuthContext";
@@ -176,10 +177,10 @@ const SinglePost = () => {
 
             {!updateMode ? (
               <>
-                <h1 className="mb-4 font-bold  text-2xl lg:text-4xl md:text-3xl  text-gray-800 text-center">
+                <h1 className="mb-4 font-bold text-2xl lg:text-4xl md:text-3xl text-gray-800 text-center">
                   ⚽ City stade du {post.title}
                 </h1>
-                <div className="relative w-1/2 mx-auto">
+                <div className="relative w-full mx-0 md:w-2/2 md:mx-auto lg:w-2/3 lg:mx-auto">
                   <CarouselImages
                     widthImage={70}
                     heightImage={30}
@@ -230,68 +231,75 @@ const SinglePost = () => {
                   </div>
                 )}
 
-                <section className="flex justify-between mt-4 w-1/2 mx-auto">
-                  <div className="">
-                    <div className="text-gray-900  text-base md:text-lg sm:text-sm rounded-lg focus:ring-green-500 focus:border-green-500 p-2.5">
-                      <div className="flex items-center justify-center">
-                        <span className="text-green-600"> Addresse</span>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-4 w-4 ml-2"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          strokeWidth={2}>
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                          />
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                          />
-                        </svg>
-                        <a
-                          className="underline hover:no-underline"
-                          href={google}
-                          alt="address-city-stade"
-                          target="_blank"
-                          rel="noreferrer">
-                          {post.address}
-                        </a>
+                <section className="flex justify-center mt-4 w-full">
+                  <div className="flex justify-center flex-wrap">
+                    <div className="w-full lg:w1/2 md:w-1/2">
+                      <div className="text-gray-900  text-base md:text-lg sm:text-sm rounded-lg focus:ring-green-500 focus:border-green-500 p-2.5">
+                        <div className="flex items-center">
+                          <span className="text-green-600"> Addresse</span>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-4 w-4 ml-2"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth={2}>
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                            />
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                            />
+                          </svg>
+                          <a
+                            className="underline hover:no-underline"
+                            href={google}
+                            alt="address-city-stade"
+                            target="_blank"
+                            rel="noreferrer">
+                            {post.address}
+                          </a>
+                        </div>
                       </div>
+
+                      <p className="text-gray-900 w-96 text-base md:text-lg sm:text-sm rounded-lg focus:ring-green-500 focus:border-green-500 p-2.5 ">
+                        <span className="text-green-600 mr-2">
+                          {" "}
+                          Description{" "}
+                        </span>{" "}
+                        {post.description}
+                      </p>
                     </div>
 
-                    <p className="text-gray-900  text-base md:text-lg sm:text-sm rounded-lg focus:ring-green-500 focus:border-green-500 p-2.5 ">
-                      <span className="text-green-600 mr-2"> Description </span>{" "}
-                      {post.description}
-                    </p>
+                    <div className="w-full lg:w1/2 md:w-1/2">
+                      <p className="text-gray-900  text-base md:text-lg sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 ">
+                        <span className="text-green-600 mr-2">
+                          Type de Terrain
+                        </span>
+                        {post.pitch}
+                      </p>
+
+                      <p className="text-gray-900  text-base md:text-lg sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5">
+                        <span className="text-green-600 mr-2">
+                          Type d'éclairage (nuit)
+                        </span>
+                        {post.light}
+                      </p>
+
+                      <p className="text-gray-900  text-base md:text-lg sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 ">
+                        <span className="text-green-600 mr-2">
+                          Type de chaussure (recommendé)
+                        </span>
+                        {post.shoes}
+                      </p>
+                    </div>
                   </div>
-
-                  <div className="">
-                    <p className="text-gray-900  text-base md:text-lg sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 ">
-                      <span className="text-green-600 mr-2">
-                        Type de Terrain
-                      </span>
-                      {post.pitch}
-                    </p>
-
-                    <p className="text-gray-900  text-base md:text-lg sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5">
-                      <span className="text-green-600 mr-2">
-                        Type d'éclairage (nuit)
-                      </span>
-                      {post.light}
-                    </p>
-
-                    <p className="text-gray-900  text-base md:text-lg sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 ">
-                      <span className="text-green-600 mr-2">
-                        Type de chaussure (recommendé)
-                      </span>
-                      {post.shoes}
-                    </p>
-                  </div>
+                  {/* Graph  */}
+                  {/* <Graph /> */}
 
                   {/* <Map /> */}
                 </section>
