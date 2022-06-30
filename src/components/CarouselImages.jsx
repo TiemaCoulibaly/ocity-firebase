@@ -32,7 +32,7 @@ const CarouselImages = ({ pictures, widthImage, heightImage, arrow, top }) => {
           ))}
         </Slider>
         <ButtonBack
-          className={`absolute top-${top} left-5 p-2 text-white transition duration-500 ease-in-out transform hover:scale-125 hover:-translate-y-1`}>
+          className={`absolute top-12 lg:top-${top}  md:top-40 sm:top-30 left-5 p-2 text-white transition duration-500 ease-in-out transform hover:scale-125 hover:-translate-y-1`}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className={`h-${arrow} w-${arrow}`}
@@ -48,7 +48,7 @@ const CarouselImages = ({ pictures, widthImage, heightImage, arrow, top }) => {
           </svg>
         </ButtonBack>
         <ButtonNext
-          className={`absolute top-${top} right-5 p-2 text-white transition duration-500 ease-in-out transform hover:scale-125 hover:-translate-y-1`}>
+          className={`absolute top-12 lg:top-${top} md:top-40  right-5 p-2 text-white transition duration-500 ease-in-out transform hover:scale-125 hover:-translate-y-1`}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className={`h-${arrow} w-${arrow}`}
