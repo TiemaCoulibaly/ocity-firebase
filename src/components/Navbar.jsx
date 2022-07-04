@@ -1,15 +1,16 @@
-import React, { useContext, Fragment } from "react";
+import React, { useContext, Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/solid";
+import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/solid";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 
 import logo from "../images/ocity-rmv.png";
 
 const Navbar = () => {
+  const [arrow, setArrow] = useState(false);
   const { currentUser, dispatch } = useContext(AuthContext);
 
   let navigate = useNavigate();
@@ -96,14 +97,7 @@ const Navbar = () => {
 													 hover:bg-green-700 hover:text-white
 													px-3 py-2 m-1 rounded-md text-xl font-medium"
                       to="/login">
-                      Login
-                    </Link>
-                    <Link
-                      className="bg-gray-900 text-white
-													 hover:bg-green-700 hover:text-white
-													px-3 py-2 m-1 rounded-md text-xl font-medium"
-                      to="/register">
-                      Register
+                      S'inscrire | Se connecter
                     </Link>
                   </>
                 )}
@@ -132,7 +126,7 @@ const Navbar = () => {
                 {currentUser && (
                   <Menu as="div" className="ml-3">
                     <div>
-                      <Menu.Button className="bg-gray-800 flex text-sm rounded-2xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white hover:bg-green-900">
+                      <Menu.Button className="bg-gray-800 flex text-sm rounded-2xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-green-700 hover:bg-green-900">
                         <span className="sr-only">Open currentUser menu</span>
 
                         <img
@@ -142,10 +136,19 @@ const Navbar = () => {
                           }
                           alt=""
                         />
-                        <ChevronDownIcon
-                          className="w-8 h-10 hover:h-10 text-gray-300 animate-bounce"
-                          aria-hidden="true"
-                        />
+                        {arrow ? (
+                          <ChevronDownIcon
+                            onClick={() => setArrow(!arrow)}
+                            className="w-8 h-10 hover:h-10 text-gray-300"
+                            aria-hidden="true"
+                          />
+                        ) : (
+                          <ChevronUpIcon
+                            onClick={() => setArrow(!arrow)}
+                            className="w-8 h-10 hover:h-10 text-gray-300"
+                            aria-hidden="true"
+                          />
+                        )}
                       </Menu.Button>
                     </div>
 
@@ -158,18 +161,6 @@ const Navbar = () => {
                       leaveFrom="transform opacity-100 scale-100"
                       leaveTo="transform opacity-0 scale-95">
                       <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                        <Menu.Item>
-                          {({ active }) => (
-                            <Link
-                              to="/settings"
-                              className={classNames(
-                                active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700"
-                              )}>
-                              Settings
-                            </Link>
-                          )}
-                        </Menu.Item>
                         <Menu.Item>
                           {({ active }) => (
                             <Link
