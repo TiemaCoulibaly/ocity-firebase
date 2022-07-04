@@ -3,7 +3,9 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import React, { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import CarouselImages from "../components/CarouselImages";
-// import Graph from "../components/Graph";
+import Graph from "../components/Graph";
+import ModalDeleteCity from "../components/ModalDeleteCity";
+
 import ProgressBar from "../components/ProgressBar";
 
 import { AuthContext } from "../context/AuthContext";
@@ -114,6 +116,11 @@ const SinglePost = () => {
     }
   };
 
+  const handleShowModal = (e) => {
+    e.preventDefault();
+    setShowModal(false);
+  };
+
   const longitude = post.coordinates && post?.coordinates[0];
   const latitude = post.coordinates && post?.coordinates[1];
 
@@ -128,49 +135,10 @@ const SinglePost = () => {
           <div className="px-4 py-2 mt-2">
             {/* HANDLE DELETE */}
             {showModal ? (
-              <>
-                {/* Delete Product Modal  */}
-                <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-                  <div className="relative w-auto my-6 mx-6 lg:mx-auto md:mx-auto max-w-3xl">
-                    {/*content*/}
-                    <div className="border-0 rounded-lg shadow-lg relative flex flex-col  w-full bg-white outline-none focus:outline-none p-2 lg:p-10 md:p-8">
-                      {/*body*/}
-                      <div className="p-6 pt-0 text-center">
-                        <svg
-                          className="mx-auto mb-4 w-14 h-14 text-green-600 dark:text-gray-200"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg">
-                          <path
-                            strokeWidth={2}
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                        <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                          Are you sure you want to delete this City?
-                        </h3>
-                        <button
-                          data-modal-toggle="popup-modal"
-                          type="button"
-                          className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
-                          onClick={handleDelete}>
-                          Yes, I'm sure
-                        </button>
-                        <button
-                          data-modal-toggle="popup-modal"
-                          type="button"
-                          className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-300 rounded-lg border-2 border-green-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600"
-                          onClick={() => setShowModal(false)}>
-                          No, cancel
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
-              </>
+              <ModalDeleteCity
+                handleDelete={handleDelete}
+                handleShowModal={handleShowModal}
+              />
             ) : null}
 
             {/* END HANDLE DELETE */}
@@ -298,11 +266,13 @@ const SinglePost = () => {
                       </p>
                     </div>
                   </div>
-                  {/* Graph  */}
-                  {/* <Graph /> */}
 
                   {/* <Map /> */}
                 </section>
+                {/* Graph  */}
+                <div className="w-1/2 mx-auto">
+                  <Graph />
+                </div>
               </>
             ) : (
               <div className="min-h-full flex items-center justify-center py-2 px-4 sm:px-6 lg:px-8">
