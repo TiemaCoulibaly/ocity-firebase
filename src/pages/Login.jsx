@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   GoogleAuthProvider,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
 } from "firebase/auth";
@@ -20,6 +21,7 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
+  const [visible, setVisible] = useState(false);
 
   const navigate = useNavigate();
 
@@ -28,18 +30,27 @@ const Login = () => {
   const handleLogin = (e) => {
     setIsFetching(true);
     e.preventDefault();
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        dispatch({ type: "LOGIN", payload: user });
-        navigate("/");
-        setIsFetching(false);
-      })
-      .catch((err) => {
-        setErrorMessage(err.message);
-        setIsFetching(false);
-      });
+    if (email && password)
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          dispatch({ type: "LOGIN", payload: user });
+          navigate("/");
+          setIsFetching(false);
+        })
+        .catch((err) => {
+          setIsFetching(false);
+          if (err.code === "auth/wrong-password") {
+            setErrorMessage("Wrong password.");
+          } else if (err.code === "auth/user-not-found") {
+            setErrorMessage("User does not exist.");
+          } else if (err.code === "auth/invalid-email") {
+            setErrorMessage("Email incorrect");
+          } else if (err.code === "auth/too-many-requests") {
+            setErrorMessage("Veuillez réeassayer plus tard");
+          }
+        });
   };
 
   const signInWithGoogle = () => {
@@ -50,7 +61,22 @@ const Login = () => {
       navigate("/");
     });
   };
-  const [visible, setVisible] = useState(false);
+  const forgotPassword = (e) => {
+    e.preventDefault();
+
+    email &&
+      sendPasswordResetEmail(auth, email)
+        .then(() => {
+          // Password reset email sent!
+          alert("email envoyer reset");
+        })
+        .catch((err) => {
+          const errorCode = err.code;
+          const errorMessage = err.message;
+          console.log("code", errorCode);
+          console.log("mesg", errorMessage);
+        });
+  };
   return (
     <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
@@ -82,6 +108,7 @@ const Login = () => {
               E-mail{" "}
             </Link>
           </p>
+          <button onClick={forgotPassword}>forgot password</button>
         </div>
 
         {visible && (
