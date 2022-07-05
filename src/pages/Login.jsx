@@ -12,7 +12,7 @@ import GoogleButton from "react-google-button";
 import Alert from "../components/Alert.jsx";
 import { AuthContext } from "../context/AuthContext";
 
-import logo from "./../images/ocity-rmv.png";
+import logo from "./../images/ocity-03.png";
 import ModalLogin from "../components/ModalLogin";
 
 const Login = () => {
@@ -73,19 +73,19 @@ const Login = () => {
           setAlert(true);
         })
         .catch((err) => {
-          const errorCode = err.code;
+          // const errorCode = err.code;
+          // console.log("code", errorCode);
           const errorMessage = err.message;
-          console.log("code", errorCode);
-          console.log("mesg", errorMessage);
+          setErrorMessage(errorMessage);
         });
   };
   return (
     <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
-          <img className="mx-auto h-24 w-auto" src={logo} alt="logo" />
-          <h2 className="mt-6 text-center text-3xl font-semibold text-gray-900">
-            Rejoins le mouvement et aide-nous à répertorier tout les city-stades
+          <img className="mx-auto h-48 w-auto" src={logo} alt="logo" />
+          <h2 className="text-center text-3xl font-semibold text-gray-900">
+            Aide-nous à répertorier tout les city-stades en France
           </h2>
           <div className="flex justify-center my-5">
             <GoogleButton

@@ -7,7 +7,7 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/solid";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 
-import logo from "../images/ocity-rmv.png";
+import logo from "../images/ocitywhite-03.png";
 
 const Navbar = () => {
   const [arrow, setArrow] = useState(false);
