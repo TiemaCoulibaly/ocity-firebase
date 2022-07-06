@@ -3,7 +3,6 @@ import {
   ButtonBack,
   ButtonNext,
   CarouselProvider,
-  DotGroup,
   ImageWithZoom,
   Slide,
   Slider,
@@ -63,8 +62,6 @@ const CarouselImages = ({ pictures, widthImage, heightImage, arrow, top }) => {
             />
           </svg>
         </ButtonNext>
-
-        <DotGroup className="text-red-400"></DotGroup>
       </CarouselProvider>
     </>
   );

@@ -270,9 +270,7 @@ const AddCity = () => {
                   Type d'éclairage (nuit)
                 </option>
                 <option value="Éclairée de nuit">Éclairée de nuit</option>
-                <option value="Non éclairée de nuit">
-                  Non éclairée de nuit
-                </option>
+                <option value="Non éclairée">Non éclairée</option>
               </select>
             </div>
             <div className="flex flex-col justify-center items-center py-4">

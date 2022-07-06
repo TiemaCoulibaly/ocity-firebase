@@ -11,12 +11,12 @@ const Post = ({ post }) => {
 
   return (
     <>
-      <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+      <div className="bg-white rounded-lg shadow-lg overflow-hidden 2xl:h-72 xl:h-72 lg:h-72 md:h-72 sm:h-96">
         <div className="w-full flex flex-col md:flex-row">
-          <div className="w-full lg:w-2/4 md:w-2/4 h-64">
+          <div className="w-full lg:w-2/4 md:w-2/4 2xl:h-52 xl:h-52 lg:h-96 md:h-52 sm:h-64">
             <div className="relative w-full mx-auto">
               <CarouselImages
-                heightImage={100}
+                heightImage={65}
                 widthImage={100}
                 arrow={7}
                 top={24}
@@ -33,17 +33,20 @@ const Post = ({ post }) => {
                 </p>
               </div>
 
-              <p className="my-2 text-xl text-green-900 font-bold">
+              <p className="my-2 text-xl text-green-900 font-bold w-64">
                 City Stade du {post.title}
               </p>
 
-              <p className="my-2 text-base text-gray-500 font-normal">
-                <i className="fas fa-map-marker-alt mr-2"></i>
-                <span className="text-gray-600">Adresse:</span> {post.address}
+              <p className="my-2 text-base text-gray-500 font-normal w-64">
+                <span className="text-gray-600 font-semibold mr-1">
+                  Adresse:
+                </span>
+
+                {post.address}
               </p>
 
-              <hr className="mt-7 h-1 w-20 bg-green-300 " />
-              <p className="text-base text-gray-400 italic">
+              <hr className="mt-5 h-1 w-20 bg-green-300" />
+              <p className="text-base text-gray-400 italic w-64">
                 Posté le:
                 {new Date(
                   post.timeStamp.toDate().toString()
@@ -52,7 +55,7 @@ const Post = ({ post }) => {
             </Link>
           </div>
         </div>
-        <div className="flex flex-wrap my-3 justify-start lg:justify-around md:justify-end">
+        <div className="flex flex-wrap my-2 justify-start lg:justify-around md:justify-end">
           <p className="mx-2 p-2 mt-2 rounded-full bg-green-100 text-green-700">
             # {post.pitch}
           </p>
