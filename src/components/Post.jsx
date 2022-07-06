@@ -55,7 +55,7 @@ const Post = ({ post }) => {
             </Link>
           </div>
         </div>
-        <div className="flex flex-wrap my-2 justify-start lg:justify-around md:justify-end">
+        <div className="flex flex-wrap my-5 justify-start lg:justify-around md:justify-end">
           <p className="mx-2 p-2 mt-2 rounded-full bg-green-100 text-green-700">
             # {post.pitch}
           </p>
