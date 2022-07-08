@@ -9,7 +9,6 @@ import {
 import { auth } from "../firebase";
 import GoogleButton from "react-google-button";
 
-import Alert from "../components/Alert.jsx";
 import { AuthContext } from "../context/AuthContext";
 
 import logo from "./../images/ocity-03.png";
@@ -43,11 +42,11 @@ const Login = () => {
         .catch((err) => {
           setIsFetching(false);
           if (err.code === "auth/wrong-password") {
-            setErrorMessage("Wrong password.");
+            setErrorMessage("Mot de passe incorrect");
           } else if (err.code === "auth/user-not-found") {
-            setErrorMessage("User does not exist.");
+            setErrorMessage("Utilisateur introuvable");
           } else if (err.code === "auth/invalid-email") {
-            setErrorMessage("Email incorrect");
+            setErrorMessage("Email non valide");
           } else if (err.code === "auth/too-many-requests") {
             setErrorMessage("Veuillez réeassayer plus tard");
           }
@@ -127,9 +126,9 @@ const Login = () => {
             setVisible={setVisible}
             setAlert={setAlert}
             alert={alert}
+            errorMessage={errorMessage}
           />
         )}
-        {errorMessage && <Alert message={errorMessage} />}
       </div>
     </div>
   );

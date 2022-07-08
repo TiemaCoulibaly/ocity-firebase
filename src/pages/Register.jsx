@@ -42,11 +42,11 @@ const Register = () => {
       setIsFetching(false);
     } catch (err) {
       if (err.code === "auth/weak-password") {
-        setErrorMessage("The password is too weak.");
+        setErrorMessage("Mot de passe faible");
       } else if (err.code === "auth/email-already-in-use") {
-        setErrorMessage("The email address is already in use.");
+        setErrorMessage("Email déjà utilisé");
       } else if (err.code === "auth/invalid-email") {
-        setErrorMessage("email is not valid");
+        setErrorMessage("Email non valide");
       }
       setIsFetching(false);
     }

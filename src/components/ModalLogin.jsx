@@ -1,4 +1,5 @@
 import React from "react";
+import Alert from "./Alert";
 import ForgotPasswordAlert from "./ForgotPasswordAlert";
 import Loader from "./Loader";
 
@@ -16,6 +17,7 @@ const ModalLogin = ({
   setVisible,
   setAlert,
   alert,
+  errorMessage,
 }) => {
   return (
     <>
@@ -131,12 +133,13 @@ const ModalLogin = ({
               </div>
 
               <button
-                className="group relative w-full flex justify-center p-3 mt-4 text-xl font-medium rounded-md bg-gradient-to-r from-green-500 to-green-800  hover:bg-green-600  text-white hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50"
+                className="group relative w-full flex justify-center p-3 my-4 text-xl font-medium rounded-md bg-gradient-to-r from-green-500 to-green-800  hover:bg-green-600  text-white hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50"
                 type="submit"
                 disabled={isFetching}>
                 {isFetching ? <Loader /> : "Login"}
               </button>
             </form>
+            {errorMessage && <Alert message={errorMessage} />}
           </div>
         </div>
       </div>
