@@ -26,6 +26,13 @@ const SinglePost = () => {
   const location = useLocation();
   const path = location.pathname.split("/")[2];
 
+  const longitude = post.coordinates && post?.coordinates[0];
+  const latitude = post.coordinates && post?.coordinates[1];
+
+  const google = `https://www.google.com/maps/place/${
+    post.address
+  }/@${latitude},${longitude},${18}z`;
+
   useEffect(() => {
     const uploadFile = () => {
       const uniqueName = new Date().getTime() + file.name;
@@ -120,13 +127,6 @@ const SinglePost = () => {
     e.preventDefault();
     setShowModal(false);
   };
-
-  const longitude = post.coordinates && post?.coordinates[0];
-  const latitude = post.coordinates && post?.coordinates[1];
-
-  const google = `https://www.google.com/maps/place/${
-    post.address
-  }/@${latitude},${longitude},${18}z`;
 
   return (
     <>

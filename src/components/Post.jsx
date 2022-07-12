@@ -29,7 +29,9 @@ const Post = ({ post }) => {
             <Link to={`/post/${post.id}`}>
               <div className="flex items-center">
                 <p className="text-base text-gray-400 font-normal">
-                  Posté par: {post.username}
+                  Posté par:{" "}
+                  {post.username.charAt(0).toUpperCase() +
+                    post.username.slice(1)}
                 </p>
               </div>
 
@@ -47,7 +49,7 @@ const Post = ({ post }) => {
 
               <hr className="mt-5 h-1 w-20 bg-green-300" />
               <p className="text-base text-gray-400 italic w-64">
-                Posté le:
+                Posté le:{" "}
                 {new Date(
                   post.timeStamp.toDate().toString()
                 ).toLocaleDateString("fr-FR", options)}
