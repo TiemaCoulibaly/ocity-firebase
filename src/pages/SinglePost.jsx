@@ -199,9 +199,9 @@ const SinglePost = () => {
                   </div>
                 )}
 
-                <section className="flex justify-center mt-4 w-full">
+                <section className="mx-auto mt-4 w-full">
                   <div className="flex justify-center flex-wrap">
-                    <div className="w-full lg:w1/2 md:w-1/2">
+                    <div>
                       <div className="text-gray-900  text-base md:text-lg sm:text-sm rounded-lg focus:ring-green-500 focus:border-green-500 p-2.5">
                         <div className="flex items-center">
                           <span className="text-green-600"> Addresse</span>
@@ -243,7 +243,7 @@ const SinglePost = () => {
                       </p>
                     </div>
 
-                    <div className="w-full lg:w1/2 md:w-1/2">
+                    <div>
                       <p className="text-gray-900  text-base md:text-lg sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 ">
                         <span className="text-green-600 mr-2">
                           Type de Terrain
