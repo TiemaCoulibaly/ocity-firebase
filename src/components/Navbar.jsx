@@ -1,4 +1,4 @@
-import React, { useContext, Fragment, useState } from "react";
+import React, { useContext, Fragment, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
@@ -11,6 +11,7 @@ import logo from "../images/ocitywhite-03.png";
 
 const Navbar = () => {
   const [arrow, setArrow] = useState(false);
+  const [greeting, setGreeeting] = useState(true);
   const { currentUser, dispatch } = useContext(AuthContext);
 
   let navigate = useNavigate();
@@ -27,6 +28,14 @@ const Navbar = () => {
   };
 
   const classNames = (...classes) => classes.filter(Boolean).join(" ");
+  useEffect(() => {
+    setTimeout(() => {
+      setGreeeting(false);
+    }, 40000);
+  }, []);
+
+  const randomGreeting = ["Hello", "Bienvenue", "Salut", "Welcome"];
+  const i = Math.floor(randomGreeting.length * Math.random());
 
   return (
     <Disclosure
@@ -181,9 +190,11 @@ const Navbar = () => {
               </div>
               {currentUser && (
                 <span className="mt-20 lg:mx-2 md:mx-2 lg:mt-0 md:mt-0text-black lg:text-white md:text-white font-bold ">
-                  Welcome😀,
-                  {currentUser.displayName.charAt(0).toUpperCase() +
-                    currentUser.displayName.slice(1)}
+                  {greeting &&
+                    randomGreeting[i] +
+                      " 😀, " +
+                      currentUser?.displayName.charAt(0).toUpperCase() +
+                      currentUser?.displayName.slice(1)}
                 </span>
               )}
             </div>
