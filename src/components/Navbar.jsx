@@ -181,7 +181,9 @@ const Navbar = () => {
               </div>
               {currentUser && (
                 <span className="mt-20 lg:mx-2 md:mx-2 lg:mt-0 md:mt-0text-black lg:text-white md:text-white font-bold ">
-                  Hey, {currentUser.displayName}
+                  Welcome😀,
+                  {currentUser.displayName.charAt(0).toUpperCase() +
+                    currentUser.displayName.slice(1)}
                 </span>
               )}
             </div>

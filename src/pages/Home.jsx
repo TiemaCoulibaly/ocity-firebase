@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { db } from "../firebase";
 import Posts from "../components/Posts";
 import Header from "../components/Header";
@@ -13,9 +13,14 @@ const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    // LISTEN TO REALTIME UPDATE
+    //Collection docRef
+    const colRef = collection(db, "city-stade");
+    //Query
+    const q = query(colRef, orderBy("timeStamp", "desc"));
+
+    // Listen to realtime update
     const unsub = onSnapshot(
-      collection(db, "city-stade"),
+      q,
       (snapShot) => {
         let lists = [];
         snapShot.docs.forEach((doc) => {
