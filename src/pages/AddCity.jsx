@@ -161,7 +161,7 @@ const AddCity = () => {
                   htmlFor="fileInput"
                   className="cursor-pointer bg-white rounded-md font-medium text-green-600 ">
                   {images.length > 0 && (
-                    <span>{images.length} images uploaded</span>
+                    <span className="m-2">{images.length} images uploaded</span>
                   )}
                   <input
                     type="file"
@@ -178,7 +178,7 @@ const AddCity = () => {
                       disabled={images.length > 3}
                       className={`${
                         images.length > 3 && "hidden"
-                      } text - xs font-semibold border-2 border-green-300 p-2 px-4 uppercase rounded-sm text-green-900 hover:text-white bg-green-100 hover:bg-green-500 disabled:opacity-50`}
+                      } mx-auto my-4 text-xs font-semibold border-2 border-green-300 p-2 px-4 uppercase rounded-sm text-green-900 hover:text-white bg-green-100 hover:bg-green-500 disabled:opacity-50`}
                       onClick={handleUpload}>
                       Upload
                     </button>
