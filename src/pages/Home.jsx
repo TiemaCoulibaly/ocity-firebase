@@ -4,6 +4,7 @@ import { db } from "../firebase";
 import Posts from "../components/Posts";
 import Header from "../components/Header";
 import SearchCity from "../components/SearchCity";
+import Faq from "../components/Faq";
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
@@ -57,6 +58,7 @@ const Home = () => {
             <div className="flex">
               {<Posts posts={filteredPost} date={date} />}
             </div>
+            <Faq />
           </div>
         </>
       )}
