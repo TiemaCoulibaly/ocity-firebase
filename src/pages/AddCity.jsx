@@ -185,9 +185,9 @@ const AddCity = () => {
                   )}
                 </label>
               </div>
-              {images.length > 3 || images.length === 3 ? (
+              {images.length >= 3 ? (
                 <p className="bg-red-100 p-1 text-xs text-gray-500">
-                  Limit de 3 images atteint upload
+                  Limit de 3 images atteint vous pouvez upload
                 </p>
               ) : (
                 <p className="text-xs text-gray-500">
