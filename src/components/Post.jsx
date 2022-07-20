@@ -8,7 +8,7 @@ const Post = ({ post }) => {
     month: "long",
     day: "numeric",
   };
-
+  console.log(post);
   return (
     <>
       <div className="bg-white rounded-lg shadow-lg overflow-hidden 2xl:h-72 xl:h-72 lg:h-72 md:h-72 sm:h-96">
@@ -20,7 +20,7 @@ const Post = ({ post }) => {
                 widthImage={100}
                 arrow={7}
                 top={24}
-                pictures={post.pictures}
+                pictures={post?.pictures}
               />
             </div>
           </div>
@@ -30,8 +30,8 @@ const Post = ({ post }) => {
               <div className="flex items-center">
                 <p className="text-base text-gray-400 font-normal">
                   Posté par:{" "}
-                  {post.username.charAt(0).toUpperCase() +
-                    post.username.slice(1)}
+                  {post?.username.charAt(0).toUpperCase() +
+                    post?.username.slice(1)}
                 </p>
               </div>
 
@@ -51,7 +51,7 @@ const Post = ({ post }) => {
               <p className="text-base text-gray-400 italic w-64">
                 Posté le:{" "}
                 {new Date(
-                  post.timeStamp.toDate().toString()
+                  post.timeStamp?.toDate().toString()
                 ).toLocaleDateString("fr-FR", options)}
               </p>
             </Link>
@@ -59,13 +59,13 @@ const Post = ({ post }) => {
         </div>
         <div className="flex flex-wrap my-5 justify-start lg:justify-around md:justify-end">
           <p className="mx-2 p-2 mt-2 rounded-full bg-green-100 text-green-700">
-            # {post.pitch}
+            # {post?.pitch}
           </p>
           <p className="mx-2 p-2 mt-2 rounded-full bg-green-100 text-green-700">
-            # {post.light}
+            # {post?.light}
           </p>
           <p className="mx-2 p-2 mt-2 rounded-full bg-green-100 text-green-700">
-            # {post.shoes}
+            # {post?.shoes}
           </p>
         </div>
       </div>

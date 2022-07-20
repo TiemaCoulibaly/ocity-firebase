@@ -82,21 +82,21 @@ const Footer = () => {
         </div>
 
         <div className="sm:flex sm:flex-wrap sm:-mx-4 mt-4 pt-2 sm:mt-2 sm:pt-2 border-t">
-          <div class="w-full px-10 rounded-b-lg">
-            <div class="max-w-7xl flex flex-col-reverse sm:flex-row py-1 mx-auto justify-between items-center">
-              <div class="text-center mt-4 sm:mt-0">
-                &copy; 2022 <span class="font-bold">O'City stade</span>
+          <div className="w-full px-10 rounded-b-lg">
+            <div className="max-w-7xl flex flex-col-reverse sm:flex-row py-1 mx-auto justify-between items-center">
+              <div className="text-center mt-4 sm:mt-0">
+                &copy; 2022 <span className="font-bold">O'City stade</span>
               </div>
-              <div class="text-center text-xl">
-                <ul class="w-full justify-center text-sm flex text-center flex-row mx-auto space-x-2 overflow-hidden">
+              <div className="text-center text-xl">
+                <ul className="w-full justify-center text-sm flex text-center flex-row mx-auto space-x-2 overflow-hidden">
                   <li>
-                    <button class="border-b border-solid border-transparent hover:border-green-400">
+                    <button className="border-b border-solid border-transparent hover:border-green-400">
                       Privacy Policy
                     </button>
                   </li>
                   <span>|</span>
                   <li>
-                    <button class="border-b border-solid border-transparent hover:border-green-400">
+                    <button className="border-b border-solid border-transparent hover:border-green-400">
                       Terms of Service
                     </button>
                   </li>

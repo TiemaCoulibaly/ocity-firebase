@@ -84,6 +84,7 @@ const AddCity = () => {
       [name]: value,
     });
   };
+  console.log("dataa", data);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -238,7 +239,25 @@ const AddCity = () => {
             name="description"
             onChange={handleChange}
             required></textarea>
+          {/* <div className="flex justify-between flex-wrap">
+            <label>Horaire d'ouverture:</label>
+            <input
+              onChange={handleChange}
+              type="time"
+              id="openHour"
+              name="openHour"
+              className="border border-gray-300"
+            />
 
+            <label>Horaire de fermeture:</label>
+            <input
+              onChange={handleChange}
+              type="time"
+              id="closeHour"
+              name="closeHour"
+              className="border border-gray-300"
+            />
+          </div> */}
           <div className="flex flex-col my-4">
             <div className="flex flex-col justify-center items-center py-4">
               <select
