@@ -200,6 +200,36 @@ const SinglePost = () => {
                 )}
 
                 <section className="mx-auto mt-4 w-full">
+                  <div className="flex justify-center border border-gray-200 p-2">
+                    {post.openHour && (
+                      <p className="text-xl">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-6 w-6 inline mx-2"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          strokeWidth={2}>
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
+                        </svg>
+                        <span className="text-green-600 ">
+                          Le City stade est ouvert de{" "}
+                        </span>
+
+                        {post.openHour}
+                      </p>
+                    )}
+                    {post.closeHour && (
+                      <p className="text-xl">
+                        <span className="text-green-600 ml-2"> à </span>
+                        {post.closeHour}
+                      </p>
+                    )}
+                  </div>
                   <div className="flex justify-center flex-wrap">
                     <div>
                       <div className="text-gray-900  text-base md:text-lg sm:text-sm rounded-lg focus:ring-green-500 focus:border-green-500 p-2.5">
@@ -344,6 +374,25 @@ const SinglePost = () => {
                     id="description"
                     name="description"
                     onChange={handleChange}></textarea>
+                  <div className="flex justify-between flex-wrap">
+                    <label>Horaire d'ouverture:</label>
+                    <input
+                      onChange={handleChange}
+                      type="time"
+                      id="openHour"
+                      name="openHour"
+                      className="border border-gray-300"
+                    />
+
+                    <label>Horaire de fermeture:</label>
+                    <input
+                      onChange={handleChange}
+                      type="time"
+                      id="closeHour"
+                      name="closeHour"
+                      className="border border-gray-300"
+                    />
+                  </div>
 
                   <div className="flex flex-col my-4">
                     <div className="flex flex-col justify-center items-center py-4">

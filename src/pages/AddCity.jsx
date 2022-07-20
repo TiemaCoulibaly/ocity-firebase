@@ -239,7 +239,7 @@ const AddCity = () => {
             name="description"
             onChange={handleChange}
             required></textarea>
-          {/* <div className="flex justify-between flex-wrap">
+          <div className="flex justify-between flex-wrap">
             <label>Horaire d'ouverture:</label>
             <input
               onChange={handleChange}
@@ -257,7 +257,7 @@ const AddCity = () => {
               name="closeHour"
               className="border border-gray-300"
             />
-          </div> */}
+          </div>
           <div className="flex flex-col my-4">
             <div className="flex flex-col justify-center items-center py-4">
               <select
