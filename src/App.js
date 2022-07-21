@@ -33,8 +33,18 @@ const App = () => {
           />
           <Route exact path="/" element={<Home />} />
           <Route path="/login" element={currentUser ? <Home /> : <Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/addcity" element={<AddCity />} />
+          <Route
+            path="/register"
+            element={currentUser ? <Home /> : <Register />}
+          />
+          <Route
+            path="/addcity"
+            element={
+              <ProtectedRoute>
+                <AddCity />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/post/:postId" element={<SinglePost />} />
 
           <Route path="*" element={<NotFound />} />
