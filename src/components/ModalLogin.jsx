@@ -1,14 +1,13 @@
-import React from "react";
+import React, { memo } from "react";
 import Alert from "./Alert";
 import ForgotPasswordAlert from "./ForgotPasswordAlert";
 import Loader from "./Loader";
+import PropTypes from "prop-types";
 
 const ModalLogin = ({
   handleLogin,
   setEmail,
-  email,
   setShowPassword,
-  password,
   forgotPassword,
   showPassword,
   setPassword,
@@ -147,5 +146,15 @@ const ModalLogin = ({
     </>
   );
 };
+ModalLogin.propTypes = {
+  errorMessage: PropTypes.string,
+  showPassword: PropTypes.bool,
+  isFetching: PropTypes.bool,
+  visible: PropTypes.bool,
+  alert: PropTypes.bool,
+  handleLogin: PropTypes.func,
+  signInWithGoogle: PropTypes.func,
+  forgotPassword: PropTypes.func,
+};
 
-export default ModalLogin;
+export default memo(ModalLogin);

@@ -1,6 +1,6 @@
 import { doc, getDoc, deleteDoc, updateDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import React, { useContext, useEffect, useState } from "react";
+import React, { memo, useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import CarouselImages from "../components/CarouselImages";
 import Graph from "../components/Graph";
@@ -10,6 +10,7 @@ import ProgressBar from "../components/ProgressBar";
 
 import { AuthContext } from "../context/AuthContext";
 import { db, storage } from "../firebase";
+import PropTypes from "prop-types";
 
 const SinglePost = () => {
   const [updateMode, setUpdatedMode] = useState(false);
@@ -469,5 +470,23 @@ const SinglePost = () => {
     </>
   );
 };
+SinglePost.propTypes = {
+  updateMode: PropTypes.bool,
+  post: PropTypes.string,
+  showModal: PropTypes.bool,
+  data: PropTypes.object,
+  progress: PropTypes.number,
+  file: PropTypes.string,
+  upload: PropTypes.string,
+  handleDelete: PropTypes.func,
+  handleChange: PropTypes.func,
+  handleClick: PropTypes.func,
+  handleUpdate: PropTypes.func,
+  handleShowModal: PropTypes.func,
+  path: PropTypes.string,
+  longitude: PropTypes.number,
+  latitude: PropTypes.number,
+  google: PropTypes.string,
+};
 
-export default SinglePost;
+export default memo(SinglePost);

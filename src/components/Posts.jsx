@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import Post from "./Post";
+import PropTypes from "prop-types";
 
 const Posts = ({ posts }) => {
   const [currentItems, setCurrentItems] = useState([]);
@@ -50,5 +51,12 @@ const Posts = ({ posts }) => {
     </section>
   );
 };
-
-export default Posts;
+Posts.propTypes = {
+  currentItems: PropTypes.array,
+  pageCount: PropTypes.number,
+  itemOffset: PropTypes.number,
+  currentPage: PropTypes.string,
+  itemsPerPage: PropTypes.number,
+  handlePageClick: PropTypes.func,
+};
+export default memo(Posts);

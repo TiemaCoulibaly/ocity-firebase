@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db } from "../firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+
+import PropTypes from "prop-types";
 
 import { useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
@@ -164,5 +166,12 @@ const Register = () => {
     </div>
   );
 };
-
-export default Register;
+Register.propTypes = {
+  data: PropTypes.object,
+  errorMessage: PropTypes.string,
+  isFetching: PropTypes.bool,
+  showPassword: PropTypes.bool,
+  handleInput: PropTypes.func,
+  handleAdd: PropTypes.func,
+};
+export default memo(Register);

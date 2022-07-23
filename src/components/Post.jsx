@@ -1,5 +1,7 @@
+import { memo } from "react";
 import { Link } from "react-router-dom";
 import CarouselImages from "./CarouselImages";
+import PropTypes from "prop-types";
 
 const Post = ({ post }) => {
   const options = {
@@ -8,7 +10,7 @@ const Post = ({ post }) => {
     month: "long",
     day: "numeric",
   };
-  console.log(post);
+
   return (
     <>
       <div className="bg-white rounded-lg shadow-lg overflow-hidden 2xl:h-72 xl:h-72 lg:h-72 md:h-72 sm:h-96">
@@ -73,4 +75,8 @@ const Post = ({ post }) => {
   );
 };
 
-export default Post;
+Post.propTypes = {
+  post: PropTypes.object,
+};
+
+export default memo(Post);

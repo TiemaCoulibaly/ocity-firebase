@@ -1,14 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { memo, useContext, useEffect, useState } from "react";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db, storage } from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { AuthContext } from "../context/AuthContext";
 import axios from "axios";
 import ProgressBar from "../components/ProgressBar";
+import PropTypes from "prop-types";
 
 const AddCity = () => {
   const [data, setData] = useState({});
-
   const [upload, setUpload] = useState("");
   const [progress, setProgress] = useState(null);
   const [fullAddress, setFullAddress] = useState([]);
@@ -24,7 +24,6 @@ const AddCity = () => {
     const { files } = e.target;
     for (let i = 0; i < files.length; i++) {
       const newImage = files[i];
-      console.log("newimage", newImage);
       setImages((prevState) => [...prevState, newImage]);
     }
   };
@@ -84,7 +83,6 @@ const AddCity = () => {
       [name]: value,
     });
   };
-  console.log("dataa", data);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -120,7 +118,6 @@ const AddCity = () => {
     setAddress(text);
     setFullAddress([]);
   };
-  console.log("fulladdress", coordinates);
 
   return (
     <div className="min-h-full flex items-center justify-center py-2 px-4 sm:px-6 lg:px-8">
@@ -325,4 +322,22 @@ const AddCity = () => {
   );
 };
 
-export default AddCity;
+AddCity.propTypes = {
+  data: PropTypes.object,
+  upload: PropTypes.string,
+  progress: PropTypes.number,
+  fullAddress: PropTypes.array,
+  query: PropTypes.string,
+  address: PropTypes.string,
+  images: PropTypes.array,
+  urls: PropTypes.array,
+  coordinates: PropTypes.number,
+  handleFile: PropTypes.func,
+  handleUpload: PropTypes.func,
+  handleChange: PropTypes.func,
+  handleSubmit: PropTypes.func,
+  handleChangeAddress: PropTypes.func,
+  handleClick: PropTypes.func,
+};
+
+export default memo(AddCity);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 
 const Loader = () => {
   let circleCommonClasses = "h-2 w-2 bg-white   rounded-full";
@@ -11,4 +11,4 @@ const Loader = () => {
   );
 };
 
-export default Loader;
+export default memo(Loader);

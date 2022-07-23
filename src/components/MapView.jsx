@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 // import GoogleMapReact from "google-map-react";
 import ReactMapGL, { Marker } from "react-map-gl";
 
@@ -46,4 +46,4 @@ const MapView = () => {
   );
 };
 
-export default MapView;
+export default memo(MapView);

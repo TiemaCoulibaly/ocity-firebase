@@ -1,4 +1,5 @@
-import React from "react";
+import React, { memo } from "react";
+import PropTypes from "prop-types";
 import {
   ButtonBack,
   ButtonNext,
@@ -66,5 +67,11 @@ const CarouselImages = ({ pictures, widthImage, heightImage, arrow, top }) => {
     </>
   );
 };
-
-export default CarouselImages;
+CarouselImages.propTypes = {
+  pictures: PropTypes.array,
+  widthImage: PropTypes.number,
+  heightImage: PropTypes.number,
+  arrow: PropTypes.number,
+  top: PropTypes.number,
+};
+export default memo(CarouselImages);

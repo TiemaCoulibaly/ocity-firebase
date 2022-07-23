@@ -1,4 +1,5 @@
-import React from "react";
+import React, { memo } from "react";
+import PropTypes from "prop-types";
 
 const ModalDeleteCity = ({ handleDelete, handleShowModal }) => {
   return (
@@ -48,4 +49,9 @@ const ModalDeleteCity = ({ handleDelete, handleShowModal }) => {
   );
 };
 
-export default ModalDeleteCity;
+ModalDeleteCity.propTypes = {
+  handleDelete: PropTypes.func,
+  handleShowModal: PropTypes.func,
+};
+
+export default memo(ModalDeleteCity);

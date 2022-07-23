@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { db } from "../firebase";
 import Posts from "../components/Posts";
 import Header from "../components/Header";
 import SearchCity from "../components/SearchCity";
 import Faq from "../components/Faq";
+import PropTypes from "prop-types";
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [date, setDate] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -66,4 +67,11 @@ const Home = () => {
   );
 };
 
-export default Home;
+Home.propTypes = {
+  posts: PropTypes.array,
+  date: PropTypes.array,
+  isLoading: PropTypes.bool,
+  searchTerm: PropTypes.string,
+};
+
+export default memo(Home);

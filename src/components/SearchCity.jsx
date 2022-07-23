@@ -1,3 +1,6 @@
+import { memo } from "react";
+import PropTypes from "prop-types";
+
 const SearchCity = ({ searchTerm, setSearchTerm }) => {
   return (
     <div className="flex justify-center">
@@ -11,4 +14,8 @@ const SearchCity = ({ searchTerm, setSearchTerm }) => {
     </div>
   );
 };
-export default SearchCity;
+SearchCity.propTypes = {
+  searchTerm: PropTypes.string,
+  setSearchTerm: PropTypes.func,
+};
+export default memo(SearchCity);
