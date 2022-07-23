@@ -1,4 +1,5 @@
 import React, { memo, useEffect } from "react";
+import PropTypes from "prop-types";
 
 const ForgotPasswordAlert = ({ setAlert }) => {
   useEffect(() => {
@@ -35,6 +36,10 @@ const ForgotPasswordAlert = ({ setAlert }) => {
       </div>
     </>
   );
+};
+
+ForgotPasswordAlert.propTypes = {
+  setAlert: PropTypes.func,
 };
 
 export default memo(ForgotPasswordAlert);

@@ -2,13 +2,12 @@ import React, { memo } from "react";
 import Alert from "./Alert";
 import ForgotPasswordAlert from "./ForgotPasswordAlert";
 import Loader from "./Loader";
+import PropTypes from "prop-types";
 
 const ModalLogin = ({
   handleLogin,
   setEmail,
-  email,
   setShowPassword,
-  password,
   forgotPassword,
   showPassword,
   setPassword,
@@ -146,6 +145,16 @@ const ModalLogin = ({
       <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
     </>
   );
+};
+ModalLogin.propTypes = {
+  errorMessage: PropTypes.string,
+  showPassword: PropTypes.bool,
+  isFetching: PropTypes.bool,
+  visible: PropTypes.bool,
+  alert: PropTypes.bool,
+  handleLogin: PropTypes.func,
+  signInWithGoogle: PropTypes.func,
+  forgotPassword: PropTypes.func,
 };
 
 export default memo(ModalLogin);

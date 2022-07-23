@@ -1,8 +1,8 @@
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
 import { AddressAutofill } from "@mapbox/search-js-react";
 
 const Search = () => {
-  const [value, setValue] = React.useState("");
+  const [value, setValue] = useState("");
   return (
     <form>
       <AddressAutofill accessToken={process.env.REACT_APP_APP_MAPBOX_API_KEY}>

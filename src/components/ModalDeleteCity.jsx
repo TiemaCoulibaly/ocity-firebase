@@ -1,4 +1,5 @@
 import React, { memo } from "react";
+import PropTypes from "prop-types";
 
 const ModalDeleteCity = ({ handleDelete, handleShowModal }) => {
   return (
@@ -46,6 +47,11 @@ const ModalDeleteCity = ({ handleDelete, handleShowModal }) => {
       <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
     </>
   );
+};
+
+ModalDeleteCity.propTypes = {
+  handleDelete: PropTypes.func,
+  handleShowModal: PropTypes.func,
 };
 
 export default memo(ModalDeleteCity);

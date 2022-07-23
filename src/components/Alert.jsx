@@ -1,4 +1,5 @@
 import React, { memo } from "react";
+import PropTypes from "prop-types";
 
 const Alert = ({ message }) => {
   return (
@@ -8,6 +9,10 @@ const Alert = ({ message }) => {
       <span className="sm:inline block">{message}</span>
     </div>
   );
+};
+
+Alert.propTypes = {
+  message: PropTypes.string,
 };
 
 export default memo(Alert);

@@ -14,6 +14,8 @@ import { AuthContext } from "../context/AuthContext";
 import logo from "./../images/ocity-03.png";
 import ModalLogin from "../components/ModalLogin";
 
+import PropTypes from "prop-types";
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -116,10 +118,8 @@ const Login = () => {
           <ModalLogin
             handleLogin={handleLogin}
             setEmail={setEmail}
-            email={email}
             setShowPassword={setShowPassword}
             setPassword={setPassword}
-            password={password}
             forgotPassword={forgotPassword}
             showPassword={showPassword}
             isFetching={isFetching}
@@ -135,4 +135,16 @@ const Login = () => {
   );
 };
 
+Login.propTypes = {
+  email: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
+  errorMessage: PropTypes.string,
+  showPassword: PropTypes.bool,
+  isFetching: PropTypes.bool,
+  visible: PropTypes.bool,
+  alert: PropTypes.bool,
+  handleLogin: PropTypes.func,
+  signInWithGoogle: PropTypes.func,
+  forgotPassword: PropTypes.func,
+};
 export default memo(Login);

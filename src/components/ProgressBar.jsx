@@ -1,4 +1,5 @@
 import { memo } from "react";
+import PropTypes from "prop-types";
 
 const ProgressBar = ({ progressPercentage, upload }) => {
   return (
@@ -22,5 +23,9 @@ const ProgressBar = ({ progressPercentage, upload }) => {
       </div>
     </div>
   );
+};
+ProgressBar.propTypes = {
+  progressPercentage: PropTypes.number,
+  upload: PropTypes.string,
 };
 export default memo(ProgressBar);

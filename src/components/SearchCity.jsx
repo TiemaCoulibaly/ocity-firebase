@@ -1,4 +1,5 @@
 import { memo } from "react";
+import PropTypes from "prop-types";
 
 const SearchCity = ({ searchTerm, setSearchTerm }) => {
   return (
@@ -12,5 +13,9 @@ const SearchCity = ({ searchTerm, setSearchTerm }) => {
       />
     </div>
   );
+};
+SearchCity.propTypes = {
+  searchTerm: PropTypes.string,
+  setSearchTerm: PropTypes.func,
 };
 export default memo(SearchCity);

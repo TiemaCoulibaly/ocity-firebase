@@ -8,6 +8,7 @@ import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/solid";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 
 import logo from "../images/ocitywhite-03.png";
+import PropTypes from "prop-types";
 
 const Navbar = () => {
   const [arrow, setArrow] = useState(false);
@@ -231,6 +232,13 @@ const Navbar = () => {
       )}
     </Disclosure>
   );
+};
+Navbar.propTypes = {
+  arrow: PropTypes.bool,
+  greeting: PropTypes.bool,
+  handleLogout: PropTypes.func,
+  randomGreeting: PropTypes.array,
+  i: PropTypes.number,
 };
 
 export default memo(Navbar);
