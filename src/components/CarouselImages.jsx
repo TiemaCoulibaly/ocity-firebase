@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import {
   ButtonBack,
   ButtonNext,
@@ -67,4 +67,4 @@ const CarouselImages = ({ pictures, widthImage, heightImage, arrow, top }) => {
   );
 };
 
-export default CarouselImages;
+export default memo(CarouselImages);

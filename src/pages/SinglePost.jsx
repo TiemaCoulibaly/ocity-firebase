@@ -1,6 +1,6 @@
 import { doc, getDoc, deleteDoc, updateDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import React, { useContext, useEffect, useState } from "react";
+import React, { memo, useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import CarouselImages from "../components/CarouselImages";
 import Graph from "../components/Graph";
@@ -470,4 +470,4 @@ const SinglePost = () => {
   );
 };
 
-export default SinglePost;
+export default memo(SinglePost);

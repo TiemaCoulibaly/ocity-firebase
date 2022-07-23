@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Link } from "react-router-dom";
 import CarouselImages from "./CarouselImages";
 
@@ -73,4 +74,4 @@ const Post = ({ post }) => {
   );
 };
 
-export default Post;
+export default memo(Post);

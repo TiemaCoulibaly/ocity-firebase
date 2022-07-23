@@ -1,5 +1,5 @@
 import { updateProfile } from "firebase/auth";
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import { auth } from "../firebase";
 
 const Setting = () => {
@@ -179,4 +179,4 @@ const Setting = () => {
   );
 };
 
-export default Setting;
+export default memo(Setting);

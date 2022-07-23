@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 
 const ModalDeleteCity = ({ handleDelete, handleShowModal }) => {
   return (
@@ -48,4 +48,4 @@ const ModalDeleteCity = ({ handleDelete, handleShowModal }) => {
   );
 };
 
-export default ModalDeleteCity;
+export default memo(ModalDeleteCity);

@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 const SearchCity = ({ searchTerm, setSearchTerm }) => {
   return (
     <div className="flex justify-center">
@@ -11,4 +13,4 @@ const SearchCity = ({ searchTerm, setSearchTerm }) => {
     </div>
   );
 };
-export default SearchCity;
+export default memo(SearchCity);

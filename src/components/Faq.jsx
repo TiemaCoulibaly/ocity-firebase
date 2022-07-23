@@ -1,5 +1,6 @@
 import { Disclosure } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/solid";
+import { memo } from "react";
 
 const Faq = () => {
   return (
@@ -72,4 +73,4 @@ const Faq = () => {
     </div>
   );
 };
-export default Faq;
+export default memo(Faq);

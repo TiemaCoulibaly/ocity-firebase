@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 const ProgressBar = ({ progressPercentage, upload }) => {
   return (
     <div className="relative pt-1">
@@ -21,4 +23,4 @@ const ProgressBar = ({ progressPercentage, upload }) => {
     </div>
   );
 };
-export default ProgressBar;
+export default memo(ProgressBar);

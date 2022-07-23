@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { AddressAutofill } from "@mapbox/search-js-react";
 
 const Search = () => {
@@ -17,4 +17,4 @@ const Search = () => {
     </form>
   );
 };
-export default Search;
+export default memo(Search);

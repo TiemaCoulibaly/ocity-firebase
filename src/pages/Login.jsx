@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, memo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   GoogleAuthProvider,
@@ -135,4 +135,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default memo(Login);

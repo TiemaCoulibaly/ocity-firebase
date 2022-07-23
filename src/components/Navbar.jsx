@@ -1,4 +1,4 @@
-import React, { useContext, Fragment, useState, useEffect } from "react";
+import React, { useContext, Fragment, useState, useEffect, memo } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
@@ -233,4 +233,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default memo(Navbar);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import Alert from "./Alert";
 import ForgotPasswordAlert from "./ForgotPasswordAlert";
 import Loader from "./Loader";
@@ -148,4 +148,4 @@ const ModalLogin = ({
   );
 };
 
-export default ModalLogin;
+export default memo(ModalLogin);

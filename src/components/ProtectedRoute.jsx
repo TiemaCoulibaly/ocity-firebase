@@ -1,14 +1,14 @@
-import React, { useContext } from "react";
+import React, { memo, useContext } from "react";
 import { Navigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 const ProtectedRoute = ({ children }) => {
-	const { currentUser } = useContext(AuthContext);
-	if (!currentUser) {
-		return <Navigate to="/" />;
-	}
+  const { currentUser } = useContext(AuthContext);
+  if (!currentUser) {
+    return <Navigate to="/" />;
+  }
 
-	return children;
+  return children;
 };
 
-export default ProtectedRoute;
+export default memo(ProtectedRoute);

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { memo, useEffect } from "react";
 
 const ForgotPasswordAlert = ({ setAlert }) => {
   useEffect(() => {
@@ -37,4 +37,4 @@ const ForgotPasswordAlert = ({ setAlert }) => {
   );
 };
 
-export default ForgotPasswordAlert;
+export default memo(ForgotPasswordAlert);

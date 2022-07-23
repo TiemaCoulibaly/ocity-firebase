@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -70,4 +70,4 @@ const Graph = () => {
   return <Bar options={options} data={data} />;
 };
 
-export default Graph;
+export default memo(Graph);

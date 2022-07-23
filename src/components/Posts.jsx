@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import Post from "./Post";
 
@@ -51,4 +51,4 @@ const Posts = ({ posts }) => {
   );
 };
 
-export default Posts;
+export default memo(Posts);
