@@ -2,8 +2,7 @@ import { doc, getDoc, deleteDoc, updateDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import React, { memo, useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import CarouselImages from "../components/CarouselImages";
-import Graph from "../components/Graph";
+// import Graph from "../components/Graph";
 import ModalDeleteCity from "../components/ModalDeleteCity";
 
 import ProgressBar from "../components/ProgressBar";
@@ -11,6 +10,7 @@ import ProgressBar from "../components/ProgressBar";
 import { AuthContext } from "../context/AuthContext";
 import { db, storage } from "../firebase";
 import PropTypes from "prop-types";
+import { Carousel } from "react-responsive-carousel";
 
 const SinglePost = () => {
   const [updateMode, setUpdatedMode] = useState(false);
@@ -149,15 +149,21 @@ const SinglePost = () => {
                 <h1 className="mb-4 font-bold text-2xl lg:text-4xl md:text-3xl text-gray-800 text-center">
                   ⚽ City stade du {post.title}
                 </h1>
+
                 <div className="relative w-full mx-0 md:w-2/2 md:mx-auto lg:w-2/3 lg:mx-auto">
-                  <CarouselImages
-                    widthImage={70}
-                    heightImage={30}
-                    arrow={10}
-                    top={40}
-                    pictures={post.pictures}
-                  />
+                  <Carousel dynamicHeight={false} showArrows={true}>
+                    {post.pictures?.map((picture, idx) => (
+                      <div key={idx}>
+                        <img
+                          src={picture}
+                          alt={post.title}
+                          className="max-h-96 object-center object-cover"
+                        />
+                      </div>
+                    ))}
+                  </Carousel>
                 </div>
+
                 {/* Only same user could edit or delete is own post */}
                 {currentUser?.displayName === post?.username && (
                   <div className="flex justify-center py-2">
@@ -301,9 +307,9 @@ const SinglePost = () => {
                   {/* <Map /> */}
                 </section>
                 {/* Graph  */}
-                <div className="w-1/2 mx-auto">
+                {/* <div className="w-1/2 mx-auto">
                   <Graph />
-                </div>
+                </div> */}
               </>
             ) : (
               <div className="min-h-full flex items-center justify-center py-2 px-4 sm:px-6 lg:px-8">

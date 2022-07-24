@@ -21,7 +21,7 @@ const Post = ({ post }) => {
                 heightImage={65}
                 widthImage={100}
                 arrow={7}
-                top={24}
+                top={16}
                 pictures={post?.pictures}
               />
             </div>
