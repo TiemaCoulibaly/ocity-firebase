@@ -7,7 +7,7 @@ const Posts = ({ posts }) => {
   const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
-  const [currentPage, setCurrentPage] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
   useEffect(() => {
@@ -23,7 +23,6 @@ const Posts = ({ posts }) => {
     setItemOffset(newOffset);
     setCurrentPage(event.selected + 1);
   };
-
   return (
     <section className="w-full px-6 py-8 bg-gray-100">
       <div className="grid grid-cols-1 2xl:grid-cols-3 xl:grid-cols-2 lg:grid-cols-2 gap-6 md:grid-cols-1 sm:grid-cols-1">
@@ -45,7 +44,7 @@ const Posts = ({ posts }) => {
         previousLinkClassName="p-2 rounded-md hover:bg-green-300 shadow-lg"
         nextLinkClassName="p-2 rounded-md hover:bg-green-300 shadow-lg"
         activeLinkClassName={`p-2 rounded-md hover:bg-green-300 ${
-          currentPage === itemOffset + 1 && "bg-green-300"
+          currentPage && "bg-green-300"
         }`}
       />
     </section>
@@ -55,7 +54,7 @@ Posts.propTypes = {
   currentItems: PropTypes.array,
   pageCount: PropTypes.number,
   itemOffset: PropTypes.number,
-  currentPage: PropTypes.string,
+  currentPage: PropTypes.number,
   itemsPerPage: PropTypes.number,
   handlePageClick: PropTypes.func,
 };
