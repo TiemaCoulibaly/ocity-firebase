@@ -11,6 +11,7 @@ import { AuthContext } from "../context/AuthContext";
 import { db, storage } from "../firebase";
 import PropTypes from "prop-types";
 import { Carousel } from "react-responsive-carousel";
+import MyMap from "../components/MyMap";
 
 const SinglePost = () => {
   const [updateMode, setUpdatedMode] = useState(false);
@@ -27,11 +28,11 @@ const SinglePost = () => {
   const location = useLocation();
   const path = location.pathname.split("/")[2];
 
-  const longitude = post.coordinates && post?.coordinates[0];
-  const latitude = post.coordinates && post?.coordinates[1];
+  const longitude = post?.coordinates && post?.coordinates[0];
+  const latitude = post?.coordinates && post?.coordinates[1];
 
   const google = `https://www.google.com/maps/place/${
-    post.address
+    post?.address
   }/@${latitude},${longitude},${18}z`;
 
   useEffect(() => {
@@ -141,13 +142,12 @@ const SinglePost = () => {
                 handleShowModal={handleShowModal}
               />
             ) : null}
-
             {/* END HANDLE DELETE */}
 
             {!updateMode ? (
               <>
                 <h1 className="mb-4 font-bold text-2xl lg:text-4xl md:text-3xl text-gray-800 text-center">
-                  ⚽ City stade du {post.title}
+                  ⚽ City stade {post?.title}
                 </h1>
 
                 <div className="relative w-full mx-0 md:w-2/2 md:mx-auto lg:w-2/3 lg:mx-auto">
@@ -156,13 +156,18 @@ const SinglePost = () => {
                       <div key={idx}>
                         <img
                           src={picture}
-                          alt={post.title}
+                          alt={post?.title}
                           className="max-h-96 object-center object-cover"
                         />
                       </div>
                     ))}
                   </Carousel>
                 </div>
+                <MyMap
+                  coordinates={post?.coordinates}
+                  address={post?.address}
+                  title={post?.title}
+                />
 
                 {/* Only same user could edit or delete is own post */}
                 {currentUser?.displayName === post?.username && (
@@ -208,7 +213,7 @@ const SinglePost = () => {
 
                 <section className="mx-auto mt-4 w-full">
                   <div className="flex justify-center border border-gray-200 p-2">
-                    {post.openHour && (
+                    {post?.openHour && (
                       <p className="text-xl">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -227,13 +232,13 @@ const SinglePost = () => {
                           Le City stade est ouvert de{" "}
                         </span>
 
-                        {post.openHour}
+                        {post?.openHour}
                       </p>
                     )}
-                    {post.closeHour && (
+                    {post?.closeHour && (
                       <p className="text-xl">
                         <span className="text-green-600 ml-2"> à </span>
-                        {post.closeHour}
+                        {post?.closeHour}
                       </p>
                     )}
                   </div>
@@ -266,7 +271,7 @@ const SinglePost = () => {
                             alt="address-city-stade"
                             target="_blank"
                             rel="noreferrer">
-                            {post.address}
+                            {post?.address}
                           </a>
                         </div>
                       </div>
@@ -276,7 +281,7 @@ const SinglePost = () => {
                           {" "}
                           Description{" "}
                         </span>{" "}
-                        {post.description}
+                        {post?.description}
                       </p>
                     </div>
 
@@ -285,21 +290,21 @@ const SinglePost = () => {
                         <span className="text-green-600 mr-2">
                           Type de Terrain
                         </span>
-                        {post.pitch}
+                        {post?.pitch}
                       </p>
 
                       <p className="text-gray-900  text-base md:text-lg sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5">
                         <span className="text-green-600 mr-2">
                           Type d'éclairage (nuit)
                         </span>
-                        {post.light}
+                        {post?.light}
                       </p>
 
                       <p className="text-gray-900  text-base md:text-lg sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 ">
                         <span className="text-green-600 mr-2">
                           Type de chaussure (recommendé)
                         </span>
-                        {post.shoes}
+                        {post?.shoes}
                       </p>
                     </div>
                   </div>
