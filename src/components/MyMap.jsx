@@ -8,6 +8,7 @@ import {
 } from "react-leaflet";
 import markerIconPng from "leaflet/dist/images/marker-icon.png";
 import { Icon } from "leaflet";
+import PropTypes from "prop-types";
 
 const MyMap = ({ coordinates, address, title }) => {
   useEffect(() => {
@@ -21,7 +22,6 @@ const MyMap = ({ coordinates, address, title }) => {
       shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
     });
   }, []);
-
   return (
     <>
       {coordinates && (
@@ -55,5 +55,11 @@ const MyMap = ({ coordinates, address, title }) => {
       )}
     </>
   );
+};
+MyMap.propTypes = {
+  coordinates: PropTypes.array,
+  address: PropTypes.string,
+  title: PropTypes.string,
+  updateMode: PropTypes.bool,
 };
 export default memo(MyMap);
