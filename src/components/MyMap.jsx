@@ -26,9 +26,9 @@ const MyMap = ({ coordinates, address, title }) => {
     <>
       {coordinates && (
         <MapContainer
-          style={{ height: "25vh", margin: 0 }}
+          style={{ height: "40vh", margin: 0 }}
           center={[coordinates[1], coordinates[0]]}
-          zoom={13}
+          zoom={14}
           scrollWheelZoom={false}>
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

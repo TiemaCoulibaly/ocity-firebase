@@ -129,6 +129,17 @@ const SinglePost = () => {
     e.preventDefault();
     setShowModal(false);
   };
+  const weekdays = [
+    "Dimanche",
+    "Lundi",
+    "Mardi",
+    "Mercredi",
+    "Jeudi",
+    "Vendredi",
+    "Samedi",
+  ];
+  const currentDate = new Date();
+  const dayOfTheWeek = weekdays[currentDate.getDay()];
 
   return (
     <>
@@ -163,12 +174,6 @@ const SinglePost = () => {
                     ))}
                   </Carousel>
                 </div>
-                <MyMap
-                  coordinates={post?.coordinates}
-                  address={post?.address}
-                  title={post?.title}
-                />
-
                 {/* Only same user could edit or delete is own post */}
                 {currentUser?.displayName === post?.username && (
                   <div className="flex justify-center py-2">
@@ -210,38 +215,102 @@ const SinglePost = () => {
                     </button>
                   </div>
                 )}
+                <section className="flex justify-center flex-wrap mx-0 sm:w-2/2 md:w-2/2 md:mx-auto md:flex-nowrap lg:w-2/3 lg:mx-auto lg:flex-nowrap gap-5 ">
+                  <div className="w-full md:w-2/3 lg:2/3">
+                    <MyMap
+                      coordinates={post?.coordinates}
+                      address={post?.address}
+                      title={post?.title}
+                    />
+                  </div>
+
+                  <div className="w-full  md:w-1/3 lg:1/3">
+                    <h5>
+                      {" "}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6 inline mx-2"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}>
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                      Horaire d'ouverture
+                    </h5>
+                    <ul>
+                      <li
+                        className={`${
+                          dayOfTheWeek === "Lundi" && "bg-green-100"
+                        } flex justify-between p-2 border-b border-gray-200`}>
+                        <p>Lundi</p>
+                        <p>
+                          {post?.openHour} <span>-</span> {post?.closeHour}
+                        </p>
+                      </li>
+                      <li
+                        className={`${
+                          dayOfTheWeek === "Mardi" && "bg-green-100"
+                        } flex justify-between p-2 border-b border-gray-200`}>
+                        <p>Mardi</p>
+                        <p>
+                          {post?.openHour} <span>-</span> {post?.closeHour}
+                        </p>
+                      </li>
+                      <li
+                        className={`${
+                          dayOfTheWeek === "Mercredi" && "bg-green-100"
+                        } flex justify-between p-2 border-b border-gray-200`}>
+                        <p>Mercredi</p>
+                        <p>
+                          {post?.openHour} <span>-</span> {post?.closeHour}
+                        </p>
+                      </li>
+                      <li
+                        className={`${
+                          dayOfTheWeek === "Jeudi" && "bg-green-100"
+                        } flex justify-between p-2 border-b border-gray-200`}>
+                        <p>Jeudi</p>
+                        <p>
+                          {post?.openHour} <span>-</span> {post?.closeHour}
+                        </p>
+                      </li>
+                      <li
+                        className={`${
+                          dayOfTheWeek === "Vendredi" && "bg-green-100"
+                        } flex justify-between p-2 border-b border-gray-200`}>
+                        <p>Vendredi</p>
+                        <p>
+                          {post?.openHour} <span>-</span> {post?.closeHour}
+                        </p>
+                      </li>
+                      <li
+                        className={`${
+                          dayOfTheWeek === "Samedi" && "bg-green-100"
+                        } flex justify-between p-2 border-b border-gray-200`}>
+                        <p>Samedi</p>
+                        <p>
+                          {post?.openHour} <span>-</span> {post?.closeHour}
+                        </p>
+                      </li>
+                      <li
+                        className={`${
+                          dayOfTheWeek === "Dimanche" && "bg-green-100"
+                        } flex justify-between p-2 border-b border-gray-200`}>
+                        <p>Dimanche</p>
+                        <p>
+                          {post?.openHour} <span>-</span> {post?.closeHour}
+                        </p>
+                      </li>
+                    </ul>
+                  </div>
+                </section>
 
                 <section className="mx-auto mt-4 w-full">
-                  <div className="flex justify-center border border-gray-200 p-2">
-                    {post?.openHour && (
-                      <p className="text-xl">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-6 w-6 inline mx-2"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          strokeWidth={2}>
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                          />
-                        </svg>
-                        <span className="text-green-600 ">
-                          Le City stade est ouvert de{" "}
-                        </span>
-
-                        {post?.openHour}
-                      </p>
-                    )}
-                    {post?.closeHour && (
-                      <p className="text-xl">
-                        <span className="text-green-600 ml-2"> à </span>
-                        {post?.closeHour}
-                      </p>
-                    )}
-                  </div>
                   <div className="flex justify-center flex-wrap">
                     <div>
                       <div className="text-gray-900  text-base md:text-lg sm:text-sm rounded-lg focus:ring-green-500 focus:border-green-500 p-2.5">
