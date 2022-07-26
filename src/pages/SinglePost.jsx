@@ -1,16 +1,16 @@
+import React, { memo, useContext, useEffect, useState } from "react";
 import { doc, getDoc, deleteDoc, updateDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import React, { memo, useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-// import Graph from "../components/Graph";
-import ModalDeleteCity from "../components/ModalDeleteCity";
-
-import ProgressBar from "../components/ProgressBar";
+import { db, storage } from "../firebase";
 
 import { AuthContext } from "../context/AuthContext";
-import { db, storage } from "../firebase";
 import PropTypes from "prop-types";
 import { Carousel } from "react-responsive-carousel";
+
+// import Graph from "../components/Graph";
+import ModalDeleteCity from "../components/ModalDeleteCity";
+import ProgressBar from "../components/ProgressBar";
 import MyMap from "../components/MyMap";
 
 const SinglePost = () => {
@@ -129,11 +129,22 @@ const SinglePost = () => {
     e.preventDefault();
     setShowModal(false);
   };
+  const weekdays = [
+    "Dimanche",
+    "Lundi",
+    "Mardi",
+    "Mercredi",
+    "Jeudi",
+    "Vendredi",
+    "Samedi",
+  ];
+  const currentDate = new Date();
+  const dayOfTheWeek = weekdays[currentDate.getDay()];
 
   return (
     <>
-      <div className="bg-white shadow-2xl px-4 py-8">
-        <div className="">
+      <div className="bg-white shadow-2xl px-4">
+        <div>
           <div className="px-4 py-2 mt-2">
             {/* HANDLE DELETE */}
             {showModal ? (
@@ -163,21 +174,15 @@ const SinglePost = () => {
                     ))}
                   </Carousel>
                 </div>
-                <MyMap
-                  coordinates={post?.coordinates}
-                  address={post?.address}
-                  title={post?.title}
-                />
-
                 {/* Only same user could edit or delete is own post */}
                 {currentUser?.displayName === post?.username && (
-                  <div className="flex justify-center py-2">
+                  <div className="flex justify-center pb-4">
                     <button
                       className="bg-blue-300 mx-5 p-1 hover:bg-blue-400 rounded"
                       onClick={handleClick}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6"
+                        className="h-8 w-8"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -196,7 +201,7 @@ const SinglePost = () => {
                       className="mx-5 bg-red-300 hover:bg-red-400 p-1 rounded">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6"
+                        className="h-8 w-8"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -210,103 +215,159 @@ const SinglePost = () => {
                     </button>
                   </div>
                 )}
-
-                <section className="mx-auto mt-4 w-full">
-                  <div className="flex justify-center border border-gray-200 p-2">
-                    {post?.openHour && (
-                      <p className="text-xl">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-6 w-6 inline mx-2"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          strokeWidth={2}>
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                          />
-                        </svg>
-                        <span className="text-green-600 ">
-                          Le City stade est ouvert de{" "}
-                        </span>
-
-                        {post?.openHour}
-                      </p>
-                    )}
-                    {post?.closeHour && (
-                      <p className="text-xl">
-                        <span className="text-green-600 ml-2"> à </span>
-                        {post?.closeHour}
-                      </p>
-                    )}
+                <section className="flex justify-center flex-wrap mx-0 sm:w-2/2 md:w-2/2 md:mx-auto md:flex-nowrap lg:w-2/3 lg:mx-auto lg:flex-nowrap gap-5">
+                  <div className="w-full md:w-2/3 lg:2/3">
+                    <MyMap
+                      coordinates={post?.coordinates}
+                      address={post?.address}
+                      title={post?.title}
+                    />
                   </div>
-                  <div className="flex justify-center flex-wrap">
-                    <div>
-                      <div className="text-gray-900  text-base md:text-lg sm:text-sm rounded-lg focus:ring-green-500 focus:border-green-500 p-2.5">
-                        <div className="flex items-center">
-                          <span className="text-green-600"> Addresse</span>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-4 w-4 ml-2"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            strokeWidth={2}>
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                            />
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                            />
-                          </svg>
-                          <a
-                            className="underline hover:no-underline"
-                            href={google}
-                            alt="address-city-stade"
-                            target="_blank"
-                            rel="noreferrer">
-                            {post?.address}
-                          </a>
-                        </div>
-                      </div>
 
-                      <p className="text-gray-900 w-96 text-base md:text-lg sm:text-sm rounded-lg focus:ring-green-500 focus:border-green-500 p-2.5 ">
-                        <span className="text-green-600 mr-2">
+                  <div className="w-full  md:w-1/3 lg:w-1/3">
+                    <h5>
+                      {" "}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6 inline mx-2"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}>
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                      <u>Horaire d'ouverture</u>
+                    </h5>
+                    <ul>
+                      <li
+                        className={`${
+                          dayOfTheWeek === "Lundi" && "bg-green-100"
+                        } flex justify-between p-2 border-b border-gray-200`}>
+                        <p>Lundi</p>
+                        <p>
+                          {post?.openHour} <span>-</span> {post?.closeHour}
+                        </p>
+                      </li>
+                      <li
+                        className={`${
+                          dayOfTheWeek === "Mardi" && "bg-green-100"
+                        } flex justify-between p-2 border-b border-gray-200`}>
+                        <p>Mardi</p>
+                        <p>
+                          {post?.openHour} <span>-</span> {post?.closeHour}
+                        </p>
+                      </li>
+                      <li
+                        className={`${
+                          dayOfTheWeek === "Mercredi" && "bg-green-100"
+                        } flex justify-between p-2 border-b border-gray-200`}>
+                        <p>Mercredi</p>
+                        <p>
+                          {post?.openHour} <span>-</span> {post?.closeHour}
+                        </p>
+                      </li>
+                      <li
+                        className={`${
+                          dayOfTheWeek === "Jeudi" && "bg-green-100"
+                        } flex justify-between p-2 border-b border-gray-200`}>
+                        <p>Jeudi</p>
+                        <p>
+                          {post?.openHour} <span>-</span> {post?.closeHour}
+                        </p>
+                      </li>
+                      <li
+                        className={`${
+                          dayOfTheWeek === "Vendredi" && "bg-green-100"
+                        } flex justify-between p-2 border-b border-gray-200`}>
+                        <p>Vendredi</p>
+                        <p>
+                          {post?.openHour} <span>-</span> {post?.closeHour}
+                        </p>
+                      </li>
+                      <li
+                        className={`${
+                          dayOfTheWeek === "Samedi" && "bg-green-100"
+                        } flex justify-between p-2 border-b border-gray-200`}>
+                        <p>Samedi</p>
+                        <p>
+                          {post?.openHour} <span>-</span> {post?.closeHour}
+                        </p>
+                      </li>
+                      <li
+                        className={`${
+                          dayOfTheWeek === "Dimanche" && "bg-green-100"
+                        } flex justify-between p-2 border-b border-gray-200`}>
+                        <p>Dimanche</p>
+                        <p>
+                          {post?.openHour} <span>-</span> {post?.closeHour}
+                        </p>
+                      </li>
+                    </ul>
+                  </div>
+                </section>
+
+                <section className="flex justify-center flex-wrap mx-0 sm:w-2/2 md:w-2/2 md:mx-auto md:flex-nowrap lg:w-2/3 lg:mx-auto lg:flex-nowrap">
+                  <div className="w-full md:w-2/3 lg:w-2/3 text-gray-900  text-base md:text-lg sm:text-sm rounded-lg focus:ring-green-500 focus:border-green-500">
+                    <div className="flex items-center w-96">
+                      <span className="text-green-600 py-2"> Addresse</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-4 w-4 ml-2"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth={2}>
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                        />
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                        />
+                      </svg>
+                      <a
+                        className="underline hover:no-underline"
+                        href={google}
+                        alt="address-city-stade"
+                        target="_blank"
+                        rel="noreferrer">
+                        {post?.address}
+                      </a>
+                    </div>
+
+                    <p className="text-gray-900 w-96 text-base md:text-lg sm:text-sm rounded-lg focus:ring-green-500 focus:border-green-500 py-2">
+                      <span className="text-green-600"> Description </span>{" "}
+                      {post?.description}
+                    </p>
+                  </div>
+                  <div className="w-full  md:w-1/3 lg:1/3">
+                    <ul>
+                      <li className=" flex justify-between p-2 border-b border-gray-200">
+                        <p className="text-green-600"> Type de Terrain</p>
+                        <p>{post?.pitch}</p>
+                      </li>
+                      <li className=" flex justify-between p-2 border-b border-gray-200">
+                        <p className="text-green-600">
                           {" "}
-                          Description{" "}
-                        </span>{" "}
-                        {post?.description}
-                      </p>
-                    </div>
-
-                    <div>
-                      <p className="text-gray-900  text-base md:text-lg sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 ">
-                        <span className="text-green-600 mr-2">
-                          Type de Terrain
-                        </span>
-                        {post?.pitch}
-                      </p>
-
-                      <p className="text-gray-900  text-base md:text-lg sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5">
-                        <span className="text-green-600 mr-2">
-                          Type d'éclairage (nuit)
-                        </span>
-                        {post?.light}
-                      </p>
-
-                      <p className="text-gray-900  text-base md:text-lg sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 ">
-                        <span className="text-green-600 mr-2">
                           Type de chaussure (recommendé)
-                        </span>
-                        {post?.shoes}
-                      </p>
-                    </div>
+                        </p>
+                        <p> {post?.shoes}</p>
+                      </li>
+                      <li className=" flex justify-between p-2 border-b border-gray-200">
+                        <p className="text-green-600">
+                          {" "}
+                          Type d'éclairage (nuit)
+                        </p>
+                        <p> {post?.light}</p>
+                      </li>
+                    </ul>
                   </div>
 
                   {/* <Map /> */}
@@ -498,6 +559,8 @@ SinglePost.propTypes = {
   longitude: PropTypes.number,
   latitude: PropTypes.number,
   google: PropTypes.string,
+  dayOfTheWeek: PropTypes.string,
+  currentDate: PropTypes.string,
 };
 
 export default memo(SinglePost);

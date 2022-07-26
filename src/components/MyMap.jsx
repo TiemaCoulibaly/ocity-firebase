@@ -8,6 +8,7 @@ import {
 } from "react-leaflet";
 import markerIconPng from "leaflet/dist/images/marker-icon.png";
 import { Icon } from "leaflet";
+import PropTypes from "prop-types";
 
 const MyMap = ({ coordinates, address, title }) => {
   useEffect(() => {
@@ -21,14 +22,13 @@ const MyMap = ({ coordinates, address, title }) => {
       shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
     });
   }, []);
-
   return (
     <>
       {coordinates && (
         <MapContainer
-          style={{ height: "25vh", margin: 0 }}
+          style={{ height: "40vh", margin: 0 }}
           center={[coordinates[1], coordinates[0]]}
-          zoom={13}
+          zoom={14}
           scrollWheelZoom={false}>
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -55,5 +55,11 @@ const MyMap = ({ coordinates, address, title }) => {
       )}
     </>
   );
+};
+MyMap.propTypes = {
+  coordinates: PropTypes.array,
+  address: PropTypes.string,
+  title: PropTypes.string,
+  updateMode: PropTypes.bool,
 };
 export default memo(MyMap);
