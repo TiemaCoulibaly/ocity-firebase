@@ -1,4 +1,6 @@
 import { memo } from "react";
+import PropTypes from "prop-types";
+
 import logo from "../images/ocity-03.png";
 
 const Header = () => {
@@ -6,7 +8,11 @@ const Header = () => {
     <div className="relative overflow-hidden mt-20">
       <div className="pb-80 lg:pt-40 lg:pb-48">
         <div className="relative max-w-7xl mx-auto px-4 lg:px-8 md:px-6 sm:px-6 sm:static">
-          <img src={logo} alt="logo" className="h-20 ml-32" />
+          <img
+            src={logo}
+            alt="logo"
+            className="h-20 mx-auto md:mx-auto lg:ml-32"
+          />
           <div className="text-center lg:text-left">
             <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
               <span className="block xl:inline">O-City</span>{" "}
@@ -97,6 +103,9 @@ const Header = () => {
       </div>
     </div>
   );
+};
+Header.propTypes = {
+  logo: PropTypes.string,
 };
 
 export default memo(Header);

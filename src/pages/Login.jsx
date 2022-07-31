@@ -98,11 +98,12 @@ const Login = () => {
           </div>
           <p className="text-center ">
             Tu as déjà un compte ?{" "}
-            <span
+            <a
+              href="##"
               onClick={() => setVisible(!visible)}
               className="text-green-500 underline hover:no-underline cursor-pointer">
               Se connecter{" "}
-            </span>
+            </a>
           </p>
           <p className="text-center ">
             Ou inscris-toi avec{" "}
