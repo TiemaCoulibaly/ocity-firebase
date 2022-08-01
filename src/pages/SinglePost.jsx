@@ -9,7 +9,7 @@ import PropTypes from "prop-types";
 import { Carousel } from "react-responsive-carousel";
 
 // import Graph from "../components/Graph";
-import ModalDeleteCity from "../components/ModalDeleteCity";
+import ModalDelete from "../components/ModalDelete";
 import ProgressBar from "../components/ProgressBar";
 import MyMap from "../components/MyMap";
 
@@ -148,9 +148,10 @@ const SinglePost = () => {
           <div className="px-4 py-2 mt-2">
             {/* HANDLE DELETE */}
             {showModal ? (
-              <ModalDeleteCity
+              <ModalDelete
                 handleDelete={handleDelete}
                 handleShowModal={handleShowModal}
+                question={"Vous voulez vraiment effacer ce stade ?"}
               />
             ) : null}
             {/* END HANDLE DELETE */}

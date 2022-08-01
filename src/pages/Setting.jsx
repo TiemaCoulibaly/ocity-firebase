@@ -1,10 +1,17 @@
-import { updateProfile } from "firebase/auth";
-import React, { memo, useState } from "react";
-import { auth } from "../firebase";
+import { deleteUser, updateProfile } from "firebase/auth";
+
+import React, { memo, useContext, useState } from "react";
+import PropTypes from "prop-types";
+
+import ModalDelete from "../components/ModalDelete";
+import { AuthContext } from "../context/AuthContext";
 
 const Setting = () => {
-  //https://firebase.google.com/docs/auth/web/manage-users
   const [data, setData] = useState({});
+  const [showModal, setShowModal] = useState(false);
+
+  const { currentUser, dispatch } = useContext(AuthContext);
+  //https://firebase.google.com/docs/auth/web/manage-users
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -14,7 +21,7 @@ const Setting = () => {
   const handleUpdatePassword = async (e) => {
     e.preventDefault();
     try {
-      await updateProfile(auth.currentUser, {
+      await updateProfile(currentUser, {
         displayName: data.username,
         email: data.email,
         password: data.password,
@@ -24,20 +31,44 @@ const Setting = () => {
       console.log(err);
     }
   };
+
+  const handleDeleteUser = async (e) => {
+    e.preventDefault();
+    try {
+      currentUser && (await deleteUser(currentUser));
+      dispatch({ type: "LOGOUT" });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const handleShowModal = (e) => {
+    e.preventDefault();
+    setShowModal(false);
+  };
   return (
     <section className="py-40 bg-gray-100  bg-opacity-50 h-screen">
       <div className="mx-auto container max-w-2xl md:w-3/4 shadow-md">
+        {showModal ? (
+          <ModalDelete
+            handleDelete={handleDeleteUser}
+            handleShowModal={handleShowModal}
+            question={"Vous voulez vraiment supprimer votre compte ?"}
+          />
+        ) : null}
+        {/* END HANDLE DELETE */}
         <form onSubmit={handleUpdatePassword}>
-          <div className="bg-gray-100 p-4 border-t-2 bg-opacity-5 border-indigo-400 rounded-t">
+          <div className="bg-gray-100 p-4 border-t-2 bg-opacity-5 border-green-400 rounded-t">
             <div className="max-w-sm mx-auto md:w-full md:mx-0">
-              <div className="inline-flex items-center space-x-4">
-                <h1 className="text-gray-600">Charly Olivas</h1>
+              <div className="inline-flex  items-center space-x-4">
+                <h2 className="font-medium text-gray-600">
+                  Compte utilisateur de {currentUser.displayName}
+                </h2>
               </div>
             </div>
           </div>
           <div className="bg-white space-y-6">
             <div className="md:inline-flex space-y-4 md:space-y-0 w-full p-4 text-gray-500 items-center">
-              <h2 className="md:w-1/3 max-w-sm mx-auto">Account</h2>
+              <h2 className="md:w-1/3 max-w-sm mx-auto">Mon Compte</h2>
 
               <div className="md:w-2/3 max-w-sm mx-auto">
                 <label className="text-sm text-gray-400">Email</label>
@@ -61,7 +92,7 @@ const Setting = () => {
                     name="email"
                     id="email"
                     className="w-11/12 focus:outline-none focus:text-gray-600 p-2"
-                    placeholder="email@example.com"
+                    placeholder={currentUser.email}
                     onChange={handleInput}
                   />
                 </div>
@@ -70,7 +101,9 @@ const Setting = () => {
 
             <hr />
             <div className="md:inline-flex  space-y-4 md:space-y-0  w-full p-4 text-gray-500 items-center">
-              <h2 className="md:w-1/3 mx-auto max-w-sm">Personal info</h2>
+              <h2 className="md:w-1/3 mx-auto max-w-sm">
+                Information Personnelle
+              </h2>
               <div className="md:w-2/3 mx-auto max-w-sm space-y-5">
                 <div>
                   <label className="text-sm text-gray-400">Username</label>
@@ -94,7 +127,7 @@ const Setting = () => {
                       name="username"
                       id="username"
                       className="w-11/12 focus:outline-none focus:text-gray-600 p-2"
-                      placeholder="username"
+                      placeholder={currentUser.displayName}
                       onChange={handleInput}
                     />
                   </div>
@@ -102,8 +135,8 @@ const Setting = () => {
               </div>
             </div>
 
-            <hr />
-            <div className="md:inline-flex w-full space-y-4 md:space-y-0 p-8 text-gray-500 items-center">
+            {/* <hr /> */}
+            {/* <div className="md:inline-flex w-full space-y-4 md:space-y-0 p-8 text-gray-500 items-center">
               <h2 className="md:w-4/12 max-w-sm mx-auto">Change password</h2>
 
               <div className="md:w-5/12 w-full md:pl-9 max-w-sm mx-auto space-y-5 md:inline-flex pl-2">
@@ -136,7 +169,7 @@ const Setting = () => {
               <div className="md:w-3/12 text-center md:pl-6">
                 <button
                   type="submit"
-                  className="text-white w-full mx-auto max-w-sm rounded-md text-center bg-indigo-400 py-2 px-4 inline-flex items-center focus:outline-none md:float-right">
+                  className="text-white w-full mx-auto max-w-sm rounded-md text-center bg-green-400 py-2 px-4 inline-flex items-center focus:outline-none md:float-right">
                   <svg
                     fill="none"
                     className="w-4 text-white mr-2"
@@ -152,11 +185,15 @@ const Setting = () => {
                   Update
                 </button>
               </div>
-            </div>
+            </div> */}
 
-            <hr />
+            {/* <hr /> */}
             <div className="w-full p-4 text-right text-gray-500">
-              <button className="rounded-md bg-red-300 p-2 text-white hover:bg-red-700 inline-flex items-center focus:outline-none mr-4">
+              <button
+                type="button"
+                data-modal-toggle="popup-modal"
+                onClick={() => setShowModal(true)}
+                className="rounded-md bg-red-300 p-2 text-white hover:bg-red-700 inline-flex items-center focus:outline-none mr-4">
                 <svg
                   fill="none"
                   className="w-4 mr-2"
@@ -169,7 +206,7 @@ const Setting = () => {
                     d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
                   />
                 </svg>
-                Delete account
+                Supprimer Mon Compte
               </button>
             </div>
           </div>
@@ -178,5 +215,11 @@ const Setting = () => {
     </section>
   );
 };
-
+Setting.propTypes = {
+  handleUpdatePassword: PropTypes.func,
+  handleDeleteUser: PropTypes.func,
+  handleShowModal: PropTypes.func,
+  showModal: PropTypes.bool,
+  question: PropTypes.string,
+};
 export default memo(Setting);

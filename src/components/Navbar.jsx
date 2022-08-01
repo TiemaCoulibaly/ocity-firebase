@@ -184,6 +184,18 @@ const Navbar = () => {
                             </Link>
                           )}
                         </Menu.Item>
+                        <Menu.Item>
+                          {({ active }) => (
+                            <Link
+                              to="/setting"
+                              className={classNames(
+                                active ? "bg-green-100" : "",
+                                "block px-4 py-2 text-sm text-gray-700"
+                              )}>
+                              {currentUser && "Setting"}
+                            </Link>
+                          )}
+                        </Menu.Item>
                       </Menu.Items>
                     </Transition>
                   </Menu>
@@ -194,8 +206,8 @@ const Navbar = () => {
                   {greeting &&
                     randomGreeting[i] +
                       " 😀, " +
-                      currentUser?.displayName.charAt(0).toUpperCase() +
-                      currentUser?.displayName.slice(1)}
+                      currentUser.displayName?.charAt(0).toUpperCase() +
+                      currentUser.displayName?.slice(1)}
                 </span>
               )}
             </div>
