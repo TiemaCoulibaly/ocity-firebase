@@ -29,7 +29,7 @@ const MyMap = ({ coordinates, address, title }) => {
           style={{ height: "40vh", margin: 0 }}
           center={[coordinates[1], coordinates[0]]}
           zoom={14}
-          scrollWheelZoom={false}>
+          scrollWheelZoom={true}>
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
