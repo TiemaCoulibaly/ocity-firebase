@@ -193,7 +193,7 @@ const AddCity = () => {
           <textarea
             placeholder="decris le city stade et comment y accéder.."
             type="text"
-            className="appearance-none rounded-none relative block w-full mb-5 p-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10"
+            className="appearance-none rounded-none relative block w-full my-5 p-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10"
             id="description"
             name="description"
             onChange={handleChange}
