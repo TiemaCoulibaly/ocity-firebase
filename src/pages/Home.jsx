@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import SearchCity from "../components/SearchCity";
 import Faq from "../components/Faq";
 import PropTypes from "prop-types";
+// import QueryAddress from "../components/QueryAddress";
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
@@ -41,8 +42,8 @@ const Home = () => {
     };
   }, []);
 
-  const filteredPost = posts.filter((val) =>
-    val.address.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredPost = posts?.filter((val) =>
+    val?.address.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -55,12 +56,11 @@ const Home = () => {
         <>
           <Header />
           <div className="mt-4 bg-gray-100">
+            {/* <div className="flex justify-center">
+              <QueryAddress address={searchTerm} setAddress={setSearchTerm} />
+            </div> */}
             <SearchCity searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-
             {<Posts posts={filteredPost} date={date} />}
-            {/* <div className="w-full h-full md:w-2/3 lg:2/3">
-                <MapView posts={filteredPost} />
-              </div> */}
 
             <Faq />
           </div>

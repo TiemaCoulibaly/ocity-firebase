@@ -2,6 +2,10 @@ import { memo } from "react";
 import PropTypes from "prop-types";
 
 const SearchCity = ({ searchTerm, setSearchTerm }) => {
+  const success = "";
+  if (success) {
+    console.log("defined");
+  }
   return (
     <div className="flex justify-center">
       <input
@@ -9,7 +13,10 @@ const SearchCity = ({ searchTerm, setSearchTerm }) => {
         type="text"
         placeholder="Entrez une addresse..."
         value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
+        onChange={(e) => {
+          setSearchTerm(e.target.value);
+          e.preventDefault();
+        }}
       />
     </div>
   );
