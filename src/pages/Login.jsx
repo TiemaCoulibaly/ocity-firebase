@@ -137,8 +137,8 @@ const Login = () => {
 };
 
 Login.propTypes = {
-  email: PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired,
+  email: PropTypes.string,
+  password: PropTypes.string,
   errorMessage: PropTypes.string,
   showPassword: PropTypes.bool,
   isFetching: PropTypes.bool,

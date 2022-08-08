@@ -1,18 +1,17 @@
-import React, { memo, useContext, useEffect, useState } from "react";
+import React, { memo, useContext, useState } from "react";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db, storage } from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { AuthContext } from "../context/AuthContext";
-import axios from "axios";
 import ProgressBar from "../components/ProgressBar";
 import PropTypes from "prop-types";
+import QueryAddress from "../components/QueryAddress";
 
 const AddCity = () => {
   const [data, setData] = useState({});
   const [upload, setUpload] = useState("");
   const [progress, setProgress] = useState(null);
-  const [fullAddress, setFullAddress] = useState([]);
-  const [query, setQuery] = useState("");
+
   const [address, setAddress] = useState("");
   const [images, setImages] = useState([]);
   const [urls, setUrls] = useState([]);
@@ -100,25 +99,6 @@ const AddCity = () => {
     }
   };
 
-  useEffect(() => {
-    axios
-      .get(`https://api-adresse.data.gouv.fr/search/?q=${query}&autocomplete=0`)
-      .then((response) => {
-        setFullAddress(response.data.features);
-        // get the coordinates of addresses
-        setCoordinates(response.data.features[0]?.geometry.coordinates);
-      });
-  }, [query]);
-  const handleChangeAddress = (e) => {
-    setQuery(e.target.value);
-    setAddress(e.target.value);
-  };
-  const handleClick = (text) => {
-    setQuery(text);
-    setAddress(text);
-    setFullAddress([]);
-  };
-
   return (
     <div className="min-h-full flex items-center justify-center py-2 px-4 sm:px-6 lg:px-8">
       <div className="max-w-2xl w-full space-y-3">
@@ -204,29 +184,11 @@ const AddCity = () => {
             onChange={handleChange}
             required
           />
-
-          <input
-            type="text"
-            id="address"
-            name="address"
-            value={address}
-            className="appearance-none rounded-none relative block w-full mb-5 p-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10"
-            placeholder="Adresse du city stade ?"
-            onChange={handleChangeAddress}
-            required
+          <QueryAddress
+            address={address}
+            setAddress={setAddress}
+            setCoordinates={setCoordinates}
           />
-          {fullAddress.map((add, key) => (
-            <div
-              className="p-3 bg-white hover:bg-green-200 border-r-2 border-l-2 border-gray-300"
-              key={key}
-              onClick={() => handleClick(add.properties.label)}>
-              {add.properties.label}
-            </div>
-          ))}
-
-          {/* <p className="flex justify-center p-2 mb-2 bg-red-100 font-semibold rounded-md">
-            Entrez l'adresse du city stade
-          </p> */}
 
           <textarea
             placeholder="decris le city stade et comment y accéder.."
