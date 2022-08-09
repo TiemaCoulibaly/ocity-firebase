@@ -9,8 +9,8 @@ import QueryAddress from "../components/QueryAddress";
 import axios from "axios";
 
 const AddCity = () => {
-  const [latitude, setLatitude] = useState("");
-  const [longitude, setLongitude] = useState("");
+  const [lat, setLat] = useState("");
+  const [long, setLong] = useState("");
   const [data, setData] = useState({});
   const [upload, setUpload] = useState("");
   const [progress, setProgress] = useState(null);
@@ -104,7 +104,7 @@ const AddCity = () => {
   useEffect(() => {
     const getLocation = async () => {
       try {
-        const QUERY_API = `https://api-adresse.data.gouv.fr/reverse/?lon=${longitude}&lat=${latitude}`;
+        const QUERY_API = `https://api-adresse.data.gouv.fr/reverse/?lon=${long}&lat=${lat}`;
 
         const { data } = await axios.get(QUERY_API);
         setAddress(data.features[0].properties.label);
@@ -113,13 +113,19 @@ const AddCity = () => {
       }
     };
     getLocation();
-  }, [latitude, longitude]);
+  }, [lat, long]);
 
   const handleClickLocation = (e) => {
     e.preventDefault();
     navigator.geolocation.getCurrentPosition((position) => {
-      setLatitude(position.coords.latitude);
-      setLongitude(position.coords.longitude);
+      setLat(position.coords.latitude);
+      setLong(position.coords.longitude);
+      // console.log("latitude", lat);
+      // console.log("long", long);
+      // console.log(position.coords.latitude);
+      // console.log(position.coords.longitude);
+      // console.log("coordi", coordinates);
+      setCoordinates([long, lat]);
     });
   };
 

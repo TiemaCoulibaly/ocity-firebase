@@ -127,7 +127,7 @@ const SinglePost = () => {
 
   const handleShowModal = (e) => {
     e.preventDefault();
-    setShowModal(false);
+    setShowModal(!showModal);
   };
   const weekdays = [
     "Dimanche",
@@ -217,7 +217,7 @@ const SinglePost = () => {
                   </div>
                 )}
                 <section className="flex justify-center flex-wrap mx-0 sm:w-2/2 md:w-2/2 md:mx-auto md:flex-nowrap lg:w-2/3 lg:mx-auto lg:flex-nowrap gap-5">
-                  <div className="w-full md:w-2/3 lg:2/3">
+                  <div className="w-full md:w-2/3 lg:2/3 z-10">
                     <MyMap
                       coordinates={post?.coordinates}
                       address={post?.address}
