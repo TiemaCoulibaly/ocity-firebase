@@ -1,4 +1,4 @@
-import React, { memo, useContext, useState } from "react";
+import React, { memo, useContext, useEffect, useState } from "react";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db, storage } from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
@@ -6,8 +6,11 @@ import { AuthContext } from "../context/AuthContext";
 import ProgressBar from "../components/ProgressBar";
 import PropTypes from "prop-types";
 import QueryAddress from "../components/QueryAddress";
+import axios from "axios";
 
 const AddCity = () => {
+  const [latitude, setLatitude] = useState("");
+  const [longitude, setLongitude] = useState("");
   const [data, setData] = useState({});
   const [upload, setUpload] = useState("");
   const [progress, setProgress] = useState(null);
@@ -97,6 +100,27 @@ const AddCity = () => {
     } catch (err) {
       console.log(err);
     }
+  };
+  useEffect(() => {
+    const getLocation = async () => {
+      try {
+        const QUERY_API = `https://api-adresse.data.gouv.fr/reverse/?lon=${longitude}&lat=${latitude}`;
+
+        const { data } = await axios.get(QUERY_API);
+        setAddress(data.features[0].properties.label);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    getLocation();
+  }, [latitude, longitude]);
+
+  const handleClickLocation = (e) => {
+    e.preventDefault();
+    navigator.geolocation.getCurrentPosition((position) => {
+      setLatitude(position.coords.latitude);
+      setLongitude(position.coords.longitude);
+    });
   };
 
   return (
@@ -188,6 +212,7 @@ const AddCity = () => {
             address={address}
             setAddress={setAddress}
             setCoordinates={setCoordinates}
+            handleClickLocation={handleClickLocation}
           />
 
           <textarea
