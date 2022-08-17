@@ -2,6 +2,14 @@ import { memo } from "react";
 import PropTypes from "prop-types";
 
 import logo from "../images/ocity-03.png";
+import footOnSoccerBall from "../images/foot-on-soocer-ball.jpg";
+
+import cityView from "../images/city-view.jpg";
+import stadium from "../images/stadium.jpg";
+import goalkeeper from "../images/goalkeeper.jpg";
+import soccerPass from "../images/soccer-pass.jpg";
+import whiteNet from "../images/white-net.jpg";
+import tribune from "../images/tribune.jpg";
 
 const Header = () => {
   return (
@@ -34,16 +42,16 @@ const Header = () => {
                     <div className="flex-shrink-0 grid grid-cols-1 gap-y-40 lg:gap-y-8">
                       <div className="w-44 h-64 rounded-lg overflow-hidden sm:opacity-0   md:opacity-0 lg:opacity-100">
                         <img
-                          src="https://images.unsplash.com/photo-1600679472829-3044539ce8ed?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
-                          alt=""
+                          src={footOnSoccerBall}
+                          alt="foot-on-SoccerBall"
                           className="w-full h-full object-center object-cover"
                           loading="lazy"
                         />
                       </div>
                       <div className="w-44 h-64 rounded-lg overflow-hidden">
                         <img
-                          src="https://images.pexels.com/photos/5836976/pexels-photo-5836976.jpeg?cs=srgb&dl=pexels-rodnae-productions-5836976.jpg&fm=jpg"
-                          alt=""
+                          src={goalkeeper}
+                          alt="goalkeeper"
                           className="w-full h-full object-center object-cover"
                           loading="lazy"
                         />
@@ -53,24 +61,24 @@ const Header = () => {
                     <div className="flex-shrink-0 grid grid-cols-1 gap-y-1 lg:gap-y-8">
                       <div className="w-44 h-64 rounded-lg overflow-hidden">
                         <img
-                          src="https://images.pexels.com/photos/972513/pexels-photo-972513.jpeg?cs=srgb&dl=pexels-markus-spiske-972513.jpg&fm=jpg"
-                          alt=""
+                          src={tribune}
+                          alt="tribune"
                           className="w-full h-full object-center object-cover"
                           loading="lazy"
                         />
                       </div>
                       <div className="w-44 h-64 rounded-lg overflow-hidden">
                         <img
-                          src="https://images.pexels.com/photos/54308/man-fan-person-football-54308.jpeg?cs=srgb&dl=pexels-pixabay-54308.jpg&fm=jpg"
-                          alt=""
+                          src={stadium}
+                          alt="soccer-stadium"
                           className="w-full h-full object-center object-cover"
                           loading="lazy"
                         />
                       </div>
                       <div className="w-44 h-64 rounded-lg overflow-hidden">
                         <img
-                          src="https://images.pexels.com/photos/3651674/pexels-photo-3651674.jpeg?cs=srgb&dl=pexels-alexander-nadrilyanski-3651674.jpg&fm=jpg"
-                          alt=""
+                          src={whiteNet}
+                          alt="white-net"
                           className="w-full h-full object-center object-cover"
                           loading="lazy"
                         />
@@ -79,16 +87,16 @@ const Header = () => {
                     <div className="flex-shrink-0 grid grid-cols-1 gap-y-6 lg:gap-y-8">
                       <div className="w-44 h-64 rounded-lg overflow-auto">
                         <img
-                          src="https://images.pexels.com/photos/1375148/pexels-photo-1375148.jpeg?cs=srgb&dl=pexels-yogendra-singh-1375148.jpg&fm=jpg"
-                          alt=""
+                          src={soccerPass}
+                          alt="soccer-pass"
                           className="w-full h-full object-center object-cover"
                           loading="lazy"
                         />
                       </div>
                       <div className="w-44 h-64 rounded-lg overflow-hidden">
                         <img
-                          src="https://images.pexels.com/photos/3886244/pexels-photo-3886244.jpeg?cs=srgb&dl=pexels-rfstudio-3886244.jpg&fm=jpg"
-                          alt=""
+                          src={cityView}
+                          alt="city-view"
                           className="w-full h-full object-center object-cover"
                           loading="lazy"
                         />

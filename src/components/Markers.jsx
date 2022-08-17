@@ -26,7 +26,7 @@ const Markers = ({ posts, setChildClicked }) => {
           key={index}
           eventHandlers={{
             click: (e) => {
-              map.setView([post.coordinates[1], post.coordinates[0]], 13);
+              map.setView([post.coordinates[1], post.coordinates[0]], 10);
 
               setChildClicked(index);
             },
@@ -41,7 +41,6 @@ const Markers = ({ posts, setChildClicked }) => {
           position={[post.coordinates[1], post.coordinates[0]]}>
           <Popup>
             {post.title} <br /> {post.address} <br />
-            <img src={post?.pictures[0]} alt="city" />
           </Popup>
         </Marker>
       ))}

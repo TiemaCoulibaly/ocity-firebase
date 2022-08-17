@@ -2,8 +2,14 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
-const QueryAddress = ({ setAddress, address, handleClickLocation }) => {
-  const [query, setQuery] = useState("");
+const QueryAddress = ({
+  setAddress,
+  address,
+  handleClickLocation,
+  setCoordinates,
+  query,
+  setQuery,
+}) => {
   const [fullAddress, setFullAddress] = useState([]);
   const success = "";
   if (success) {
@@ -62,6 +68,7 @@ const QueryAddress = ({ setAddress, address, handleClickLocation }) => {
             </svg>
           </label>
         </div>
+
         <input
           type="text"
           id="address"
@@ -81,6 +88,7 @@ const QueryAddress = ({ setAddress, address, handleClickLocation }) => {
           key={key}
           onClick={(e) => {
             handleClick(add?.properties.label);
+            setCoordinates(add.geometry.coordinates);
             e.preventDefault();
           }}>
           <span className="font-bold">{add?.properties.label} </span>

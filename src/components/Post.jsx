@@ -4,7 +4,6 @@ import CarouselImages from "./CarouselImages";
 import PropTypes from "prop-types";
 
 const Post = ({ post, selected, refProp }) => {
-  console.log("refprop", refProp);
   const options = {
     weekday: "long",
     year: "numeric",

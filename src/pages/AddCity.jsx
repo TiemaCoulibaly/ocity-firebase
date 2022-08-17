@@ -18,22 +18,23 @@ const AddCity = () => {
   const [address, setAddress] = useState("");
   const [images, setImages] = useState([]);
   const [urls, setUrls] = useState([]);
-  const [coordinates, setCoordinates] = useState("");
+  const [coordinates, setCoordinates] = useState([]);
+  const [query, setQuery] = useState("");
 
   const { currentUser } = useContext(AuthContext);
 
   const handleFile = (e) => {
+    // e.preventDefault();
     const { files } = e.target;
+
     for (let i = 0; i < files.length; i++) {
       const newImage = files[i];
       setImages((prevState) => [...prevState, newImage]);
     }
   };
-
-  const handleUpload = (e) => {
-    e.preventDefault();
+  useEffect(() => {
     const promises = [];
-    images.forEach((image) => {
+    images?.forEach((image) => {
       const uniqueName = new Date().getTime() + image.name;
       const storageRef = ref(storage, uniqueName);
       const uploadTask = uploadBytesResumable(storageRef, image);
@@ -68,12 +69,13 @@ const AddCity = () => {
           });
         }
       );
+      setUrls([]);
     });
 
     Promise.all(promises)
       .then(() => setUpload("All images uploaded"))
       .catch((err) => console.log(err));
-  };
+  }, [images]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -107,26 +109,27 @@ const AddCity = () => {
         const QUERY_API = `https://api-adresse.data.gouv.fr/reverse/?lon=${long}&lat=${lat}`;
 
         const { data } = await axios.get(QUERY_API);
-        setAddress(data.features[0].properties.label);
+        setQuery(data.features[0].properties.label);
       } catch (e) {
         console.log(e);
       }
     };
-    getLocation();
-  }, [lat, long]);
 
-  const handleClickLocation = (e) => {
+    getLocation();
+  }, [lat, long, coordinates]);
+
+  const handleClickLocation = async (e) => {
     e.preventDefault();
-    navigator.geolocation.getCurrentPosition((position) => {
-      setLat(position.coords.latitude);
-      setLong(position.coords.longitude);
-      // console.log("latitude", lat);
-      // console.log("long", long);
-      // console.log(position.coords.latitude);
-      // console.log(position.coords.longitude);
-      // console.log("coordi", coordinates);
-      setCoordinates([long, lat]);
-    });
+    try {
+      navigator.geolocation.getCurrentPosition((position) => {
+        setLat(position.coords.latitude);
+        setLong(position.coords.longitude);
+
+        setCoordinates([long, lat]);
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -168,20 +171,20 @@ const AddCity = () => {
                 <label
                   htmlFor="fileInput"
                   className="cursor-pointer bg-white rounded-md font-medium text-green-600 ">
-                  {images.length > 0 && (
+                  {images.length >= 0 && (
                     <span className="m-2">{images.length} images uploaded</span>
                   )}
                   <input
                     type="file"
                     id="fileInput"
-                    className=""
+                    className="disabled:opacity-50 disabled:cursor-not-allowed"
                     onChange={handleFile}
                     multiple
-                    disabled={images.length > 3}
+                    disabled={images.length >= 3}
                     required
                   />
 
-                  {images.length >= 1 && (
+                  {/* {images.length >= 1 && (
                     <button
                       disabled={images.length > 3}
                       className={`${
@@ -190,12 +193,12 @@ const AddCity = () => {
                       onClick={handleUpload}>
                       Upload
                     </button>
-                  )}
+                  )} */}
                 </label>
               </div>
               {images.length >= 3 ? (
                 <p className="bg-red-100 p-1 text-xs text-gray-500">
-                  Limit de 3 images atteint vous pouvez upload
+                  Limit de 3 images atteint
                 </p>
               ) : (
                 <p className="text-xs text-gray-500">
@@ -219,6 +222,8 @@ const AddCity = () => {
             setAddress={setAddress}
             setCoordinates={setCoordinates}
             handleClickLocation={handleClickLocation}
+            query={query}
+            setQuery={setQuery}
           />
 
           <textarea
