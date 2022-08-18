@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 
 const QueryAddress = ({
@@ -9,12 +9,11 @@ const QueryAddress = ({
   setCoordinates,
   query,
   setQuery,
+  setFullAddress,
+  fullAddress,
+  setLat,
+  setLong,
 }) => {
-  const [fullAddress, setFullAddress] = useState([]);
-  const success = "";
-  if (success) {
-    console.log("defined");
-  }
   useEffect(() => {
     const getData = async () => {
       try {
@@ -27,10 +26,11 @@ const QueryAddress = ({
       }
     };
     getData();
-  }, [query]);
+  }, [query, setFullAddress]);
 
   const handleClick = (text) => {
     setQuery(text);
+
     setAddress(text);
     setFullAddress([]);
   };
@@ -89,6 +89,8 @@ const QueryAddress = ({
           onClick={(e) => {
             handleClick(add?.properties.label);
             setCoordinates(add.geometry.coordinates);
+            setLat(add.geometry.coordinates[1]);
+            setLong(add.geometry.coordinates[0]);
             e.preventDefault();
           }}>
           <span className="font-bold">{add?.properties.label} </span>

@@ -20,6 +20,7 @@ const AddCity = () => {
   const [urls, setUrls] = useState([]);
   const [coordinates, setCoordinates] = useState([]);
   const [query, setQuery] = useState("");
+  const [fullAddress, setFullAddress] = useState([]);
 
   const { currentUser } = useContext(AuthContext);
 
@@ -109,6 +110,7 @@ const AddCity = () => {
         const QUERY_API = `https://api-adresse.data.gouv.fr/reverse/?lon=${long}&lat=${lat}`;
 
         const { data } = await axios.get(QUERY_API);
+
         setQuery(data.features[0].properties.label);
       } catch (e) {
         console.log(e);
@@ -183,17 +185,6 @@ const AddCity = () => {
                     disabled={images.length >= 3}
                     required
                   />
-
-                  {/* {images.length >= 1 && (
-                    <button
-                      disabled={images.length > 3}
-                      className={`${
-                        images.length > 3 && "hidden"
-                      } mx-auto my-4 text-xs font-semibold border-2 border-green-300 p-2 px-4 uppercase rounded-sm text-green-900 hover:text-white bg-green-100 hover:bg-green-500 disabled:opacity-50`}
-                      onClick={handleUpload}>
-                      Upload
-                    </button>
-                  )} */}
                 </label>
               </div>
               {images.length >= 3 ? (
@@ -224,6 +215,11 @@ const AddCity = () => {
             handleClickLocation={handleClickLocation}
             query={query}
             setQuery={setQuery}
+            setFullAddress={setFullAddress}
+            fullAddress={fullAddress}
+            coordinates={coordinates}
+            setLat={setLat}
+            setLong={setLong}
           />
 
           <textarea
