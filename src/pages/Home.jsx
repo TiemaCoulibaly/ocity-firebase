@@ -4,7 +4,6 @@ import { db } from "../firebase";
 import Posts from "../components/Posts";
 import Header from "../components/Header";
 import SearchCity from "../components/SearchCity";
-import Faq from "../components/Faq";
 import PropTypes from "prop-types";
 // import QueryAddress from "../components/QueryAddress";
 
@@ -61,8 +60,6 @@ const Home = () => {
             </div> */}
             <SearchCity searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
             {<Posts posts={filteredPost} date={date} />}
-
-            <Faq />
           </div>
         </>
       )}

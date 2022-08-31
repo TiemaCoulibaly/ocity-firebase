@@ -13,6 +13,7 @@ import Footer from "./components/Footer";
 import { AuthContext } from "./context/AuthContext";
 import AddCity from "./pages/AddCity";
 import SinglePost from "./pages/SinglePost";
+import Faq from "./pages/Faq";
 
 const App = () => {
   const { currentUser } = useContext(AuthContext);
@@ -32,6 +33,7 @@ const App = () => {
             }
           />
           <Route exact path="/" element={<Home />} />
+          <Route path="/faq" element={<Faq />} />
           <Route path="/login" element={currentUser ? <Home /> : <Login />} />
           <Route
             path="/register"

@@ -90,6 +90,13 @@ const Navbar = () => {
                         to="/contact">
                         Contact
                       </Link>
+                      <Link
+                        className="bg-gray-900 text-white
+  												 hover:bg-green-700 hover:text-white
+  												px-3 py-2 rounded-md text-xl font-medium"
+                        to="/faq">
+                        Faq
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -237,6 +244,13 @@ const Navbar = () => {
   									block px-3 py-2 my-1 rounded-md text-base font-medium"
                     to="/contact">
                     Contact
+                  </Link>
+                  <Link
+                    className="bg-gray-900 text-white
+  										 hover:bg-gray-700 hover:text-white
+  									block px-3 py-2 my-1 rounded-md text-base font-medium"
+                    to="/faq">
+                    Faq
                   </Link>
                 </Disclosure.Button>
               </div>
