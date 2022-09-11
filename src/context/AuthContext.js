@@ -1,4 +1,6 @@
+import { onAuthStateChanged } from "firebase/auth";
 import { createContext, useEffect, useReducer } from "react";
+import { auth } from "../firebase";
 import AuthReducer from "./AuthReducer";
 
 const INITIAL_STATE = {
@@ -12,6 +14,7 @@ export const AuthContextProvider = ({ children }) => {
 
   useEffect(() => {
     //we cannot store object inside localstorage so we convert into json
+
     localStorage.setItem("user", JSON.stringify(state.currentUser));
   }, [state.currentUser]);
   return (
@@ -19,7 +22,8 @@ export const AuthContextProvider = ({ children }) => {
       value={{
         currentUser: state.currentUser,
         dispatch,
-      }}>
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

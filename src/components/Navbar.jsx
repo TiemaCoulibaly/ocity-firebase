@@ -43,7 +43,8 @@ const Navbar = () => {
     <div className="w-full">
       <Disclosure
         as="nav"
-        className="bg-gradient-to-r from-gray-900 to-green-900">
+        className="bg-gradient-to-r from-gray-900 to-green-900"
+      >
         {({ open }) => (
           <>
             <div className="max-w-7xl mx-auto px-2 sm:px-6 md:px-6 lg:px-8">
@@ -73,28 +74,32 @@ const Navbar = () => {
                         className="bg-gray-900 text-white
   												 hover:bg-green-600 hover:text-white
   												px-3 py-2 rounded-md text-xl font-medium"
-                        to="/">
+                        to="/"
+                      >
                         Home
                       </Link>
                       <Link
                         className="bg-gray-900 text-white
   												 hover:bg-green-700 hover:text-white
   												px-3 py-2 rounded-md text-xl font-medium"
-                        to="/about">
+                        to="/about"
+                      >
                         About
                       </Link>
                       <Link
                         className="bg-gray-900 text-white
   												 hover:bg-green-700 hover:text-white
   												px-3 py-2 rounded-md text-xl font-medium"
-                        to="/contact">
+                        to="/contact"
+                      >
                         Contact
                       </Link>
                       <Link
                         className="bg-gray-900 text-white
   												 hover:bg-green-700 hover:text-white
   												px-3 py-2 rounded-md text-xl font-medium"
-                        to="/faq">
+                        to="/faq"
+                      >
                         Faq
                       </Link>
                     </div>
@@ -105,7 +110,8 @@ const Navbar = () => {
                     <>
                       <button
                         type="button"
-                        className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                        className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                      >
                         <span className="sr-only">View notifications</span>
                       </button>
                     </>
@@ -115,7 +121,8 @@ const Navbar = () => {
                         className="bg-gray-900 text-white
   												 hover:bg-green-700 hover:text-white
   												px-3 py-2 m-1 rounded-md text-xl font-medium"
-                        to="/login">
+                        to="/login"
+                      >
                         S'inscrire | Se connecter
                       </Link>
                     </>
@@ -124,18 +131,21 @@ const Navbar = () => {
                   {currentUser && (
                     <Link
                       to="/addcity"
-                      className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center mr-4">
+                      className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center mr-4"
+                    >
                       <svg
                         className="w-6 h-6"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
                         <path
                           strokeWidth={2}
                           strokeLinecap="round"
                           strokeLinejoin="round"
-                          d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                          d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                        ></path>
                       </svg>
                       <span>Add a stadium</span>
                     </Link>
@@ -177,7 +187,8 @@ const Navbar = () => {
                         enterTo="transform opacity-100 scale-100"
                         leave="transition ease-in duration-75"
                         leaveFrom="transform opacity-100 scale-100"
-                        leaveTo="transform opacity-0 scale-95">
+                        leaveTo="transform opacity-0 scale-95"
+                      >
                         <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                           <Menu.Item>
                             {({ active }) => (
@@ -187,7 +198,8 @@ const Navbar = () => {
                                 className={classNames(
                                   active ? "bg-red-100" : "",
                                   "block px-4 py-2 text-sm text-gray-700"
-                                )}>
+                                )}
+                              >
                                 {currentUser && "Logout"}
                               </Link>
                             )}
@@ -199,7 +211,8 @@ const Navbar = () => {
                                 className={classNames(
                                   active ? "bg-green-100" : "",
                                   "block px-4 py-2 text-sm text-gray-700"
-                                )}>
+                                )}
+                              >
                                 {currentUser && "Setting"}
                               </Link>
                             )}
@@ -228,28 +241,32 @@ const Navbar = () => {
                     className="bg-gray-900 text-white
   										 hover:bg-gray-700 hover:text-white
   									block px-3 py-2 my-1 rounded-md text-base font-medium"
-                    to="/">
+                    to="/"
+                  >
                     Home
                   </Link>
                   <Link
                     className="bg-gray-900 text-white
   										 hover:bg-gray-700 hover:text-white
   									block px-3 py-2 my-1 rounded-md text-base font-medium"
-                    to="/about">
+                    to="/about"
+                  >
                     About
                   </Link>
                   <Link
                     className="bg-gray-900 text-white
   										 hover:bg-gray-700 hover:text-white
   									block px-3 py-2 my-1 rounded-md text-base font-medium"
-                    to="/contact">
+                    to="/contact"
+                  >
                     Contact
                   </Link>
                   <Link
                     className="bg-gray-900 text-white
   										 hover:bg-gray-700 hover:text-white
   									block px-3 py-2 my-1 rounded-md text-base font-medium"
-                    to="/faq">
+                    to="/faq"
+                  >
                     Faq
                   </Link>
                 </Disclosure.Button>
@@ -262,7 +279,8 @@ const Navbar = () => {
       <div className="z-10 bottomNav fixed bottom-0 w-full">
         <nav
           style={{ border: "1px blue" }}
-          className="md:hidden bottom-0 w-full bg-gradient-to-r from-gray-900 to-green-900">
+          className="md:hidden bottom-0 w-full bg-gradient-to-r from-gray-900 to-green-900"
+        >
           <ul className="flex justify-around items-center text-white text-center opacity-75">
             <li className="p-4 hover:bg-gray-500">
               <Link to="/">
@@ -273,7 +291,8 @@ const Navbar = () => {
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  strokeWidth={2}>
+                  strokeWidth={2}
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -291,7 +310,8 @@ const Navbar = () => {
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  strokeWidth={2}>
+                  strokeWidth={2}
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -311,7 +331,8 @@ const Navbar = () => {
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
-                      strokeWidth={2}>
+                      strokeWidth={2}
+                    >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -329,7 +350,8 @@ const Navbar = () => {
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
-                      strokeWidth={2}>
+                      strokeWidth={2}
+                    >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -350,7 +372,8 @@ const Navbar = () => {
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
-                      strokeWidth={2}>
+                      strokeWidth={2}
+                    >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
