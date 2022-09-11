@@ -29,11 +29,11 @@ const Login = () => {
 
   const { dispatch } = useContext(AuthContext);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     setIsFetching(true);
     e.preventDefault();
     if (email && password)
-      signInWithEmailAndPassword(auth, email, password)
+      await signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
@@ -56,20 +56,20 @@ const Login = () => {
         });
   };
 
-  const signInWithGoogle = () => {
+  const signInWithGoogle = async () => {
     const googleAuthProvider = new GoogleAuthProvider();
-    signInWithPopup(auth, googleAuthProvider).then((userCredential) => {
+    await signInWithPopup(auth, googleAuthProvider).then((userCredential) => {
       const user = userCredential.user;
       dispatch({ type: "LOGIN", payload: user });
       navigate("/");
     });
   };
 
-  const forgotPassword = (e) => {
+  const forgotPassword = async (e) => {
     e.preventDefault();
 
     email &&
-      sendPasswordResetEmail(auth, email)
+      await sendPasswordResetEmail(auth, email)
         .then(() => {
           // Password reset email sent!
           setAlert(true);
