@@ -10,7 +10,7 @@ import { Carousel } from "react-responsive-carousel";
 
 // import Graph from "../components/Graph";
 import ModalDelete from "../components/ModalDelete";
-import ProgressBar from "../components/ProgressBar";
+import ProgressBar from "../components/ProgressBar.tsx";
 import MyMap from "../components/MyMap";
 
 const SinglePost = () => {
