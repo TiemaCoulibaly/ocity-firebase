@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import Alert from "./Alert";
+import Alert from "./Alert.tsx";
 import ForgotPasswordAlert from "./ForgotPasswordAlert";
 import Loader from "./Loader";
 import PropTypes from "prop-types";
@@ -34,7 +34,8 @@ const ModalLogin = ({
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  strokeWidth={2}>
+                  strokeWidth={2}
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -52,7 +53,8 @@ const ModalLogin = ({
               )}
               <label
                 className="font-medium block mb-1 mt-6 text-gray-500"
-                htmlFor="email">
+                htmlFor="email"
+              >
                 Email
               </label>
               <input
@@ -66,7 +68,8 @@ const ModalLogin = ({
 
               <label
                 className="font-medium block mb-1 mt-6 text-gray-500"
-                htmlFor="password">
+                htmlFor="password"
+              >
                 Password
               </label>
               <div className="relative w-full">
@@ -74,14 +77,16 @@ const ModalLogin = ({
                   <label
                     onClick={() => setShowPassword(!showPassword)}
                     className="bg-gray-300 hover:bg-gray-400 rounded px-2 py-1 text-gray-600 cursor-pointer"
-                    htmlFor="toggle">
+                    htmlFor="toggle"
+                  >
                     {showPassword ? (
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-6 w-6"
                         fill="none"
                         viewBox="0 0 24 24"
-                        stroke="currentColor">
+                        stroke="currentColor"
+                      >
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -95,7 +100,8 @@ const ModalLogin = ({
                         className="h-6 w-6"
                         fill="none"
                         viewBox="0 0 24 24"
-                        stroke="currentColor">
+                        stroke="currentColor"
+                      >
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -127,7 +133,8 @@ const ModalLogin = ({
                 <button
                   alt="mot de passe oublier"
                   onClick={forgotPassword}
-                  className="mt-2 text-green-500 underline hover:no-underline cursor-pointer">
+                  className="mt-2 text-green-500 underline hover:no-underline cursor-pointer"
+                >
                   Mot de passe oublié ?
                 </button>
               </div>
@@ -135,7 +142,8 @@ const ModalLogin = ({
               <button
                 className="group relative w-full flex justify-center p-3 my-4 text-xl font-medium rounded-md bg-gradient-to-r from-green-500 to-green-800  hover:bg-green-600  text-white hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50"
                 type="submit"
-                disabled={isFetching}>
+                disabled={isFetching}
+              >
                 {isFetching ? <Loader /> : "Login"}
               </button>
             </form>

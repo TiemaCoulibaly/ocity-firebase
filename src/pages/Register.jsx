@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 
 import { useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
-import Alert from "../components/Alert";
+import Alert from "../components/Alert.tsx";
 
 import logo from "./../images/ocity-03.png";
 
