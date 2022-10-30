@@ -1,11 +1,11 @@
 import React, { memo } from "react";
 
-type Props = {
+interface AlertProps {
   message: string;
   color: string;
-};
+}
 
-const Alert = ({ message, color }: Props) => {
+const Alert: React.FC<AlertProps> = ({ message, color }) => {
   return (
     <div
       className={`bg-${color}-100 border border-${color}-400 text-${color}-700 px-4 py-3 rounded relative mb-2 text-center`}
