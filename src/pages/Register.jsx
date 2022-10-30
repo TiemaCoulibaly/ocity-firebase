@@ -6,7 +6,7 @@ import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import PropTypes from "prop-types";
 
 import { useNavigate } from "react-router-dom";
-import Loader from "../components/Loader";
+import Loader from "../components/Loader.tsx";
 import Alert from "../components/Alert.tsx";
 
 import logo from "./../images/ocity-03.png";
@@ -78,7 +78,8 @@ const Register = () => {
           <form className="mt-8" onSubmit={handleAdd}>
             <label
               className="font-medium block mb-1 mt-6 text-gray-500"
-              htmlFor="username">
+              htmlFor="username"
+            >
               Username
             </label>
             <input
@@ -93,7 +94,8 @@ const Register = () => {
 
             <label
               className="font-medium block mb-1 mt-6 text-gray-500"
-              htmlFor="email">
+              htmlFor="email"
+            >
               Email
             </label>
             <input
@@ -108,7 +110,8 @@ const Register = () => {
 
             <label
               className="font-medium block mb-1 mt-6 text-gray-500"
-              htmlFor="password">
+              htmlFor="password"
+            >
               Password
             </label>
             <div className="relative w-full">
@@ -116,14 +119,16 @@ const Register = () => {
                 <label
                   onClick={() => setShowPassword(!showPassword)}
                   className="bg-gray-300 hover:bg-gray-400 rounded px-2 py-1 text-gray-600 cursor-pointer"
-                  htmlFor="toggle">
+                  htmlFor="toggle"
+                >
                   {showPassword ? (
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="h-6 w-6"
                       fill="none"
                       viewBox="0 0 24 24"
-                      stroke="currentColor">
+                      stroke="currentColor"
+                    >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -137,7 +142,8 @@ const Register = () => {
                       className="h-6 w-6"
                       fill="none"
                       viewBox="0 0 24 24"
-                      stroke="currentColor">
+                      stroke="currentColor"
+                    >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -169,7 +175,8 @@ const Register = () => {
             <button
               className="group relative w-full flex justify-center p-3 my-5 text-xl font-medium rounded-md text-white bg-gradient-to-r from-green-500 to-green-800 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50"
               type="submit"
-              disabled={isFetching}>
+              disabled={isFetching}
+            >
               {isFetching ? <Loader /> : "Register"}
             </button>
           </form>

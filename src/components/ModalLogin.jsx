@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 import Alert from "./Alert.tsx";
 import ForgotPasswordAlert from "./ForgotPasswordAlert";
-import Loader from "./Loader";
+import Loader from "./Loader.tsx";
 import PropTypes from "prop-types";
 
 const ModalLogin = ({
