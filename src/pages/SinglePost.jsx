@@ -9,7 +9,7 @@ import PropTypes from "prop-types";
 import { Carousel } from "react-responsive-carousel";
 
 // import Graph from "../components/Graph";
-import ModalDelete from "../components/ModalDelete";
+import ModalDelete from "../components/ModalDelete.tsx";
 import ProgressBar from "../components/ProgressBar.tsx";
 import MyMap from "../components/MyMap";
 
