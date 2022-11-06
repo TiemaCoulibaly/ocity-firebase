@@ -1,6 +1,6 @@
 import { memo } from "react";
 import { Link } from "react-router-dom";
-import CarouselImages from "./CarouselImages";
+import CarouselImages from "./CarouselImages.tsx";
 import PropTypes from "prop-types";
 
 const Post = ({ post, selected, refProp }) => {
@@ -20,7 +20,8 @@ const Post = ({ post, selected, refProp }) => {
       <div
         className={`${
           selected ? "bg-green-100" : "bg-white"
-        } mb-4 w-10/12 mx-auto rounded-lg shadow-lg overflow-hidden h-72 2xl:h-72 xl:h-64 lg:h-44 md:h-52 sm:h-96`}>
+        } mb-4 w-10/12 mx-auto rounded-lg shadow-lg overflow-hidden h-72 2xl:h-72 xl:h-64 lg:h-44 md:h-52 sm:h-96`}
+      >
         {/* xl:w-2/3 lg:w-4/5 md:w-3/3 */}
         <div className="w-full flex flex-col md:flex-row">
           <div className="w-full lg:w-2/4 md:w-2/4 ">
@@ -72,19 +73,22 @@ const Post = ({ post, selected, refProp }) => {
           <p
             className={`mx-2 p-2 mt-2 rounded-full  text-green-700 ${
               selected ? "bg-white" : "bg-green-100"
-            }`}>
+            }`}
+          >
             # {post?.pitch}
           </p>
           <p
             className={`mx-2 p-2 mt-2 rounded-full  text-green-700 ${
               selected ? "bg-white" : "bg-green-100"
-            }`}>
+            }`}
+          >
             # {post?.light}
           </p>
           <p
             className={`mx-2 p-2 mt-2 rounded-full  text-green-700 ${
               selected ? "bg-white" : "bg-green-100"
-            }`}>
+            }`}
+          >
             # {post?.shoes}
           </p>
         </div>

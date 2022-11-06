@@ -1,14 +1,11 @@
 import { memo, SetStateAction } from "react";
 
-interface SearchCityProps {
+type SearchCityProps = {
   searchTerm: string;
   setSearchTerm: React.Dispatch<SetStateAction<string>>;
-}
+};
 
-const SearchCity: React.FC<SearchCityProps> = ({
-  searchTerm,
-  setSearchTerm,
-}) => {
+const SearchCity = ({ searchTerm, setSearchTerm }: SearchCityProps) => {
   const success = "";
   if (success) {
     console.log("defined");

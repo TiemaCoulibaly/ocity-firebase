@@ -1,11 +1,9 @@
 import React, { memo, useEffect } from "react";
 
-interface PropsForgotPasswordAlert {
+type ForgotPasswordAlertProps = {
   setAlert: React.Dispatch<boolean>;
-}
-const ForgotPasswordAlert: React.FC<PropsForgotPasswordAlert> = ({
-  setAlert,
-}) => {
+};
+const ForgotPasswordAlert = ({ setAlert }: ForgotPasswordAlertProps) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setAlert(false);

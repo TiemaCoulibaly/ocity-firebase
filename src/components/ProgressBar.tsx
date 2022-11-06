@@ -1,14 +1,11 @@
 import { memo } from "react";
 
-interface PropsProgressBar {
+type ProgressBarProps = {
   progressPercentage: number;
   upload: string;
-}
+};
 
-const ProgressBar: React.FC<PropsProgressBar> = ({
-  progressPercentage,
-  upload,
-}) => {
+const ProgressBar = ({ progressPercentage, upload }: ProgressBarProps) => {
   return (
     <div className="relative pt-1">
       <div className="flex mb-2 items-center justify-between">

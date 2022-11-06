@@ -1,5 +1,4 @@
 import { memo } from "react";
-import PropTypes from "prop-types";
 
 import logo from "../images/logo-black-green.png";
 import footOnSoccerBall from "../images/foot-on-soocer-ball.jpg";
@@ -112,9 +111,6 @@ const Header = () => {
       </div>
     </div>
   );
-};
-Header.propTypes = {
-  logo: PropTypes.string,
 };
 
 export default memo(Header);

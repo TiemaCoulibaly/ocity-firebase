@@ -1,8 +1,23 @@
-import React, { memo } from "react";
-import Alert from "./Alert.tsx";
-import ForgotPasswordAlert from "./ForgotPasswordAlert.tsx";
-import Loader from "./Loader.tsx";
-import PropTypes from "prop-types";
+import { memo } from "react";
+import Alert from "./Alert";
+import ForgotPasswordAlert from "./ForgotPasswordAlert";
+import Loader from "./Loader";
+
+type ModalLoginProps = {
+  errorMessage: string;
+  showPassword: boolean;
+  isFetching: boolean;
+  visible: boolean;
+  alert: boolean;
+  handleLogin: React.FormEventHandler<HTMLFormElement>;
+  signInWithGoogle: React.Dispatch<string>;
+  forgotPassword: React.MouseEventHandler<HTMLButtonElement>;
+  setEmail: React.Dispatch<string>;
+  setShowPassword: React.Dispatch<boolean>;
+  setPassword: React.Dispatch<string>;
+  setVisible: React.Dispatch<boolean>;
+  setAlert: React.Dispatch<boolean>;
+};
 
 const ModalLogin = ({
   handleLogin,
@@ -17,7 +32,7 @@ const ModalLogin = ({
   setAlert,
   alert,
   errorMessage,
-}) => {
+}: ModalLoginProps) => {
   return (
     <>
       {/*  Modal  */}
@@ -131,7 +146,7 @@ const ModalLogin = ({
               </div>
               <div className="flex justify-end">
                 <button
-                  alt="mot de passe oublier"
+                  type="button"
                   onClick={forgotPassword}
                   className="mt-2 text-green-500 underline hover:no-underline cursor-pointer"
                 >
@@ -154,16 +169,6 @@ const ModalLogin = ({
       <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
     </>
   );
-};
-ModalLogin.propTypes = {
-  errorMessage: PropTypes.string,
-  showPassword: PropTypes.bool,
-  isFetching: PropTypes.bool,
-  visible: PropTypes.bool,
-  alert: PropTypes.bool,
-  handleLogin: PropTypes.func,
-  signInWithGoogle: PropTypes.func,
-  forgotPassword: PropTypes.func,
 };
 
 export default memo(ModalLogin);

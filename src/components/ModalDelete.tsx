@@ -1,15 +1,15 @@
 import React, { memo } from "react";
 
-interface ModalDeleteProps {
+type ModalDeleteProps = {
   handleDelete: React.MouseEventHandler<HTMLButtonElement>;
   handleShowModal: React.MouseEventHandler<HTMLButtonElement>;
   question: string;
-}
-const ModalDelete: React.FC<ModalDeleteProps> = ({
+};
+const ModalDelete = ({
   handleDelete,
   handleShowModal,
   question,
-}) => {
+}: ModalDeleteProps) => {
   return (
     <>
       {/* Delete Product Modal  */}
