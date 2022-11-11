@@ -3,7 +3,6 @@ import ReactPaginate from "react-paginate";
 import Post from "./Post";
 import PropTypes from "prop-types";
 import MapView from "./MapView";
-import { v4 as uuidv4 } from "uuid";
 
 const Posts = ({ posts }) => {
   const [currentItems, setCurrentItems] = useState([]);

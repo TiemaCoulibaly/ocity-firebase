@@ -1,8 +1,7 @@
 import { Icon } from "leaflet";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import PropTypes from "prop-types";
 import { Marker, Popup, useMap } from "react-leaflet";
-import { v4 as uuidv4 } from "uuid";
 
 import markerIconPng from "leaflet/dist/images/marker-icon.png";
 
