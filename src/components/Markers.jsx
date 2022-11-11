@@ -2,6 +2,7 @@ import { Icon } from "leaflet";
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { Marker, Popup, useMap } from "react-leaflet";
+import { v4 as uuidv4 } from "uuid";
 
 import markerIconPng from "leaflet/dist/images/marker-icon.png";
 
@@ -21,14 +22,14 @@ const Markers = ({ posts, setChildClicked }) => {
 
   return (
     <>
-      {posts?.map((post, index) => (
+      {posts?.map((post, i) => (
         <Marker
-          key={index}
+          key={i}
           eventHandlers={{
             click: (e) => {
               map.setView([post.coordinates[1], post.coordinates[0]], 10);
 
-              setChildClicked(index);
+              setChildClicked(i);
             },
           }}
           icon={
@@ -38,7 +39,8 @@ const Markers = ({ posts, setChildClicked }) => {
               iconAnchor: [12, 41],
             })
           }
-          position={[post.coordinates[1], post.coordinates[0]]}>
+          position={[post.coordinates[1], post.coordinates[0]]}
+        >
           <Popup>
             {post.title} <br /> {post.address} <br />
           </Popup>

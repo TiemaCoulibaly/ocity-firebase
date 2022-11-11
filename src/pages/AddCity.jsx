@@ -7,6 +7,7 @@ import ProgressBar from "../components/ProgressBar";
 import PropTypes from "prop-types";
 import QueryAddress from "../components/QueryAddress";
 import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
 
 const AddCity = () => {
   const [lat, setLat] = useState("");
@@ -148,9 +149,9 @@ const AddCity = () => {
         </div>
 
         <div className="flex justify-around flex-wrap rounded-lg rounded-b-none w-full">
-          {urls?.map((url, i) => (
+          {urls?.map((url) => (
             <img
-              key={i}
+              key={uuidv4()}
               className="w-60 mx-2 my-2 object-cover object-center rounded-xl"
               src={url}
               alt="city-stade"
@@ -166,13 +167,15 @@ const AddCity = () => {
                 stroke="currentColor"
                 fill="none"
                 viewBox="0 0 48 48"
-                aria-hidden="true">
+                aria-hidden="true"
+              >
                 <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" />
               </svg>
               <div className="flex justify-center text-sm text-gray-600">
                 <label
                   htmlFor="fileInput"
-                  className="cursor-pointer bg-white rounded-md font-medium text-green-600 ">
+                  className="cursor-pointer bg-white rounded-md font-medium text-green-600 "
+                >
                   {images.length >= 0 && (
                     <span className="m-2">{images.length} images uploaded</span>
                   )}
@@ -229,7 +232,8 @@ const AddCity = () => {
             id="description"
             name="description"
             onChange={handleChange}
-            required></textarea>
+            required
+          ></textarea>
           <div className="flex justify-between flex-wrap">
             <label>Horaire d'ouverture:</label>
             <input
@@ -257,7 +261,8 @@ const AddCity = () => {
                 id="pitch"
                 defaultValue=""
                 className="active:bg-green-600 bg-white p-3 shadow-lg rounded-md w-2/3  border-none focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10"
-                required>
+                required
+              >
                 <option value="" disabled hidden className="">
                   Type de Terrain
                 </option>
@@ -275,7 +280,8 @@ const AddCity = () => {
                 onChange={handleChange}
                 defaultValue=""
                 className="active:bg-green-600 bg-white p-3 shadow-lg rounded-md w-2/3  border-none focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10"
-                required>
+                required
+              >
                 <option value="" disabled hidden>
                   Type d'éclairage (nuit)
                 </option>
@@ -290,7 +296,8 @@ const AddCity = () => {
                 onChange={handleChange}
                 defaultValue=""
                 className="active:bg-green-600 bg-white p-3 shadow-lg rounded-md w-2/3  border-none focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10"
-                required>
+                required
+              >
                 <option value="" disabled hidden>
                   Type de chaussure (recommendé)
                 </option>
@@ -307,7 +314,8 @@ const AddCity = () => {
           <button
             disabled={progress !== null && progress < 100}
             className="group relative w-full flex justify-center p-3 mb-5 text-xl font-medium rounded-md text-white bg-gradient-to-r from-green-500 to-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-green-400"
-            type="submit">
+            type="submit"
+          >
             Ajouter
           </button>
         </form>
