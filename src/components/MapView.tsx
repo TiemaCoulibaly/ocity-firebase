@@ -1,9 +1,13 @@
-import React, { memo } from "react";
+import { memo } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import Markers from "./Markers";
-import PropTypes from "prop-types";
 
-const MapView = ({ posts, setChildClicked }) => {
+type MapViewProps = {
+  posts: string[];
+  setChildClicked: React.Dispatch<number>;
+};
+
+const MapView = ({ posts, setChildClicked }: MapViewProps) => {
   const position = [46.7111, 1.7191];
   const zoomLevel = 6;
 
@@ -13,7 +17,8 @@ const MapView = ({ posts, setChildClicked }) => {
         style={{ height: "100vh", width: "40vw", margin: 0 }}
         center={position}
         zoom={zoomLevel}
-        scrollWheelZoom={true}>
+        scrollWheelZoom={true}
+      >
         <Markers setChildClicked={setChildClicked} posts={posts} />
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -23,8 +28,5 @@ const MapView = ({ posts, setChildClicked }) => {
     </>
   );
 };
-MapView.propTypes = {
-  posts: PropTypes.array,
-  setChildClicked: PropTypes.func,
-};
+
 export default memo(MapView);

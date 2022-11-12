@@ -3,7 +3,7 @@ import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db, storage } from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { AuthContext } from "../context/AuthContext";
-import ProgressBar from "../components/ProgressBar";
+import ProgressBar from "../components/ProgressBar.tsx";
 import PropTypes from "prop-types";
 import QueryAddress from "../components/QueryAddress";
 import axios from "axios";

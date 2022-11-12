@@ -2,7 +2,7 @@ import React, { memo, useEffect, useState, createRef } from "react";
 import ReactPaginate from "react-paginate";
 import Post from "./Post";
 import PropTypes from "prop-types";
-import MapView from "./MapView";
+import MapView from "./MapView.tsx";
 
 const Posts = ({ posts }) => {
   const [currentItems, setCurrentItems] = useState([]);

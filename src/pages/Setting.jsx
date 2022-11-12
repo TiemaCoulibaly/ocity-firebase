@@ -3,7 +3,7 @@ import { deleteUser, updateProfile } from "firebase/auth";
 import React, { memo, useContext, useState } from "react";
 import PropTypes from "prop-types";
 
-import ModalDelete from "../components/ModalDelete";
+import ModalDelete from "../components/ModalDelete.tsx";
 import { AuthContext } from "../context/AuthContext";
 
 const Setting = () => {

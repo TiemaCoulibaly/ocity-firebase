@@ -1,5 +1,9 @@
 import { memo } from "react";
+<<<<<<< HEAD:src/components/CarouselImages.tsx
+
+=======
 import PropTypes from "prop-types";
+>>>>>>> main:src/components/CarouselImages.jsx
 import {
   ButtonBack,
   ButtonNext,
@@ -11,7 +15,21 @@ import {
 import "pure-react-carousel/dist/react-carousel.es.css";
 import { v4 as uuidv4 } from "uuid";
 
-const CarouselImages = ({ pictures, widthImage, heightImage, arrow, top }) => {
+type CarouselImagesProps = {
+  pictures: string[];
+  widthImage: number;
+  heightImage: number;
+  arrow: number;
+  top: number;
+};
+
+const CarouselImages = ({
+  pictures,
+  widthImage,
+  heightImage,
+  arrow,
+  top,
+}: CarouselImagesProps) => {
   return (
     <>
       <CarouselProvider
@@ -27,7 +45,7 @@ const CarouselImages = ({ pictures, widthImage, heightImage, arrow, top }) => {
             <Slide key={uuidv4()}>
               <ImageWithZoom
                 src={picture}
-                alt={picture.name}
+                alt={picture}
                 className="object-center object-cover w-full h-full rounded-sm"
               />
             </Slide>
@@ -72,12 +90,5 @@ const CarouselImages = ({ pictures, widthImage, heightImage, arrow, top }) => {
       </CarouselProvider>
     </>
   );
-};
-CarouselImages.propTypes = {
-  pictures: PropTypes.array,
-  widthImage: PropTypes.number,
-  heightImage: PropTypes.number,
-  arrow: PropTypes.number,
-  top: PropTypes.number,
 };
 export default memo(CarouselImages);

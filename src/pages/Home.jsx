@@ -2,8 +2,8 @@ import React, { memo, useEffect, useState } from "react";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { db } from "../firebase";
 import Posts from "../components/Posts";
-import Header from "../components/Header";
-import SearchCity from "../components/SearchCity";
+import Header from "../components/Header.tsx";
+import SearchCity from "../components/SearchCity.tsx";
 import PropTypes from "prop-types";
 // import QueryAddress from "../components/QueryAddress";
 

@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import { memo } from "react";
 
 const Loader = () => {
   let circleCommonClasses = "h-2 w-2 bg-white   rounded-full";

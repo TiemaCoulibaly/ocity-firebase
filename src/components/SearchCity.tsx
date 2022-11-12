@@ -1,7 +1,11 @@
-import { memo } from "react";
-import PropTypes from "prop-types";
+import { memo, SetStateAction } from "react";
 
-const SearchCity = ({ searchTerm, setSearchTerm }) => {
+type SearchCityProps = {
+  searchTerm: string;
+  setSearchTerm: React.Dispatch<SetStateAction<string>>;
+};
+
+const SearchCity = ({ searchTerm, setSearchTerm }: SearchCityProps) => {
   const success = "";
   if (success) {
     console.log("defined");
@@ -21,8 +25,5 @@ const SearchCity = ({ searchTerm, setSearchTerm }) => {
     </div>
   );
 };
-SearchCity.propTypes = {
-  searchTerm: PropTypes.string,
-  setSearchTerm: PropTypes.func,
-};
+
 export default memo(SearchCity);

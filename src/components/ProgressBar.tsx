@@ -1,7 +1,11 @@
 import { memo } from "react";
-import PropTypes from "prop-types";
 
-const ProgressBar = ({ progressPercentage, upload }) => {
+type ProgressBarProps = {
+  progressPercentage: number;
+  upload: string;
+};
+
+const ProgressBar = ({ progressPercentage, upload }: ProgressBarProps) => {
   return (
     <div className="relative pt-1">
       <div className="flex mb-2 items-center justify-between">
@@ -19,13 +23,10 @@ const ProgressBar = ({ progressPercentage, upload }) => {
       <div className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-amber-200">
         <div
           style={{ width: `${progressPercentage}%` }}
-          className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500"></div>
+          className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500"
+        ></div>
       </div>
     </div>
   );
-};
-ProgressBar.propTypes = {
-  progressPercentage: PropTypes.number,
-  upload: PropTypes.string,
 };
 export default memo(ProgressBar);

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
@@ -9,7 +9,7 @@ import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar";
 import Setting from "./pages/Setting";
 import ProtectedRoute from "./components/ProtectedRoute";
-import Footer from "./components/Footer";
+import Footer from "./components/Footer.tsx";
 import { AuthContext } from "./context/AuthContext";
 import AddCity from "./pages/AddCity";
 import SinglePost from "./pages/SinglePost";

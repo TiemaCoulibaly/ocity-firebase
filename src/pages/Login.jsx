@@ -12,7 +12,7 @@ import GoogleButton from "react-google-button";
 import { AuthContext } from "../context/AuthContext";
 
 import logo from "./../images/ocity-03.png";
-import ModalLogin from "../components/ModalLogin";
+import ModalLogin from "../components/ModalLogin.tsx";
 
 import PropTypes from "prop-types";
 
