@@ -7,6 +7,7 @@ import ProgressBar from "../components/ProgressBar.tsx";
 import PropTypes from "prop-types";
 import QueryAddress from "../components/QueryAddress";
 import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
 
 const AddCity = () => {
   const [lat, setLat] = useState("");
@@ -148,9 +149,9 @@ const AddCity = () => {
         </div>
 
         <div className="flex justify-around flex-wrap rounded-lg rounded-b-none w-full">
-          {urls?.map((url, i) => (
+          {urls?.map((url) => (
             <img
-              key={i}
+              key={uuidv4()}
               className="w-60 mx-2 my-2 object-cover object-center rounded-xl"
               src={url}
               alt="city-stade"

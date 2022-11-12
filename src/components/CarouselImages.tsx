@@ -1,5 +1,9 @@
 import { memo } from "react";
+<<<<<<< HEAD:src/components/CarouselImages.tsx
 
+=======
+import PropTypes from "prop-types";
+>>>>>>> main:src/components/CarouselImages.jsx
 import {
   ButtonBack,
   ButtonNext,
@@ -9,6 +13,7 @@ import {
   Slider,
 } from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
+import { v4 as uuidv4 } from "uuid";
 
 type CarouselImagesProps = {
   pictures: string[];
@@ -36,8 +41,8 @@ const CarouselImages = ({
         hasMasterSpinner
       >
         <Slider>
-          {pictures?.map((picture, idx) => (
-            <Slide key={idx}>
+          {pictures?.map((picture) => (
+            <Slide key={uuidv4()}>
               <ImageWithZoom
                 src={picture}
                 alt={picture}

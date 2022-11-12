@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
+import { v4 as uuidv4 } from "uuid";
 
 const QueryAddress = ({
   setAddress,
@@ -47,14 +48,16 @@ const QueryAddress = ({
         <div className="absolute inset-y-0 right-0 flex items-center px-2">
           <label
             onClick={handleClickLocation}
-            className="bg-gray-200 hover:bg-green-200 rounded px-2 py-1 text-gray-600 cursor-pointer">
+            className="bg-gray-200 hover:bg-green-200 rounded px-2 py-1 text-gray-600 cursor-pointer"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
-              strokeWidth={2}>
+              strokeWidth={2}
+            >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -82,17 +85,18 @@ const QueryAddress = ({
         />
       </div>
 
-      {fullAddress?.map((add, key) => (
+      {fullAddress?.map((add) => (
         <div
           className="p-3 bg-white hover:bg-green-200 border-r-2 border-l-2 border-b-2 border-gray-300"
-          key={key}
+          key={uuidv4()}
           onClick={(e) => {
             handleClick(add?.properties.label);
             setCoordinates(add.geometry.coordinates);
             setLat(add.geometry.coordinates[1]);
             setLong(add.geometry.coordinates[0]);
             e.preventDefault();
-          }}>
+          }}
+        >
           <span className="font-bold">{add?.properties.label} </span>
           <br />
           <span> {add?.properties.context}</span>
