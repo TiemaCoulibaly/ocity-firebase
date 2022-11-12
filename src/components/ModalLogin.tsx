@@ -1,4 +1,4 @@
-import { memo } from "react";
+import React, { memo } from "react";
 import Alert from "./Alert";
 import ForgotPasswordAlert from "./ForgotPasswordAlert";
 import Loader from "./Loader";
