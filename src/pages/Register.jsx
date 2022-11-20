@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import Loader from "../components/Loader.tsx";
 import Alert from "../components/Alert.tsx";
 
-import logo from "./../images/ocity-03.png";
+import logo from "./../images/oc-green.png";
 
 const Register = () => {
   const [data, setData] = useState({});

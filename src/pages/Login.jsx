@@ -11,7 +11,7 @@ import GoogleButton from "react-google-button";
 
 import { AuthContext } from "../context/AuthContext";
 
-import logo from "./../images/ocity-03.png";
+import logo from "./../images/oc-green.png";
 import ModalLogin from "../components/ModalLogin.tsx";
 
 import PropTypes from "prop-types";
@@ -69,7 +69,7 @@ const Login = () => {
     e.preventDefault();
 
     email &&
-      await sendPasswordResetEmail(auth, email)
+      (await sendPasswordResetEmail(auth, email)
         .then(() => {
           // Password reset email sent!
           setAlert(true);
@@ -79,7 +79,7 @@ const Login = () => {
           // console.log("code", errorCode);
           const errorMessage = err.message;
           setErrorMessage(errorMessage);
-        });
+        }));
   };
   return (
     <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -101,7 +101,8 @@ const Login = () => {
             <a
               href="##"
               onClick={() => setVisible(!visible)}
-              className="text-green-500 underline hover:no-underline cursor-pointer">
+              className="text-green-500 underline hover:no-underline cursor-pointer"
+            >
               Se connecter{" "}
             </a>
           </p>
@@ -109,7 +110,8 @@ const Login = () => {
             Ou inscris-toi avec{" "}
             <Link
               to="/register"
-              className="text-green-500 underline hover:no-underline cursor-pointer">
+              className="text-green-500 underline hover:no-underline cursor-pointer"
+            >
               E-mail{" "}
             </Link>
           </p>

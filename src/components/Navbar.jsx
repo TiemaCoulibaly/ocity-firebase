@@ -7,7 +7,7 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/solid";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 
-import logo from "../images/ocw.png";
+import logo from "../images/oc-white.png";
 import soccerBall from "../images/soccer-ball.ico";
 import PropTypes from "prop-types";
 

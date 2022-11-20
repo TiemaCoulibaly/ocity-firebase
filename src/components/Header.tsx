@@ -1,6 +1,6 @@
 import { memo } from "react";
 
-import logo from "../images/oc.png";
+import logo from "../images/oc-green.png";
 import footOnSoccerBall from "../images/foot-on-soocer-ball.jpg";
 
 import cityView from "../images/city-view.jpg";
