@@ -5,7 +5,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { AuthContext } from "../context/AuthContext";
 import ProgressBar from "../components/ProgressBar.tsx";
 import PropTypes from "prop-types";
-import QueryAddress from "../components/QueryAddress";
+import QueryAddress from "../components/QueryAddress.tsx";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 

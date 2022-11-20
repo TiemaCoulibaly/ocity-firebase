@@ -1,7 +1,21 @@
 import axios from "axios";
 import React, { useEffect } from "react";
-import PropTypes from "prop-types";
 import { v4 as uuidv4 } from "uuid";
+
+type QueryAddressProps = {
+  setAddress: React.Dispatch<string>;
+  address: string[];
+  handleClickLocation: React.MouseEventHandler<HTMLLabelElement>;
+  setCoordinates: React.Dispatch<number[]>;
+  query: string;
+  setQuery: React.Dispatch<string>;
+  setFullAddress: React.Dispatch<string[]>;
+  fullAddress: any[];
+  setLat: React.Dispatch<number[]>;
+  setLong: React.Dispatch<number[]>;
+  handleClick: number;
+  add: React.Dispatch<string>;
+};
 
 const QueryAddress = ({
   setAddress,
@@ -14,7 +28,7 @@ const QueryAddress = ({
   fullAddress,
   setLat,
   setLong,
-}) => {
+}: QueryAddressProps) => {
   useEffect(() => {
     const getData = async () => {
       try {
@@ -29,14 +43,13 @@ const QueryAddress = ({
     getData();
   }, [query, setFullAddress]);
 
-  const handleClick = (text) => {
+  const handleClick = (text: string) => {
     setQuery(text);
-
     setAddress(text);
     setFullAddress([]);
   };
 
-  const handleChangeAddress = (e) => {
+  const handleChangeAddress = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setQuery(e.target.value);
     setAddress(e.target.value);
@@ -104,13 +117,6 @@ const QueryAddress = ({
       ))}
     </div>
   );
-};
-
-QueryAddress.propTypes = {
-  query: PropTypes.string,
-  fullAddress: PropTypes.array,
-  handleChangeAddress: PropTypes.func,
-  handleClick: PropTypes.func,
 };
 
 export default QueryAddress;
