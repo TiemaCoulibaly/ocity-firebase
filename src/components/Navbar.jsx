@@ -61,7 +61,11 @@ const Navbar = () => {
                   </Disclosure.Button>
                 </div>
                 <div className="flex-1 flex items-center justify-center md:items-stretch sm:items-stretch md:justify-start sm:justify-start">
-                  <Link className="flex-shrink-0 flex items-center" to="/">
+                  <Link
+                    className="flex-shrink-0 flex items-center bg-gray-900
+  												px-3 rounded-md text-xl font-medium"
+                    to="/"
+                  >
                     <img
                       className="hidden lg:block h-12 w-auto"
                       src={logo}
