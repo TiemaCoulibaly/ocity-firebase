@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import { memo } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -19,7 +19,19 @@ ChartJS.register(
   Legend
 );
 
-export const options = {
+type OptionProps = {
+  responsive: boolean;
+  plugins: {
+    legend: {
+      position: "top" | "left" | "right" | "bottom" | "center";
+    };
+    title: {
+      display: boolean;
+      text: string;
+    };
+  };
+};
+export const options: OptionProps = {
   responsive: true,
   plugins: {
     legend: {
