@@ -8,7 +8,7 @@ import NotFound from "./pages/NotFound";
 
 import Navbar from "./components/Navbar";
 import Setting from "./pages/Setting";
-import ProtectedRoute from "./components/ProtectedRoute";
+import ProtectedRoute from "./components/ProtectedRoute.tsx";
 import Footer from "./components/Footer.tsx";
 import { AuthContext } from "./context/AuthContext";
 import AddCity from "./pages/AddCity";
