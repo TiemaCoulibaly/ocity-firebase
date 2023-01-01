@@ -1,15 +1,29 @@
 import { memo } from "react";
 import { Link } from "react-router-dom";
-import CarouselImages from "./CarouselImages.tsx";
-import PropTypes from "prop-types";
+import CarouselImages from "./CarouselImages";
 
-const Post = ({ post, selected, refProp }) => {
-  const options = {
+type PostProps = {
+  post: any;
+  selected: number;
+  refProp: any;
+  pictures: string;
+};
+type OptionProps = {
+  weekday: "long" | "short" | "narrow";
+  year: "numeric" | "2-digit" | undefined;
+  month: "long" | "short" | "narrow";
+  day: "numeric" | "2-digit" | undefined;
+};
+const Post = ({ post, selected, refProp }: PostProps) => {
+  const options: OptionProps = {
     weekday: "long",
     year: "numeric",
     month: "long",
     day: "numeric",
   };
+  const date = new Date(post.timeStamp?.toDate().toString());
+
+  const formattedDate = date.toLocaleDateString("en-US", options);
 
   //When click on marker it will render the exact item clicked
   if (selected)
@@ -61,10 +75,7 @@ const Post = ({ post, selected, refProp }) => {
 
               <hr className="mt-3 h-1 w-20 bg-green-300" />
               <p className="text-base text-gray-400 italic w-64">
-                Posté le:{" "}
-                {new Date(
-                  post.timeStamp?.toDate().toString()
-                ).toLocaleDateString("fr-FR", options)}
+                Posté le: {formattedDate}
               </p>
             </Link>
           </div>
@@ -95,12 +106,6 @@ const Post = ({ post, selected, refProp }) => {
       </div>
     </>
   );
-};
-
-Post.propTypes = {
-  post: PropTypes.object,
-  selected: PropTypes.number,
-  refProp: PropTypes.object,
 };
 
 export default memo(Post);

@@ -4,7 +4,7 @@ import Markers from "./Markers";
 
 type MapViewProps = {
   posts: string[];
-  setChildClicked: React.Dispatch<number>;
+  setChildClicked: React.Dispatch<null>;
 };
 
 const MapView = ({ posts, setChildClicked }: MapViewProps) => {
