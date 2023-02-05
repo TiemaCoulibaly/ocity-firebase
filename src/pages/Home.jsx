@@ -5,6 +5,7 @@ import Posts from "../components/Posts";
 import Header from "../components/Header.tsx";
 import SearchCity from "../components/SearchCity.tsx";
 import PropTypes from "prop-types";
+import Spinner from "../components/Spinner";
 // import QueryAddress from "../components/QueryAddress";
 
 const Home = () => {
@@ -48,9 +49,12 @@ const Home = () => {
   return (
     <>
       {isLoading ? (
-        <div className="flex items-center justify-center space-x-2 h-screen">
-          <div className="spinner-border animate-spin  w-10 h-10 lg:w-16 lg:h-16 md:w-16 md:h-16 border-t-2 border-b-2 rounded-full border-green-600"></div>
-        </div>
+        <Spinner
+          heightScreen={"h-screen"}
+          justify={"center"}
+          width={16}
+          height={16}
+        />
       ) : (
         <>
           <Header />

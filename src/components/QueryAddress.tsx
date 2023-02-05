@@ -1,6 +1,7 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import Spinner from "./Spinner";
 
 type QueryAddressProps = {
   setAddress: React.Dispatch<string>;
@@ -29,6 +30,8 @@ const QueryAddress = ({
   setLat,
   setLong,
 }: QueryAddressProps) => {
+  const [noResult, setNoResult] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const getData = async () => {
       try {
@@ -36,6 +39,7 @@ const QueryAddress = ({
 
         const { data } = await axios.get(QUERY_API);
         setFullAddress(data.features);
+        setIsLoading(false);
       } catch (e) {
         console.log(e);
       }
@@ -53,6 +57,19 @@ const QueryAddress = ({
     e.preventDefault();
     setQuery(e.target.value);
     setAddress(e.target.value);
+    if (fullAddress.length === 0) {
+      setNoResult("no result");
+    } else {
+      setNoResult("");
+    }
+
+    console.log("====================================");
+    console.log("query", query);
+    console.log("====================================");
+    console.log("address", address);
+    console.log("====================================");
+    console.log("fullAddress", fullAddress);
+    console.log("====================================");
   };
 
   return (
@@ -98,23 +115,52 @@ const QueryAddress = ({
         />
       </div>
 
-      {fullAddress?.map((add) => (
-        <div
-          className="p-3 bg-white hover:bg-green-200 border-r-2 border-l-2 border-b-2 border-gray-300"
-          key={uuidv4()}
-          onClick={(e) => {
-            handleClick(add?.properties.label);
-            setCoordinates(add.geometry.coordinates);
-            setLat(add.geometry.coordinates[1]);
-            setLong(add.geometry.coordinates[0]);
-            e.preventDefault();
-          }}
-        >
-          <span className="font-bold">{add?.properties.label} </span>
-          <br />
-          <span> {add?.properties.context}</span>
+      {noResult ? (
+        <div className="p-3 bg-white hover:bg-green-200 border-r-2 border-l-2 border-b-2 border-gray-300">
+          <span className="font-bold">
+            {isLoading ? (
+              <Spinner
+                heightScreen={"h-5"}
+                justify={"start"}
+                width={5}
+                height={5}
+              />
+            ) : (
+              noResult
+            )}
+          </span>
         </div>
-      ))}
+      ) : (
+        fullAddress?.map((add) => (
+          <div
+            className="p-3 bg-white hover:bg-green-200 border-r-2 border-l-2 border-b-2 border-gray-300"
+            key={uuidv4()}
+            onClick={(e) => {
+              handleClick(add?.properties.label);
+              setCoordinates(add.geometry.coordinates);
+              setLat(add.geometry.coordinates[1]);
+              setLong(add.geometry.coordinates[0]);
+              e.preventDefault();
+            }}
+          >
+            {isLoading ? (
+              <Spinner
+                heightScreen={"h-5"}
+                width={5}
+                height={5}
+                justify={"start"}
+              />
+            ) : (
+              <>
+                {" "}
+                <span className="font-bold">{add?.properties.label} </span>
+                <br />
+                <span> {add?.properties.context}</span>
+              </>
+            )}
+          </div>
+        ))
+      )}
     </div>
   );
 };
