@@ -59,7 +59,7 @@
     "@types/leaflet": "^1.9.0",
     "@types/uuid": "^8.3.4",
     "autoprefixer": "^9.8.8",
-    "postcss": "^7.0.39",
+    "postcss": "^8.4.31",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17"
   },
   "proxy": "https://ocitystade.com/"
