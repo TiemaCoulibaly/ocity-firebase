@@ -16,7 +16,7 @@
     "axios": "^1.7.4",
     "chart.js": "^3.8.0",
     "file-saver": "^2.0.5",
-    "firebase": "^9.6.6",
+    "firebase": "^10.9.0",
     "leaflet": "^1.8.0",
     "prop-types": "^15.8.1",
     "pure-react-carousel": "^1.28.1",
